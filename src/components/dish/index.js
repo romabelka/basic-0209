@@ -1,10 +1,8 @@
 import React from "react";
 import { Button, Card, Typography } from "antd";
-import useAmount from "../../hooks/use-amount";
+import amount from "../../decorators/amount";
 
-function Dish({ dish }) {
-  const { amount, increment, decrement } = useAmount();
-
+function Dish({ dish, amount, increment, decrement }) {
   return (
     <Card title={dish.name}>
       <Typography>{dish.ingredients.join(", ")}</Typography>
@@ -15,4 +13,4 @@ function Dish({ dish }) {
   );
 }
 
-export default Dish;
+export default amount(Dish);
