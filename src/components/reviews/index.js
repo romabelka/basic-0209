@@ -1,15 +1,26 @@
 import React from "react";
-import SimpleForm from "../simple-form";
+import { List } from "antd";
+import ReviewForm from "../review-form";
+import Review from "../review";
 
 function Reviews(props) {
+  const { reviews } = props;
+
   return (
     <div>
       <h1>Reviews</h1>
-      <SimpleForm />
+      <ReviewForm />
+      <List
+        bordered
+        dataSource={reviews}
+        renderItem={item => (
+          <List.Item key={item.id}>
+            <Review review={item} />
+          </List.Item>
+        )}
+      />
     </div>
   );
 }
-
-Reviews.propTypes = {};
 
 export default Reviews;
