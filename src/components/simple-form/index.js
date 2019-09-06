@@ -1,13 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
+import { Rate, Input, Button, Typography } from "antd";
+import reviewDecorator from "../../decorators/review";
 
 function SimpleForm(props) {
-  const [review, setReview] = useState("");
+  const { comment, isShowError, showError, changeReview, changeRate } = props;
+  const { review, rate, errors } = comment;
+
+  const handleSubmit = () => console.log(comment);
+
+  const handleClick = () => {
+    handleSubmit();
+    showError();
+  };
+
   return (
     <div>
-      add your review:{" "}
-      <input value={review} onChange={ev => setReview(ev.target.value)} />
+      <Typography.Text strong>add your review: </Typography.Text>
+      <Rate value={rate} onChange={changeRate} />
+      <Input.TextArea
+        placeholder="review"
+        value={review}
+        onChange={changeReview}
+        rows={4}
+      />
+      {isShowError && <Typography.Text>{errors.join(",")}</Typography.Text>}
+      <Button block onClick={handleClick}>
+        add
+      </Button>
     </div>
   );
 }
 
-export default SimpleForm;
+export default reviewDecorator(SimpleForm);
