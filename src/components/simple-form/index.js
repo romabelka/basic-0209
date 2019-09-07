@@ -1,29 +1,36 @@
 import React, { useState } from "react";
 import { Typography, Rate, Button, Form } from "antd";
+import useInput from "../../hooks/use-input";
+import isReviewNameValid from "../../validators/review/isReviewNameValid";
 
 function SimpleForm(props) {
-  const [name, setName] = useState("");
-  const [review, setReview] = useState("");
+  const { value: name, bind: bindName } = useInput("");
+  const { value: review, bind: bindReview } = useInput("");
   const [rate, setRate] = useState(0);
+
+  const { value, bind, reset, setState } = useInput("");
+
   return (
     <Form
       onSubmit={e => {
         e.preventDefault();
-        console.log("submit");
+        console.log(
+          `Your review is done: Name: ${name} , Review: ${review}, Rate: ${rate}`
+        );
       }}
     >
       <Typography.Title level={2}>Add your reivew</Typography.Title>
       <div>
         <label htmlFor="">Your name:</label>
-        <input value={name} onChange={ev => setName(ev.target.value)} />
+        <input {...bindName} />
       </div>
       <div>
         <label htmlFor="">Your review:</label>
-        <input value={review} onChange={ev => setReview(ev.target.value)} />
+        <input {...bindReview} />
       </div>
       <div>
         <label htmlFor="">Your rate:</label>
-        <Rate value={rate} />
+        <Rate value={rate} onChange={value => setRate(value)} />
       </div>
       <Button type="primary" htmlType={"submit"}>
         Send
