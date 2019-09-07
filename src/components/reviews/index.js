@@ -1,6 +1,7 @@
 import React from "react";
-import SimpleForm from "../simple-form";
+import SimpleForm from "../review-form";
 import Review from "../review";
+import { Row } from "antd";
 
 function Reviews({ reviews }) {
   return (
@@ -9,9 +10,11 @@ function Reviews({ reviews }) {
       <SimpleForm />
 
       <div style={{ background: "#f6f8fa", padding: "30px" }}>
-        {reviews.map(review => (
-          <Review review={review} key={review.id} />
-        ))}
+        <Row>
+          {reviews.map(review => (
+            <Review review={review} key={review.id} />
+          ))}
+        </Row>
       </div>
     </div>
   );
