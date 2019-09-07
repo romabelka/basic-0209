@@ -2,21 +2,27 @@ import React, { useState } from "react";
 import { Typography, Rate, Button, Form } from "antd";
 import useInput from "../../hooks/use-input";
 import isReviewNameValid from "../../validators/review/isReviewNameValid";
+import isReviewTextValid from "../../validators/review/isReviewTextValid";
 
 function SimpleForm(props) {
   const { value: name, bind: bindName } = useInput("");
   const { value: review, bind: bindReview } = useInput("");
   const [rate, setRate] = useState(0);
 
-  const { value, bind, reset, setState } = useInput("");
+  const { value, bind, setState } = useInput("");
 
   return (
     <Form
       onSubmit={e => {
         e.preventDefault();
-        console.log(
-          `Your review is done: Name: ${name} , Review: ${review}, Rate: ${rate}`
-        );
+        if (isReviewTextValid(review) && isReviewNameValid(name) && rate) {
+          console.log(
+            `Your review is done: Name: ${name} , Review: ${review}, Rate: ${rate}`
+          );
+          return true;
+        }
+
+        console.log("Check your values");
       }}
     >
       <Typography.Title level={2}>Add your reivew</Typography.Title>
@@ -26,7 +32,7 @@ function SimpleForm(props) {
       </div>
       <div>
         <label htmlFor="">Your review:</label>
-        <input {...bindReview} />
+        <textarea {...bindReview} />
       </div>
       <div>
         <label htmlFor="">Your rate:</label>
