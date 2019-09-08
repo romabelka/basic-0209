@@ -3,7 +3,8 @@ import { Card, Rate, Typography } from "antd";
 
 function Review({ review }) {
   return (
-    <Card title={review.user}>
+    <Card>
+      <Typography.Title level={3}>{review.user}</Typography.Title>
       <Rate disabled defaultValue={review.rating} />
       <p>
         <Typography.Text>{review.text}</Typography.Text>
