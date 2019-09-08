@@ -1,0 +1,13 @@
+.review {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.review__user {
+  font-weight: bold;
+}
+
+.review__text {
+  flex: 1 100%;
+}
