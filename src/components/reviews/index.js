@@ -1,11 +1,19 @@
 import React from "react";
-import SimpleForm from "../simple-form";
+import ReviewForm from "../review-form";
+import Review from "../review";
+import { List, Typography } from "antd";
 
-function Reviews(props) {
+function Reviews({ reviews }) {
   return (
     <div>
-      <h1>Reviews</h1>
-      <SimpleForm />
+      <Typography.Title level={2}>Reviews</Typography.Title>
+      <ReviewForm />
+      <List
+        className="comments-list"
+        itemLayout="horizontal"
+        dataSource={reviews}
+        renderItem={review => <Review review={review} key={review.id} />}
+      />
     </div>
   );
 }
