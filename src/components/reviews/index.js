@@ -1,10 +1,21 @@
 import React from "react";
+import { Rate } from "antd";
 import SimpleForm from "../simple-form";
 
-function Reviews(props) {
+function Reviews({ reviews }) {
   return (
     <div>
-      <h1>Reviews</h1>
+      <div>
+        {reviews.map(review => (
+          <div
+            key={review.id}
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <Rate value={review.rating} />
+            <div style={{ marginLeft: "10px" }}>{review.text}</div>
+          </div>
+        ))}
+      </div>
       <SimpleForm />
     </div>
   );
