@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card, Typography } from "antd";
-import amount from "../../decorators/amount";
+import amount from "../../decorators/with-calculate-amount";
 
 function Dish({ dish, amount, increment, decrement }) {
   return (

@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+/** Счетчик суммы */
 export default function useAmount(initialAmount = 0) {
   const [state, setState] = useState(initialAmount);
 
