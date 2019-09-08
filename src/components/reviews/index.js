@@ -1,12 +1,18 @@
 import React from "react";
-import SimpleForm from "../simple-form";
+import { Col, Row } from "antd";
+import Review from "./review";
+import ReviewForm from "./review-form";
 
-function Reviews(props) {
+function Reviews({ reviews }) {
   return (
-    <div>
-      <h1>Reviews</h1>
-      <SimpleForm />
-    </div>
+    <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
+      <Col xs={24} md={16}>
+        {reviews.map(review => (
+          <Review review={review} key={review.id} />
+        ))}
+        <ReviewForm />
+      </Col>
+    </Row>
   );
 }
 
