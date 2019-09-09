@@ -4,11 +4,9 @@ import PropTypes from "prop-types";
 import amount from "../../decorators/amount";
 import styles from "./product.module.css";
 
-function Product({ product, amount, increment, decrement }) {
+function Product({ product, amount, increment, decrement, fetchProduct }) {
   useEffect(() => {
-    console.log("---", "side-effect for Product");
-    return () => console.log("---", "cleanup for Product");
-    //perform some effect
+    fetchProduct && fetchProduct(product.id);
   }, [product.id]);
 
   return (
@@ -25,7 +23,9 @@ function Product({ product, amount, increment, decrement }) {
         </Col>
         <Col xs={8} md={6} lg={4} align="right">
           <div className={styles.counter}>
-            <div className={styles.count}>{amount}</div>
+            <div className={styles.count} data-id="product-amount">
+              {amount}
+            </div>
             <Button.Group>
               <Button
                 className={styles.button}
@@ -36,6 +36,7 @@ function Product({ product, amount, increment, decrement }) {
                 className={styles.button}
                 icon="plus"
                 onClick={increment}
+                data-id="product-increment-btn"
               />
             </Button.Group>
           </div>
