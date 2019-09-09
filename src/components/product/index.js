@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Card, Col, Row, Typography } from "antd";
 import PropTypes from "prop-types";
 import amount from "../../decorators/amount";
 import styles from "./product.module.css";
 
 function Product({ product, amount, increment, decrement }) {
+  useEffect(() => {
+    console.log("---", "side-effect for Product");
+    return () => console.log("---", "cleanup for Product");
+    //perform some effect
+  }, [product.id]);
+
   return (
     <Card className={styles.productDetailedOrderCard}>
       <Row type="flex" justify="space-between">

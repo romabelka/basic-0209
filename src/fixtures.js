@@ -18,7 +18,8 @@ const restaurants = [
       {
         id: "c3cb8f92-a2ed-4716-92a1-b6ea813e9049",
         name: "Naan",
-        price: 3
+        price: 3,
+        ingredients: ["bread"]
       },
       {
         id: "bd129641-c0eb-432b-84b6-8b81d2930358",

@@ -8,6 +8,12 @@ class Menu extends React.Component {
     error: null
   };
 
+  //componentWillMount() {} deprecated -> constructor() || componentDidMount()
+
+  //componentWillReceiveProps() {} deprecated -> componentDidUpdate() || static getDerivedStateFromProps()
+
+  //componentWillUpdate() {} deprecated -> componentDidUpdate() || getSnapshotBeforeUpdate()
+
   componentDidCatch(error) {
     this.setState({ error });
   }
