@@ -1,5 +1,5 @@
 import React from "react";
-import Dish from "../dish";
+import Dish from "../product";
 
 function Menu({ menu }) {
   return (
