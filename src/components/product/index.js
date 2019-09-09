@@ -1,9 +1,10 @@
 import React from "react";
 import { Button, Card, Col, Row, Typography } from "antd";
+import PropTypes from "prop-types";
 import amount from "../../decorators/amount";
 import styles from "./product.module.css";
 
-function Product({ dish: product, amount, increment, decrement }) {
+function Product({ product, amount, increment, decrement }) {
   return (
     <Card className={styles.productDetailedOrderCard}>
       <Row type="flex" justify="space-between">
@@ -37,5 +38,17 @@ function Product({ dish: product, amount, increment, decrement }) {
     </Card>
   );
 }
+
+Product.propTypes = {
+  product: PropTypes.shape({
+    name: PropTypes.string,
+    price: PropTypes.number,
+    ingredients: PropTypes.array.isRequired
+  }).isRequired,
+  // from amount decorator
+  amount: PropTypes.number,
+  increment: PropTypes.func,
+  decrement: PropTypes.func
+};
 
 export default amount(Product);
