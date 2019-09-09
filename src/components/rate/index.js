@@ -1,4 +1,5 @@
 import { Rate as AntRate } from "antd";
+import PropTypes from "prop-types";
 import cx from "classnames";
 import React from "react";
 
@@ -17,5 +18,12 @@ const Rate = ({ amount, value, onChange, disabled = false }) => (
     {amount && <span className="ant-rate-text">({amount})</span>}
   </>
 );
+
+Rate.propTypes = {
+  amount: PropTypes.number,
+  value: PropTypes.number,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool
+};
 
 export default Rate;
