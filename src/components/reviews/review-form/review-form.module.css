@@ -19,9 +19,18 @@
   background-color: transparent !important;
   margin-top: 25px;
 }
-
+.inputWrap {
+  position: relative;
+}
 .invalid:focus {
   border-color: red !important;
+}
+
+.notification {
+  position: absolute;
+  top: 18px;
+  width: 100%;
+  left: 0;
 }
 
 @media all and (max-width: 767px) {

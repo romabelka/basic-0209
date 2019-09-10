@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row } from "antd";
 import Review from "./review";
 import ReviewForm from "./review-form";
+import PropTypes from "prop-types";
 
 function Reviews({ reviews }) {
   return (
@@ -16,6 +17,10 @@ function Reviews({ reviews }) {
   );
 }
 
-Reviews.propTypes = {};
+Review.propTypes = {
+  user: PropTypes.string,
+  text: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired
+};
 
 export default Reviews;

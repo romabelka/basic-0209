@@ -3,6 +3,8 @@ import cx from "classnames";
 import React from "react";
 
 import styles from "./rate.module.css";
+import PropTypes from "prop-types";
+import Review from "../reviews/review";
 
 const Rate = ({ amount, value, onChange, disabled = false }) => (
   <>
@@ -17,5 +19,12 @@ const Rate = ({ amount, value, onChange, disabled = false }) => (
     {amount && <span className="ant-rate-text">({amount})</span>}
   </>
 );
+
+Rate.propTypes = {
+  amount: PropTypes.number,
+  value: PropTypes.number,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool
+};
 
 export default Rate;
