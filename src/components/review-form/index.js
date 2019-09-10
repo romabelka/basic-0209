@@ -1,33 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Rate, Row, Col } from "antd";
 import useReviewInput from "../../hooks/use-review-input";
 
 function SimpleForm() {
-  const {
-    name,
-    setName,
-    review,
-    setReview,
-    rateValue,
-    setRateValue,
-    validate
-  } = useReviewInput();
+  const [name, setName] = useReviewInput(
+    "",
+    name => typeof name === "string" && name.length < 10
+  );
+  const [review, setReview] = useReviewInput(
+    "",
+    review => typeof review === "string"
+  );
+  const [rate, setRate] = useState(0);
 
   const onSubmit = e => {
     e.preventDefault();
-    if (validate()) {
-      console.log(
-        name,
-        review,
-        rateValue,
-        " <--- name, review, rateValue | Validate Good!"
-      );
-    } else {
-      console.log("Sorry, not validate");
-    }
+
+    console.log(name, review, rate, " <--- name, review, rateValue");
     setName("");
     setReview("");
-    setRateValue(0);
+    setRate(0);
+    alert("Thank you!");
   };
 
   return (
@@ -46,7 +39,7 @@ function SimpleForm() {
             value={review}
             onChange={ev => setReview(ev.target.value)}
           />
-          <Rate onChange={setRateValue} value={rateValue} />
+          <Rate onChange={setRate} value={rate} />
           <Input type="submit" value="Submit" />
         </form>
       </Col>

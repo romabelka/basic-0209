@@ -1,28 +1,13 @@
 import { useState } from "react";
 
-function useReviewInput() {
-  const [name, setName] = useState("");
-  const [review, setReview] = useState("");
-  const [rateValue, setRateValue] = useState(0);
+export default function useReviewInput(initialState, validator) {
+  const [state, setState] = useState(initialState);
 
-  function validate() {
-    return !(
-      typeof name !== "string" ||
-      name.trim().length < 3 ||
-      (typeof review !== "string" || review.trim().length < 3) ||
-      (typeof rateValue !== "number" || rateValue < 1 || rateValue > 5)
-    );
+  function setValidState(state) {
+    if (validator(state)) {
+      setState(state);
+    }
   }
 
-  return {
-    name,
-    setName,
-    review,
-    setReview,
-    rateValue,
-    setRateValue,
-    validate
-  };
+  return [state, setValidState];
 }
-
-export default useReviewInput;

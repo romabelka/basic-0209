@@ -3,12 +3,11 @@ import SimpleForm from "../review-form";
 import Review from "../review";
 import { Row } from "antd";
 
-function Reviews({ reviews }) {
+export default function Reviews({ reviews }) {
   return (
     <div>
       <h1>Reviews</h1>
       <SimpleForm />
-
       <div style={{ background: "#f6f8fa", padding: "30px" }}>
         <Row>
           {reviews.map(review => (
@@ -19,5 +18,3 @@ function Reviews({ reviews }) {
     </div>
   );
 }
-
-export default Reviews;
