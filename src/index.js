@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Restaurant from "./components/restaurant";
 import { restaurants } from "./fixtures";
-import "antd/dist/antd.css";
+import "./index.css";
 
 ReactDOM.render(
   <Restaurant restaurant={restaurants[0]} />,

@@ -7,8 +7,8 @@ function Restaurant({ restaurant }) {
   return (
     <div>
       <Typography.Title>{restaurant.name}</Typography.Title>
-      <Reviews reviews={restaurant.reviews} />
       <Menu menu={restaurant.menu} />
+      <Reviews reviews={restaurant.reviews} />
     </div>
   );
 }
