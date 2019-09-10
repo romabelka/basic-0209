@@ -1,17 +1,20 @@
-import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
+import { Button, Card, Col, Form, Input, Row, Typography, message } from "antd";
 import React, { useState } from "react";
 import useInput from "../../../hooks/use-input";
 
 import Rate from "../../rate";
 import styles from "./review-form.module.css";
 
-const AddReview = () => {
+const AddReview = props => {
   const [rate, setRate] = useState();
   const [text, setText, isValidText] = useInput();
-
   const handleSubmit = ev => {
     ev.preventDefault();
-    console.log("submitted: ", rate, text);
+    isValidText ? console.log("submitted: ", rate, text) : error();
+  };
+
+  const error = () => {
+    message.error("Please, enter review text");
   };
 
   return (
@@ -22,8 +25,9 @@ const AddReview = () => {
             Leave your review
           </Typography.Title>
           <Form onSubmit={handleSubmit}>
-            <Form.Item>
+            <Form.Item className={styles.inputWrap}>
               <Input.TextArea
+                data-id="review-input"
                 rows={3}
                 value={text}
                 onChange={setText}
@@ -33,6 +37,11 @@ const AddReview = () => {
                 }}
                 autosize={{ minRows: 3, maxRows: 6 }}
               />
+              {!isValidText && (
+                <span data-id="review-error" className={styles.notification}>
+                  This field is required
+                </span>
+              )}
             </Form.Item>
             <div>
               Rating: <Rate value={rate} onChange={setRate} />
