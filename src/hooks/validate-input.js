@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-export default function ValidateInput(validationFunction) {
+export default function useValidateInput(validationFunction) {
   const [inputValue, setInputValue] = useState();
 
-  const isValid = inputValue => {
+  const setValidValue = inputValue => {
     if (validationFunction(inputValue)) {
       setInputValue(inputValue);
     }
   };
 
-  return [inputValue, isValid];
+  return [inputValue, setValidValue];
 }

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Input, Rate, Form, Button, Card, Typography } from "antd";
-import ValidateInput from "../../hooks/validate-input";
+import useValidateInput from "../../hooks/validate-input";
 
 function SimpleForm(props) {
-  const [review, setReview] = ValidateInput(review =>
-    /^([a-zA-Z0-9_-]){1,150}$/.test(review)
+  const [review, setReview] = useValidateInput(review =>
+    /^([a-zA-Z0-9_-]){0,150}$/.test(review)
   );
   const [rate, setRate] = useState();
   const [name, setName] = useState();
@@ -15,7 +15,7 @@ function SimpleForm(props) {
 
       <Form layout="vertical">
         <Form.Item>
-          <Rate value={rate} onChange={rate => setRate(rate)} />
+          <Rate value={rate} onChange={setRate} />
         </Form.Item>
         <Form.Item>
           <Input
@@ -34,7 +34,7 @@ function SimpleForm(props) {
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" disabled={!review}>
             Add
           </Button>
         </Form.Item>
