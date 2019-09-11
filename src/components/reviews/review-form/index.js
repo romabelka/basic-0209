@@ -47,4 +47,6 @@ const AddReview = () => {
   );
 };
 
+AddReview.propTypes = {};
+
 export default AddReview;
