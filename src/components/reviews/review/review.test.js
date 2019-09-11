@@ -10,7 +10,37 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe("Review", () => {
   it("should render a Card", () => {
-    const component = mount(<Review review={review} />);
+    const component = mount(<Review />);
     expect(component.find("Card").length).toBe(1);
+  });
+
+  it("should render a text review", () => {
+    const component = mount(<Review text={review.text} />);
+    expect(
+      component
+        .find("Text")
+        .at(0)
+        .text()
+    ).toBe(review.text);
+  });
+
+  it("should render a user review", () => {
+    const component = mount(<Review user={review.user} />);
+    expect(
+      component
+        .find("Title")
+        .at(0)
+        .text()
+    ).toBe("Anonymous");
+  });
+
+  it("should render a Rate", () => {
+    const component = mount(<Review rating={review.rating} />);
+    expect(
+      component
+        .find("Rate")
+        .at(0)
+        .prop("value")
+    ).toBe(5);
   });
 });
