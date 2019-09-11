@@ -49,6 +49,53 @@ describe("Product", () => {
     ).toBe("1");
   });
 
+  it("should correct decrement amount", () => {
+    const component = mount(<Product product={product} />);
+
+    expect(
+      component
+        .find('[data-id="product-amount"]')
+        .at(0)
+        .text()
+    ).toBe("0");
+
+    component
+      .find('[data-id="product-increment-btn"]')
+      .at(0)
+      .simulate("click");
+
+    expect(
+      component
+        .find('[data-id="product-amount"]')
+        .at(0)
+        .text()
+    ).toBe("1");
+
+    component
+      .find('[data-id="product-decrement-btn"]')
+      .at(0)
+      .simulate("click");
+
+    expect(
+      component
+        .find('[data-id="product-amount"]')
+        .at(0)
+        .text()
+    ).toBe("0");
+
+    component
+      .find('[data-id="product-decrement-btn"]')
+      .at(0)
+      .simulate("click");
+
+    expect(
+      component
+        .find('[data-id="product-amount"]')
+        .at(0)
+        .text()
+    ).toBe("0");
+  });
+
   it("should fetch a product", () => {
     const fn = jest.fn();
 

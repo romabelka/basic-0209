@@ -4,14 +4,18 @@ import useInput from "../../../hooks/use-input";
 
 import Rate from "../../rate";
 import styles from "./review-form.module.css";
+import sendData from "./send-data";
 
 const AddReview = () => {
-  const [rate, setRate] = useState();
+  const [rate, setRate] = useState(0);
   const [text, setText, isValidText] = useInput();
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    console.log("submitted: ", rate, text);
+
+    //if (isValidText) {
+    sendData({ rate, text });
+    //}
   };
 
   return (
@@ -32,12 +36,22 @@ const AddReview = () => {
                   [styles.invalid]: !isValidText
                 }}
                 autosize={{ minRows: 3, maxRows: 6 }}
+                data-id="review-form-text"
               />
             </Form.Item>
             <div>
-              Rating: <Rate value={rate} onChange={setRate} />
+              Rating:{" "}
+              <Rate
+                value={rate}
+                onChange={setRate}
+                data-id="review-form-rate"
+              />
             </div>
-            <Button htmlType="submit" className={styles.submitButton}>
+            <Button
+              htmlType="submit"
+              className={styles.submitButton}
+              data-id="review-form-btn"
+            >
               PUBLISH REVIEW
             </Button>
           </Form>
