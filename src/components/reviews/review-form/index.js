@@ -28,6 +28,7 @@ const AddReview = () => {
                 value={text}
                 onChange={setText}
                 size="large"
+                input-id="review-form-text"
                 className={{
                   [styles.invalid]: !isValidText
                 }}
@@ -46,5 +47,7 @@ const AddReview = () => {
     </Card>
   );
 };
+
+AddReview.propTypes = {};
 
 export default AddReview;

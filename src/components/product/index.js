@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import amount from "../../decorators/amount";
 import styles from "./product.module.css";
 
-function Product({ product, amount, increment, decrement, fetchProduct }) {
+function Product({ product, fetchProduct, amount, increment, decrement }) {
   useEffect(() => {
     fetchProduct && fetchProduct(product.id);
-  }, [product.id]);
+  }, [product.id, fetchProduct]);
 
   return (
     <Card className={styles.productDetailedOrderCard}>
@@ -31,6 +31,7 @@ function Product({ product, amount, increment, decrement, fetchProduct }) {
                 className={styles.button}
                 icon="minus"
                 onClick={decrement}
+                data-id="product-decrement-btn"
               />
               <Button
                 className={styles.button}
@@ -48,14 +49,21 @@ function Product({ product, amount, increment, decrement, fetchProduct }) {
 
 Product.propTypes = {
   product: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string,
     price: PropTypes.number,
     ingredients: PropTypes.array.isRequired
   }).isRequired,
+  fetchProduct: PropTypes.func,
   // from amount decorator
-  amount: PropTypes.number,
-  increment: PropTypes.func,
-  decrement: PropTypes.func
+  amount: PropTypes.number.isRequired,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired
 };
+
+// Question!
+// Product.defaultProps = {
+//   fetchProduct: undefined
+// }
 
 export default amount(Product);

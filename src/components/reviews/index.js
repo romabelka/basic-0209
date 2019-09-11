@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Col, Row } from "antd";
 import Review from "./review";
 import ReviewForm from "./review-form";
@@ -16,6 +17,12 @@ function Reviews({ reviews }) {
   );
 }
 
-Reviews.propTypes = {};
+Reviews.propTypes = {
+  reviews: PropTypes.array
+};
+
+Reviews.defaultProps = {
+  reviews: []
+};
 
 export default Reviews;
