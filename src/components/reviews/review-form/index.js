@@ -28,6 +28,7 @@ const AddReview = () => {
                 value={text}
                 onChange={setText}
                 size="large"
+                input-id="review-form-text"
                 className={{
                   [styles.invalid]: !isValidText
                 }}

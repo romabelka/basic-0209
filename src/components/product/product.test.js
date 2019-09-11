@@ -56,4 +56,44 @@ describe("Product", () => {
 
     expect(fn).toBeCalledWith(product.id);
   });
+
+  it("should decrement amount correctly", () => {
+    const component = mount(<Product product={product} />);
+
+    component
+      .find('[data-id="product-increment-btn"]')
+      .at(0)
+      .simulate("click");
+
+    expect(
+      component
+        .find('[data-id="product-amount"]')
+        .at(0)
+        .text()
+    ).toBe("1");
+
+    component
+      .find('[data-id="product-decrement-btn"]')
+      .at(0)
+      .simulate("click");
+
+    expect(
+      component
+        .find('[data-id="product-amount"]')
+        .at(0)
+        .text()
+    ).toBe("0");
+
+    component
+      .find('[data-id="product-decrement-btn"]')
+      .at(0)
+      .simulate("click");
+
+    expect(
+      component
+        .find('[data-id="product-amount"]')
+        .at(0)
+        .text()
+    ).toBe("0");
+  });
 });

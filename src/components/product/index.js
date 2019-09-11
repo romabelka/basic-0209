@@ -31,6 +31,7 @@ function Product({ product, fetchProduct, amount, increment, decrement }) {
                 className={styles.button}
                 icon="minus"
                 onClick={decrement}
+                data-id="product-decrement-btn"
               />
               <Button
                 className={styles.button}
@@ -53,11 +54,16 @@ Product.propTypes = {
     price: PropTypes.number,
     ingredients: PropTypes.array.isRequired
   }).isRequired,
-  fetchProduct: PropTypes.func.isRequired,
+  fetchProduct: PropTypes.func,
   // from amount decorator
   amount: PropTypes.number.isRequired,
   increment: PropTypes.func.isRequired,
   decrement: PropTypes.func.isRequired
 };
+
+// Question!
+// Product.defaultProps = {
+//   fetchProduct: undefined
+// }
 
 export default amount(Product);
