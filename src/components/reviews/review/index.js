@@ -1,5 +1,6 @@
 import { Card, Col, Row, Typography } from "antd";
 import React from "react";
+import PropTypes from "prop-types";
 
 import Rate from "../../rate";
 import styles from "./review.module.css";
@@ -8,7 +9,11 @@ const Review = ({ user, text, rating }) => (
   <Card className={styles.review}>
     <Row type="flex" align="middle">
       <Col xs={24} md={18} align="left">
-        <Typography.Title className={styles.name} level={4}>
+        <Typography.Title
+          className={styles.name}
+          level={4}
+          data-id="review-user"
+        >
           {user}
         </Typography.Title>
         <Typography.Text className={styles.comment}>{text}</Typography.Text>
@@ -19,6 +24,12 @@ const Review = ({ user, text, rating }) => (
     </Row>
   </Card>
 );
+
+Review.propTypes = {
+  user: PropTypes.string,
+  text: PropTypes.string,
+  rating: PropTypes.number
+};
 
 Review.defaultProps = {
   user: "Anonymous"
