@@ -8,10 +8,12 @@ import styles from "./review-form.module.css";
 const AddReview = () => {
   const [rate, setRate] = useState();
   const [text, setText, isValidText] = useInput();
+  const [btnCaption, setBtnCaption] = useState("PUBLISH REVIEW");
 
   const handleSubmit = ev => {
     ev.preventDefault();
     console.log("submitted: ", rate, text);
+    if (text) setBtnCaption("PUBLISHED");
   };
 
   return (
@@ -32,13 +34,18 @@ const AddReview = () => {
                   [styles.invalid]: !isValidText
                 }}
                 autosize={{ minRows: 3, maxRows: 6 }}
+                data-id="add-review-textarea"
               />
             </Form.Item>
             <div>
               Rating: <Rate value={rate} onChange={setRate} />
             </div>
-            <Button htmlType="submit" className={styles.submitButton}>
-              PUBLISH REVIEW
+            <Button
+              htmlType="submit"
+              className={styles.submitButton}
+              data-id="add-review-submit-btn"
+            >
+              {btnCaption}
             </Button>
           </Form>
         </Col>
