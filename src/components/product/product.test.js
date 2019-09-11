@@ -52,7 +52,7 @@ describe("Product", () => {
   it("should fetch a product", () => {
     const fn = jest.fn();
 
-    const component = mount(<Product product={product} fetchProduct={fn} />);
+    mount(<Product product={product} fetchProduct={fn} />);
 
     expect(fn).toBeCalledWith(product.id);
   });

@@ -53,11 +53,11 @@ Product.propTypes = {
     price: PropTypes.number,
     ingredients: PropTypes.array.isRequired
   }).isRequired,
-  fetchProduct: PropTypes.func,
+  fetchProduct: PropTypes.func.isRequired,
   // from amount decorator
-  amount: PropTypes.number,
-  increment: PropTypes.func,
-  decrement: PropTypes.func
+  amount: PropTypes.number.isRequired,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired
 };
 
 export default amount(Product);

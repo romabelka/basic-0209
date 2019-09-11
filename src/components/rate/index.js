@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import styles from "./rate.module.css";
 
-const Rate = ({ amount, value, onChange, disabled = false }) => (
+const Rate = ({ amount, value, onChange, disabled }) => (
   <>
     <AntRate
       disabled={disabled}
@@ -24,6 +24,10 @@ Rate.propTypes = {
   value: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   disabled: PropTypes.bool
+};
+
+Rate.defaultProps = {
+  disabled: false
 };
 
 export default Rate;
