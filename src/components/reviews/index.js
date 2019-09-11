@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row } from "antd";
 import Review from "./review";
 import ReviewForm from "./review-form";
+import PropTypes, { reviewsType } from "../../prop-types";
 
 function Reviews({ reviews }) {
   return (
@@ -16,6 +17,8 @@ function Reviews({ reviews }) {
   );
 }
 
-Reviews.propTypes = {};
+Reviews.propTypes = {
+  reviews: reviewsType
+};
 
 export default Reviews;

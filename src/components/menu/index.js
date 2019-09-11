@@ -1,7 +1,7 @@
 import React from "react";
 import Product from "../product";
-import * as PropTypes from "prop-types";
 import { Typography } from "antd";
+import PropTypes, { menuType } from "../../prop-types";
 
 class Menu extends React.Component {
   state = {
@@ -36,7 +36,7 @@ class Menu extends React.Component {
 }
 
 Menu.propTypes = {
-  menu: PropTypes.array.isRequired
+  menu: menuType
 };
 
 export default Menu;
