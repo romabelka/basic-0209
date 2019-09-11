@@ -3,11 +3,10 @@ import Enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import ReviewForm from "./index";
 
+Enzyme.configure({ adapter: new Adapter() });
+
 jest.mock("./send-data");
 const sendData = require("./send-data").default;
-sendData.mockImplementation(() => true);
-
-Enzyme.configure({ adapter: new Adapter() });
 
 describe("ReviewForm", () => {
   it("should not submit invalid data by click on btn", () => {
@@ -16,24 +15,25 @@ describe("ReviewForm", () => {
 
     btn.simulate("click");
 
-    expect(sendData).toHaveBeenCalledTimes(0);
+    expect(sendData).not.toBeCalled();
   });
 
   it("should submit data by click on btn", () => {
-    console.log("~~~~~~~~~~~ review-form.test", sendData());
-
     const component = mount(<ReviewForm />);
 
     const textInput = component.find('[data-id="review-form-text"]').at(0);
-    const rateComponent = component.find('[data-id="review-form-rate"]').at(0);
+    //const rateComponent = component.find('[data-id="review-form-rate"]').at(0);
     const btn = component.find('[data-id="review-form-btn"]').at(0);
 
-    textInput.simulate("change", { target: { value: "test" } });
-    //rateComponent.simulate('change', { which: 5 });
+    const text = "test";
+
+    textInput.simulate("change", { target: { value: text } });
+    //rateComponent.simulate('change', { target: { value: text } });
+
     btn.simulate("click");
 
-    expect(sendData).toHaveBeenCalledTimes(1);
+    expect(sendData).toBeCalledWith({ text, rate: 0 });
   });
 
-  //it('should change props along change forms data');
+  it.todo("should change props along change forms data");
 });

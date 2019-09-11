@@ -13,9 +13,9 @@ const AddReview = () => {
   const handleSubmit = ev => {
     ev.preventDefault();
 
-    //if (isValidText) {
-    sendData({ rate, text });
-    //}
+    if (isValidText) {
+      sendData({ rate, text });
+    }
   };
 
   return (
@@ -25,7 +25,7 @@ const AddReview = () => {
           <Typography.Title className={styles.addReviewTitle} level={4}>
             Leave your review
           </Typography.Title>
-          <Form onSubmit={handleSubmit}>
+          <Form>
             <Form.Item>
               <Input.TextArea
                 rows={3}
@@ -50,6 +50,7 @@ const AddReview = () => {
             <Button
               htmlType="submit"
               className={styles.submitButton}
+              onClick={handleSubmit}
               data-id="review-form-btn"
             >
               PUBLISH REVIEW
