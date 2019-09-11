@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography } from "antd";
+import PropTypes from "prop-types";
 import Reviews from "../reviews";
 import Menu from "../menu";
 
@@ -12,5 +13,13 @@ function Restaurant({ restaurant }) {
     </div>
   );
 }
+
+Restaurant.prototypes = {
+  restaurant: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    menu: PropTypes.array.isRequired,
+    reviews: PropTypes.array.isRequired
+  })
+};
 
 export default Restaurant;
