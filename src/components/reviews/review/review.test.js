@@ -16,14 +16,27 @@ describe("Review", () => {
     expect(component.find("Rate").length).toBeGreaterThan(0);
   });
 
-  it("should contain user name or Anonymous", () => {
-    const component = mount(<Review {...review} />);
+  it("should contain non-empty user name", () => {
+    const sampleReview = { user: "John Doe", ...review };
+    const component = mount(<Review {...sampleReview} />);
 
     expect(
       component
         .find('[data-id="review-user"]')
         .at(0)
         .text()
-    ).toBe(review.user || "Anonymous");
+    ).toBe(sampleReview.user);
+  });
+
+  it("should contain Anonymous if user name is empty", () => {
+    const { user, ...sampleReview } = review;
+    const component = mount(<Review {...sampleReview} />);
+
+    expect(
+      component
+        .find('[data-id="review-user"]')
+        .at(0)
+        .text()
+    ).toBe("Anonymous");
   });
 });
