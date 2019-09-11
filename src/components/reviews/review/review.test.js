@@ -9,9 +9,9 @@ const mockReview = restaurants[0].reviews[0];
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("Review", () => {
-  // Вопрос: если ТЗ на русском, то почему бы не писать эти описания по-русски? Т. е. прямо копировать пункты из ТЗ.
+  // 🙋 Вопрос: если ТЗ на русском, то почему бы не писать эти описания по-русски? Т. е. прямо копировать пункты из ТЗ.
   // Так можно будет максимально точно описать бизнес-требования. Или лучше по-английски?
-  it("should render all Reviews's required props", () => {
+  it("should get all Reviews's required props", () => {
     const component = mount(<Review {...mockReview} />);
     expect(!!component.props().text).toBe(true);
     expect(!!component.props().rating).toBe(true);
