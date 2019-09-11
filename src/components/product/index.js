@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Button, Card, Col, Row, Typography } from "antd";
-import PropTypes from "prop-types";
+import PropTypes, { productType } from "../../prop-types";
 import amount from "../../decorators/amount";
 import styles from "./product.module.css";
 
@@ -47,11 +47,7 @@ function Product({ product, amount, increment, decrement, fetchProduct }) {
 }
 
 Product.propTypes = {
-  product: PropTypes.shape({
-    name: PropTypes.string,
-    price: PropTypes.number,
-    ingredients: PropTypes.array.isRequired
-  }).isRequired,
+  product: PropTypes.shape(productType),
   // from amount decorator
   amount: PropTypes.number,
   increment: PropTypes.func,
