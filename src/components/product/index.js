@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { Button, Card, Col, Row, Typography } from "antd";
-import PropTypes from "prop-types";
-import amount from "../../decorators/amount";
+import * as PropTypes from "prop-types";
+import amount, {
+  decoratedPropTypes as amountDecoratedPropTypes
+} from "../../decorators/amount";
 import styles from "./product.module.css";
 
 function Product({ product, amount, increment, decrement, fetchProduct }) {
@@ -48,14 +50,15 @@ function Product({ product, amount, increment, decrement, fetchProduct }) {
 
 Product.propTypes = {
   product: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string,
     price: PropTypes.number,
     ingredients: PropTypes.array.isRequired
   }).isRequired,
   // from amount decorator
-  amount: PropTypes.number,
-  increment: PropTypes.func,
-  decrement: PropTypes.func
+  ...amountDecoratedPropTypes,
+  // from tests
+  fetchProduct: PropTypes.func
 };
 
 export default amount(Product);

@@ -1,5 +1,6 @@
 import { Card, Col, Row, Typography } from "antd";
 import React from "react";
+import * as PropTypes from "prop-types";
 
 import Rate from "../../rate";
 import styles from "./review.module.css";
@@ -19,6 +20,12 @@ const Review = ({ user, text, rating }) => (
     </Row>
   </Card>
 );
+
+Review.propTypes = {
+  user: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired
+};
 
 Review.defaultProps = {
   user: "Anonymous"

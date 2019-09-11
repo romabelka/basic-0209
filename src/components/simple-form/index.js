@@ -10,4 +10,6 @@ function SimpleForm(props) {
   );
 }
 
+SimpleForm.propTypes = {};
+
 export default SimpleForm;
