@@ -1,7 +1,7 @@
 import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
 import React, { useState } from "react";
 import useInput from "../../../hooks/use-input";
-
+import PropTypes from "prop-types";
 import Rate from "../../rate";
 import styles from "./review-form.module.css";
 
@@ -21,9 +21,10 @@ const AddReview = () => {
           <Typography.Title className={styles.addReviewTitle} level={4}>
             Leave your review
           </Typography.Title>
-          <Form onSubmit={handleSubmit}>
+          <Form data-ut="form" onSubmit={handleSubmit}>
             <Form.Item>
               <Input.TextArea
+                data-ut="review-text"
                 rows={3}
                 value={text}
                 onChange={setText}
@@ -37,7 +38,11 @@ const AddReview = () => {
             <div>
               Rating: <Rate value={rate} onChange={setRate} />
             </div>
-            <Button htmlType="submit" className={styles.submitButton}>
+            <Button
+              htmlType="submit"
+              data-ut="submit"
+              className={styles.submitButton}
+            >
               PUBLISH REVIEW
             </Button>
           </Form>
@@ -45,6 +50,11 @@ const AddReview = () => {
       </Row>
     </Card>
   );
+};
+
+AddReview.propTypes = {
+  text: PropTypes.string,
+  rate: PropTypes.number
 };
 
 export default AddReview;

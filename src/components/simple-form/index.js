@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 function SimpleForm(props) {
   const [review, setReview] = useState("");
@@ -9,5 +10,14 @@ function SimpleForm(props) {
     </div>
   );
 }
+
+SimpleForm.propTypes = {
+  review: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    user: PropTypes.string,
+    text: PropTypes.string,
+    rating: PropTypes.string
+  })
+};
 
 export default SimpleForm;
