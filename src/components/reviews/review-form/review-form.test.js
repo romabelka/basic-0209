@@ -3,37 +3,41 @@ import Enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import ReviewForm from "./index";
 
-Enzyme.configure({ adapter: new Adapter() });
+import { act } from "react-dom/test-utils";
 
-jest.mock("./send-data");
-const sendData = require("./send-data").default;
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("ReviewForm", () => {
   it("should not submit invalid data by click on btn", () => {
-    const component = mount(<ReviewForm />);
+    const handleSubmitData = jest.fn();
+
+    const component = mount(<ReviewForm submitData={handleSubmitData} />);
     const btn = component.find('[data-id="review-form-btn"]').at(0);
 
     btn.simulate("click");
 
-    expect(sendData).not.toBeCalled();
+    expect(component.props().isValidText).toBeFalsy();
+    expect(handleSubmitData).not.toBeCalled();
   });
 
   it("should submit data by click on btn", () => {
-    const component = mount(<ReviewForm />);
+    const handleSubmitData = jest.fn();
+    const component = mount(<ReviewForm submitData={handleSubmitData} />);
 
     const textInput = component.find('[data-id="review-form-text"]').at(0);
-    //const rateComponent = component.find('[data-id="review-form-rate"]').at(0);
+    const rateComponent = component.find('[data-id="review-form-rate"]').at(0);
     const btn = component.find('[data-id="review-form-btn"]').at(0);
 
     const text = "test";
 
     textInput.simulate("change", { target: { value: text } });
-    //rateComponent.simulate('change', { target: { value: text } });
+
+    act(() => {
+      rateComponent.props().onChange(5);
+    });
 
     btn.simulate("click");
 
-    expect(sendData).toBeCalledWith({ text, rate: 0 });
+    expect(handleSubmitData).toBeCalledWith({ text, rate: 5 });
   });
-
-  it.todo("should change props along change forms data");
 });

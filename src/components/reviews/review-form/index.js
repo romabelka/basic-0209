@@ -1,12 +1,12 @@
 import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import useInput from "../../../hooks/use-input";
 
 import Rate from "../../rate";
 import styles from "./review-form.module.css";
-import sendData from "./send-data";
 
-const AddReview = () => {
+const AddReview = ({ submitData }) => {
   const [rate, setRate] = useState(0);
   const [text, setText, isValidText] = useInput();
 
@@ -14,7 +14,7 @@ const AddReview = () => {
     ev.preventDefault();
 
     if (isValidText) {
-      sendData({ rate, text });
+      submitData({ rate, text });
     }
   };
 
@@ -60,6 +60,16 @@ const AddReview = () => {
       </Row>
     </Card>
   );
+};
+
+AddReview.defaultProps = {
+  submitData: data => {
+    console.log("submitted: ", data);
+  }
+};
+
+AddReview.propTypes = {
+  submitData: PropTypes.func.isRequired
 };
 
 export default AddReview;
