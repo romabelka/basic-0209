@@ -1,10 +1,17 @@
 import React, { useEffect } from "react";
 import { Button, Card, Col, Row, Typography } from "antd";
 import PropTypes from "prop-types";
-import amount from "../../decorators/amount";
+import { connect } from "react-redux";
 import styles from "./product.module.css";
+import { decrement, increment } from "../../redux/ac";
 
-function Product({ product, amount, increment, decrement, fetchProduct }) {
+function Product({
+  product,
+  amount,
+  handleIncrement,
+  handleDecrement,
+  fetchProduct
+}) {
   useEffect(() => {
     fetchProduct && fetchProduct(product.id);
   }, [product.id]);
@@ -30,12 +37,12 @@ function Product({ product, amount, increment, decrement, fetchProduct }) {
               <Button
                 className={styles.button}
                 icon="minus"
-                onClick={decrement}
+                onClick={handleDecrement}
               />
               <Button
                 className={styles.button}
                 icon="plus"
-                onClick={increment}
+                onClick={handleIncrement}
                 data-id="product-increment-btn"
               />
             </Button.Group>
@@ -59,4 +66,16 @@ Product.propTypes = {
   decrement: PropTypes.func
 };
 
-export default amount(Product);
+const mapStateToProps = storeState => ({
+  amount: storeState.order
+});
+
+const mapDispatchToProps = {
+  handleDecrement: decrement,
+  handleIncrement: increment
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Product);
