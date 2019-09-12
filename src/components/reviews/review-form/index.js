@@ -1,17 +1,18 @@
 import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import useInput from "../../../hooks/use-input";
 
 import Rate from "../../rate";
 import styles from "./review-form.module.css";
 
-const AddReview = () => {
+const AddReview = ({ onSubmit }) => {
   const [rate, setRate] = useState();
   const [text, setText, isValidText] = useInput();
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    console.log("submitted: ", rate, text);
+    onSubmit(text, rate);
   };
 
   return (
@@ -21,7 +22,7 @@ const AddReview = () => {
           <Typography.Title className={styles.addReviewTitle} level={4}>
             Leave your review
           </Typography.Title>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} data-id="review-form">
             <Form.Item>
               <Input.TextArea
                 rows={3}
@@ -32,10 +33,16 @@ const AddReview = () => {
                   [styles.invalid]: !isValidText
                 }}
                 autosize={{ minRows: 3, maxRows: 6 }}
+                data-id="review-form-text"
               />
             </Form.Item>
             <div>
-              Rating: <Rate value={rate} onChange={setRate} />
+              Rating:{" "}
+              <Rate
+                value={rate}
+                onChange={setRate}
+                data-id="review-form-rate"
+              />
             </div>
             <Button htmlType="submit" className={styles.submitButton}>
               PUBLISH REVIEW
@@ -45,6 +52,10 @@ const AddReview = () => {
       </Row>
     </Card>
   );
+};
+
+AddReview.propTypes = {
+  onSubmit: PropTypes.func.isRequired
 };
 
 export default AddReview;

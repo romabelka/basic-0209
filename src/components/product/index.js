@@ -52,6 +52,7 @@ Product.propTypes = {
     price: PropTypes.number,
     ingredients: PropTypes.array.isRequired
   }).isRequired,
+  fetchProduct: PropTypes.func,
   // from amount decorator
   amount: PropTypes.number,
   increment: PropTypes.func,
