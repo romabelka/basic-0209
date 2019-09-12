@@ -37,12 +37,12 @@ function Product({
               <Button
                 className={styles.button}
                 icon="minus"
-                onClick={handleDecrement}
+                onClick={() => handleDecrement(product.id)}
               />
               <Button
                 className={styles.button}
                 icon="plus"
-                onClick={handleIncrement}
+                onClick={() => handleIncrement(product.id)}
                 data-id="product-increment-btn"
               />
             </Button.Group>
@@ -66,12 +66,12 @@ Product.propTypes = {
   decrement: PropTypes.func
 };
 
-const mapStateToProps = storeState => ({
-  amount: storeState.order
+const mapStateToProps = (storeState, ownProps) => ({
+  amount: storeState.order[ownProps.product.id] || 0
 });
 
 const mapDispatchToProps = {
-  handleDecrement: decrement,
+  handleDecrement: decrement, //handleDecrement = (...args) => dispatch(decrement(...args))
   handleIncrement: increment
 };
 
