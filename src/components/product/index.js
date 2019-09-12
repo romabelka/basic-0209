@@ -31,6 +31,7 @@ function Product({ product, amount, increment, decrement, fetchProduct }) {
                 className={styles.button}
                 icon="minus"
                 onClick={decrement}
+                data-id="product-decrement-btn"
               />
               <Button
                 className={styles.button}
@@ -52,6 +53,7 @@ Product.propTypes = {
     price: PropTypes.number,
     ingredients: PropTypes.array.isRequired
   }).isRequired,
+  fetchProduct: PropTypes.func,
   // from amount decorator
   amount: PropTypes.number,
   increment: PropTypes.func,

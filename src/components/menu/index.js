@@ -1,6 +1,6 @@
 import React from "react";
 import Product from "../product";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Typography } from "antd";
 
 class Menu extends React.Component {
