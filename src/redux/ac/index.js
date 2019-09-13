@@ -1,11 +1,11 @@
 import { DECREMENT, INCREMENT } from "../constants";
 
-export const increment = id => ({
+export const increment = (id, name) => ({
   type: INCREMENT,
-  payload: { id }
+  payload: { id, name }
 });
 
-export const decrement = id => ({
+export const decrement = (id, name) => ({
   type: DECREMENT,
-  payload: { id }
+  payload: { id, name }
 });
