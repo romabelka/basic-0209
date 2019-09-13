@@ -1,12 +1,9 @@
 import React from "react";
-import Enzyme, { mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { mount } from "enzyme";
 import Product from "./index";
 import { restaurants } from "../../fixtures";
 
 const product = restaurants[0].menu[0];
-
-Enzyme.configure({ adapter: new Adapter() });
 
 describe("Product", () => {
   it("should render a Card", () => {
