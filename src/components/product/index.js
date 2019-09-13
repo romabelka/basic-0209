@@ -37,7 +37,9 @@ function Product({
               <Button
                 className={styles.button}
                 icon="minus"
-                onClick={() => handleDecrement(product.id)}
+                onClick={() =>
+                  amount > 0 ? handleDecrement(product.id) : null
+                }
               />
               <Button
                 className={styles.button}
