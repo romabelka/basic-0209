@@ -21,14 +21,13 @@ const AddReview = () => {
           <Typography.Title className={styles.addReviewTitle} level={4}>
             Leave your review
           </Typography.Title>
-          <Form data-id="form" onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Form.Item>
               <Input.TextArea
                 rows={3}
                 value={text}
                 onChange={setText}
                 size="large"
-                data-id="form-input"
                 className={{
                   [styles.invalid]: !isValidText
                 }}
