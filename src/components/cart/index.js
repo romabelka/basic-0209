@@ -14,42 +14,52 @@ function Cart({ order, handleRemove }) {
     <>
       <div
         style={{
-          width: "450px",
-          height: "150px",
-          margin: "20px",
-          overflowY: "auto"
+          margin: "20px"
         }}
       >
         <h4>Cart</h4>
-        {!cartList.length ? (
-          <div>Is empty</div>
-        ) : (
-          <>
-            <div>
-              Total: <strong>{total}</strong>
-            </div>
-            <ul>
-              {cartList.map(cartItem => {
-                const { product, amount } = cartItem;
-                const itemSum = (product.price * amount).toFixed(2);
+        <div
+          style={{
+            width: "450px",
+            height: "120px",
+            overflowY: "auto"
+          }}
+        >
+          {!cartList.length ? (
+            "Is empty"
+          ) : (
+            <>
+              <div>
+                Total: <strong>{total}</strong>
+              </div>
+              <ul>
+                {cartList.map(cartItem => {
+                  const { product, amount } = cartItem;
+                  const itemSum = (product.price * amount).toFixed(2);
 
-                return (
-                  <li key={product.id}>
-                    {`${product.name} ${
-                      product.price
-                    } x ${amount} = ${itemSum}`}
-                    <button
-                      style={{ margin: "0 5px" }}
-                      onClick={() => handleRemove(product.id)}
+                  return (
+                    <li
+                      style={{
+                        margin: "5px 0"
+                      }}
+                      key={product.id}
                     >
-                      X
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </>
-        )}
+                      {`${product.name} ${
+                        product.price
+                      } x ${amount} = ${itemSum}`}
+                      <button
+                        style={{ margin: "0 5px" }}
+                        onClick={() => handleRemove(product.id)}
+                      >
+                        X
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          )}
+        </div>
       </div>
     </>
   );

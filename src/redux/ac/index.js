@@ -5,9 +5,9 @@ export const increment = ({ id, name, price }) => ({
   payload: { id, name, price }
 });
 
-export const decrement = ({ id, name, price }) => ({
+export const decrement = ({ id }) => ({
   type: DECREMENT,
-  payload: { id, name, price }
+  payload: { id }
 });
 
 export const remove = id => ({
