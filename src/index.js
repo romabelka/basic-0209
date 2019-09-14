@@ -6,11 +6,18 @@ import Restaurant from "./components/restaurant";
 import { restaurants } from "./fixtures";
 import "./index.css";
 import store from "./redux/store";
+import { Tabs } from "antd";
 
 ReactDOM.render(
   <Provider store={store}>
     <Cart />
-    <Restaurant restaurant={restaurants[0]} />
+    <Tabs>
+      {restaurants.map(restaurant => (
+        <Tabs.TabPane tab={restaurant.name} key={restaurant.id}>
+          <Restaurant restaurant={restaurant} />
+        </Tabs.TabPane>
+      ))}
+    </Tabs>
   </Provider>,
   document.getElementById("root")
 );
