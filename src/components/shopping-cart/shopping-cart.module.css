@@ -1,0 +1,10 @@
+.cartContainer {
+  position: relative;
+}
+
+.cartTitle {
+  color: #de9124;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
