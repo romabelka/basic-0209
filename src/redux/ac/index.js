@@ -9,3 +9,8 @@ export const decrement = id => ({
   type: DECREMENT,
   payload: { id }
 });
+
+export const setRestaurant = id => ({
+  type: "RESTAURANT",
+  payload: { id }
+});
