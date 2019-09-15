@@ -4,7 +4,10 @@ import { connect } from "react-redux";
 import { Badge, Popover, Row, Col, Button } from "antd";
 
 function Cart({ positions, total }) {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisibleState] = useState(false);
+
+  const setVisible = visible =>
+    setVisibleState(visible && positions.length !== 0);
 
   const products = positions.map(product => (
     <Row key={product.id}>
@@ -26,11 +29,11 @@ function Cart({ positions, total }) {
   const checkoutButton = positions.length ? <Button>Checkout</Button> : "";
 
   const content = (
-    <div>
+    <React.Fragment>
       {products}
       {totalRow}
       {checkoutButton}
-    </div>
+    </React.Fragment>
   );
 
   return (
