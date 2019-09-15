@@ -22,7 +22,7 @@ export default (state = {}, action) => {
         }
       };
     case DECREMENT:
-      if (amount <= 1) {
+      if (amount <= 1 && state[payload.id]) {
         return removeFromState(payload.id, state);
       }
 
