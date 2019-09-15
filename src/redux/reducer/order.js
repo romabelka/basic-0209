@@ -1,20 +1,41 @@
-import { DECREMENT, INCREMENT } from "../constants";
+import { DECREMENT, INCREMENT, REMOVE } from "../constants";
+
+function removeFromState(id, state = {}) {
+  const newState = { ...state };
+  delete newState[id];
+
+  return newState;
+}
 
 //{[productId]: amount}
 export default (state = {}, action) => {
-  const { type, payload } = action;
+  const { type, payload = {} } = action;
+  const { product, amount = 0 } = state[payload.id] || {};
 
   switch (type) {
     case INCREMENT:
       return {
         ...state,
-        [payload.id]: (state[payload.id] || 0) + 1
+        [payload.id]: {
+          product: product ? product : { ...payload },
+          amount: amount + 1
+        }
       };
     case DECREMENT:
+      if (amount <= 1 && state[payload.id]) {
+        return removeFromState(payload.id, state);
+      }
+
       return {
         ...state,
-        [payload.id]: (state[payload.id] || 0) - 1
+        [payload.id]: {
+          product,
+          amount: amount - 1
+        }
       };
+
+    case REMOVE:
+      return removeFromState(payload.id, state);
 
     default:
       return state;
