@@ -1,22 +1,40 @@
 import React from "react";
 import { Card } from "antd";
 import { connect } from "react-redux";
-// import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 
-function Cart({ productId, menu }) {
-  // console.log(productId[0],'productId')
+function Cart({ productId = {}, menu }) {
+  let totalPrice = 0;
+  let arr = menu.map(item => {
+    let count = productId[item.id];
 
-  for (var prop in productId) {
-    console.log(productId[prop], menu, "productId");
-  }
+    if (count && count !== "undefined") {
+      let price = item.price * count;
+      totalPrice = totalPrice + price;
+      return {
+        name: item.name,
+        count: count,
+        price: price,
+        id: item.id
+      };
+    }
+  });
 
   return (
     <div style={{ background: "#ECECEC", padding: "30px" }}>
-      <Card title="Your cart" bordered={false} style={{ width: 300 }}>
-        {/*<p>{productId}</p>*/}
-        {/*{productId.map((prod)=>(<p>{prod}</p>))}*/}
-        <p>Card content</p>
-        <p>Card content</p>
+      <Card title="Your cart:" bordered={false} style={{ width: 300 }}>
+        {arr.map(item => {
+          if (item) {
+            return (
+              <p key={item.id}>
+                <strong>{item.name}: </strong>
+                {item.count} pcs / {item.price} $
+              </p>
+            );
+          }
+        })}
+        <h4>
+          <strong>Total price:</strong> {totalPrice} $
+        </h4>
       </Card>
     </div>
   );
