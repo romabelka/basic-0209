@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 function Cart({ order, totalAmount, totalPrice }) {
   const [isShowAll, setShowAll] = useState(false);
 
-  const renderItem = ({ price, name, amount }) => (
-    <div key={name}>
+  const renderItem = ({ id, price, name, amount }) => (
+    <div key={id}>
       <Typography.Text>{`dish: ${name}`}</Typography.Text>
       <Typography.Text>{` price: ${price} `}</Typography.Text>
       <Typography.Text>{` amount: ${amount} `}</Typography.Text>
