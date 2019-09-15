@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import Restaurant from "./components/restaurant";
-import { restaurants } from "./fixtures";
-import "./index.css";
+import { Layout } from "./components/layout";
 import store from "./redux/store";
+import "./index.css";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Restaurant restaurant={restaurants[0]} />
+    <Layout />
   </Provider>,
   document.getElementById("root")
 );

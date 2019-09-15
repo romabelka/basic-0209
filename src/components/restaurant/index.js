@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 function Restaurant({ restaurant }) {
   return (
     <div>
-      <Typography.Title>{restaurant.name}</Typography.Title>
+      <Typography.Title level={2}>{restaurant.name}</Typography.Title>
       <Menu menu={restaurant.menu} />
       <Reviews reviews={restaurant.reviews} />
     </div>
