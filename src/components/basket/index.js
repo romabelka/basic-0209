@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styles from "./basket.module.css";
 
-function Basket({ menu, order, total }) {
+function Basket({ menu, order }) {
   return (
     <div className={styles.basket}>
       <Row type="flex" justify="end">
         <Typography.Title level={3}>Basket</Typography.Title>
       </Row>
-      {!!total ? (
+      {!!order.total ? (
         <div className={styles.basketRow}>
           <Row type="flex" justify="end">
             <Col span={4}>
@@ -27,16 +27,16 @@ function Basket({ menu, order, total }) {
               <Typography.Text strong>Product total</Typography.Text>
             </Col>
           </Row>
-          {Object.keys(order).map(id => (
+          {Object.keys(order.orderedPositions).map(id => (
             <div key={id}>
-              {!!order[id] && (
-                <BasketItem quantity={order[id]} product={menu[id]} />
+              {!!order.orderedPositions[id]["quantity"] && (
+                <BasketItem product={order.orderedPositions[id]} />
               )}
             </div>
           ))}
           <Row type="flex" justify="end">
             <Typography.Title level={4} mark>
-              Total price: {total}
+              Total price: {order.total}
             </Typography.Title>
           </Row>
         </div>
@@ -52,7 +52,7 @@ function Basket({ menu, order, total }) {
 }
 
 Basket.propTypes = {
-  quantity: PropTypes.object.isRequired,
+  quantity: PropTypes.object,
   menu: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
@@ -60,15 +60,32 @@ Basket.propTypes = {
   }).isRequired
 };
 
-function getTotal(order, menu) {
-  return Object.keys(order).reduce(function(previous, key) {
-    return previous + order[key] * menu[key]["price"];
+function filterMenuByOrder(order, menu) {
+  const allowed = Object.keys(order);
+
+  const orderedPositions = Object.keys(menu)
+    .filter(key => allowed.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = menu[key];
+      obj[key]["quantity"] = order[key];
+      return obj;
+    }, {});
+
+  const total = Object.keys(orderedPositions).reduce(function(previous, key) {
+    return (
+      previous +
+      orderedPositions[key]["quantity"] * orderedPositions[key]["price"]
+    );
   }, 0);
+
+  return {
+    orderedPositions: orderedPositions,
+    total: total
+  };
 }
 
 const mapStateToProps = (storeState, ownProps) => ({
-  order: storeState.order,
-  total: getTotal(storeState.order, ownProps.menu)
+  order: filterMenuByOrder(storeState.order, ownProps.menu)
 });
 
 export default connect(mapStateToProps)(Basket);

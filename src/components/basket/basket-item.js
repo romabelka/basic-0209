@@ -1,9 +1,8 @@
 import React from "react";
 import { Row, Col, Typography } from "antd";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-function BasketItem({ quantity, product }) {
+function BasketItem({ product }) {
   return (
     <div>
       <Row type="flex" justify="end">
@@ -11,13 +10,13 @@ function BasketItem({ quantity, product }) {
           <Typography.Text>{product.name}</Typography.Text>
         </Col>
         <Col span={4}>
-          <Typography.Text>{quantity}</Typography.Text>
+          <Typography.Text>{product.quantity}</Typography.Text>
         </Col>
         <Col span={4}>
           <Typography.Text>{product.price}</Typography.Text>
         </Col>
         <Col span={4}>
-          <Typography.Text>{quantity * product.price}</Typography.Text>
+          <Typography.Text>{product.quantity * product.price}</Typography.Text>
         </Col>
       </Row>
     </div>
@@ -25,15 +24,11 @@ function BasketItem({ quantity, product }) {
 }
 
 BasketItem.propTypes = {
-  quantity: PropTypes.number.isRequired,
-  restaurant: PropTypes.shape({
+  product: PropTypes.shape({
     name: PropTypes.string,
-    price: PropTypes.number
+    price: PropTypes.number,
+    quantity: PropTypes.number
   }).isRequired
 };
 
-const mapStateToProps = storeState => ({
-  order: storeState.order
-});
-
-export default connect(mapStateToProps)(BasketItem);
+export default BasketItem;
