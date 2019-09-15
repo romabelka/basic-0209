@@ -3,14 +3,16 @@ import { Button, Card, Col, Row, Typography } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styles from "./product.module.css";
-import { decrement, increment } from "../../redux/ac";
+import { decrement, increment, add, del } from "../../redux/ac";
 
 function Product({
   product,
   amount,
   handleIncrement,
   handleDecrement,
-  fetchProduct
+  fetchProduct,
+  removeDish,
+  addDish
 }) {
   useEffect(() => {
     fetchProduct && fetchProduct(product.id);
@@ -37,12 +39,20 @@ function Product({
               <Button
                 className={styles.button}
                 icon="minus"
-                onClick={() => handleDecrement(product.id)}
+                onClick={() => {
+                  if (amount > 0) {
+                    amount === 1
+                      ? removeDish(product.id)
+                      : handleDecrement(product.id);
+                  }
+                }}
               />
               <Button
                 className={styles.button}
                 icon="plus"
-                onClick={() => handleIncrement(product.id)}
+                onClick={() =>
+                  amount === 0 ? addDish(product) : handleIncrement(product.id)
+                }
                 data-id="product-increment-btn"
               />
             </Button.Group>
@@ -66,13 +76,15 @@ Product.propTypes = {
   decrement: PropTypes.func
 };
 
-const mapStateToProps = (storeState, ownProps) => ({
-  amount: storeState.order[ownProps.product.id] || 0
+const mapStateToProps = ({ order }, { product: { id } }) => ({
+  amount: order[id] ? order[id].amount : 0
 });
 
 const mapDispatchToProps = {
   handleDecrement: decrement, //handleDecrement = (...args) => dispatch(decrement(...args))
-  handleIncrement: increment
+  handleIncrement: increment,
+  addDish: add,
+  removeDish: del
 };
 
 export default connect(
