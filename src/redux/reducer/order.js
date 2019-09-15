@@ -29,7 +29,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         [payload.id]: {
-          product: product ? product : { ...payload },
+          product,
           amount: amount - 1
         }
       };
