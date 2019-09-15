@@ -1,0 +1,18 @@
+.layout {
+  width: 100%;
+  padding: 20px;
+}
+
+.layout__main-content {
+  width: 100%;
+  display: flex;
+}
+
+.layout__restaurants {
+  width: 65%;
+  margin-right: 5%;
+}
+
+.layout__cart {
+  width: 30%;
+}
