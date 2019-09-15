@@ -19,10 +19,11 @@ function Restaurant({ restaurant }) {
   ];
 
   return (
-    <>
-      <Hero heading={restaurant.name} />
-      <ContentTabs items={contentItems} tabPaneClassName={styles.tabPane} />
-    </>
+    <div>
+      <Typography.Title level={2}>{restaurant.name}</Typography.Title>
+      <Menu menu={restaurant.menu} />
+      <Reviews reviews={restaurant.reviews} />
+    </div>
   );
 }
 
