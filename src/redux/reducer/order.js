@@ -10,7 +10,13 @@ export default (state = new Map({}), action) => {
       return state.update(payload.id, 0, amount => amount + 1);
 
     case DECREMENT:
-      return state.update(payload.id, 0, amount => Math.max(amount - 1, 0));
+      return {
+        ...state,
+        [payload.id]:
+          state[payload.id] > 0
+            ? (state[payload.id] || 0) - 1
+            : state[payload.id]
+      };
 
     default:
       return state;
