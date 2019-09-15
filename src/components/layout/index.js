@@ -5,7 +5,7 @@ import { restaurants } from "../../fixtures";
 import { Tabs, Typography } from "antd";
 import "./layout.css";
 
-export const Layout = props => {
+export const Layout = () => {
   return (
     <div className="layout">
       <header className="layout__head">

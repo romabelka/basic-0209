@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { Typography, List } from "antd";
 import { CartItem } from "../cart-item";
 import { restaurants } from "../../fixtures";
+import PropTypes from "prop-types";
 import "./cart.css";
 
-const Cart = ({ order }) => {
+export const Cart = ({ order }) => {
   const selectedProducts = getSelectedProducts(
     order,
     restaurants.map(i => i.menu).reduce((acc, curr) => [...acc, ...curr])
@@ -13,7 +14,7 @@ const Cart = ({ order }) => {
 
   const MainBlock = (
     <>
-      <section>
+      <section data-id="cart-list">
         <Typography.Title level={3}> Dishes </Typography.Title>
         <List
           dataSource={selectedProducts}
@@ -27,13 +28,13 @@ const Cart = ({ order }) => {
       <section>
         <Typography.Title level={3}> Total </Typography.Title>
         <Typography.Paragraph className="cart__total-item">
-          Common count of dishes:{" "}
+          Common count of dishes:
           <Typography.Text mark>
             {getCommonCount(selectedProducts)}
           </Typography.Text>
         </Typography.Paragraph>
         <Typography.Paragraph className="cart__total-item">
-          Common price:{" "}
+          Common price:
           <Typography.Text mark>
             {getCommonPrice(selectedProducts)} $
           </Typography.Text>
@@ -59,6 +60,7 @@ const getSelectedProducts = (order, allProducts) => {
   for (let key in order) {
     if (!order[key]) continue;
     const currProduct = allProducts.find(i => i.id === key);
+    if (!currProduct) continue;
     products.push({
       id: currProduct.id,
       count: order[key],
@@ -84,3 +86,9 @@ const mapStateToProps = (storeState, ownProps) => ({
 });
 
 export default connect(mapStateToProps)(Cart);
+
+Cart.propTypes = {
+  order: PropTypes.shape({
+    [PropTypes.string]: PropTypes.number
+  })
+};
