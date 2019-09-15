@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography } from "antd";
+import PropTypes from "prop-types";
 import "./cart-item.css";
 
 export const CartItem = ({ caption, price, count }) => {
@@ -12,4 +13,10 @@ export const CartItem = ({ caption, price, count }) => {
       <Typography.Text strong>{count}</Typography.Text>
     </div>
   );
+};
+
+CartItem.propTypes = {
+  caption: PropTypes.string,
+  price: PropTypes.number,
+  count: PropTypes.number
 };
