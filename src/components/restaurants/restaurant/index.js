@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography } from "antd";
-import Reviews from "../reviews";
-import Menu from "../menu";
+import Reviews from "../../reviews";
+import Menu from "../../menu";
 import PropTypes from "prop-types";
 
 function Restaurant({ restaurant }) {
