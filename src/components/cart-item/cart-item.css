@@ -1,0 +1,9 @@
+.cart-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-item__caption {
+  width: 70%;
+}

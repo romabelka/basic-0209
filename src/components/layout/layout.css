@@ -1,5 +1,6 @@
 .layout {
   width: 100%;
+  padding: 20px;
 }
 
 .layout__main-content {
@@ -12,6 +13,6 @@
   margin-right: 5%;
 }
 
-.layout__aside {
+.layout__cart {
   width: 30%;
 }
