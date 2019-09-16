@@ -1,16 +1,27 @@
 import React from "react";
-import { Typography } from "antd";
 import Reviews from "../reviews";
 import Menu from "../menu";
 import PropTypes from "prop-types";
+import ContentTabs from "../content-tabs";
+import Hero from "../app/hero";
 
 function Restaurant({ restaurant }) {
+  const contentItems = [
+    {
+      tabTitle: "Menu",
+      tabContent: <Menu menu={restaurant.menu} />
+    },
+    {
+      tabTitle: "Reviews",
+      tabContent: <Reviews reviews={restaurant.reviews} />
+    }
+  ];
+
   return (
-    <div>
-      <Typography.Title>{restaurant.name}</Typography.Title>
-      <Menu menu={restaurant.menu} />
-      <Reviews reviews={restaurant.reviews} />
-    </div>
+    <>
+      <Hero heading={restaurant.name} />
+      <ContentTabs items={contentItems} />
+    </>
   );
 }
 
