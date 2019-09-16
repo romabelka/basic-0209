@@ -16,6 +16,8 @@ function Cart({ productId = {}, menu }) {
         price: price,
         id: item.id
       };
+    } else {
+      return null;
     }
   });
 
@@ -30,6 +32,8 @@ function Cart({ productId = {}, menu }) {
                 {item.count} pcs / {item.price} $
               </p>
             );
+          } else {
+            return null;
           }
         })}
         <h4>
