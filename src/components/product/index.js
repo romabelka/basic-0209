@@ -37,12 +37,12 @@ function Product({
               <Button
                 className={styles.button}
                 icon="minus"
-                onClick={() => handleDecrement(product.id, product.name)}
+                onClick={() => handleDecrement(product.id)}
               />
               <Button
                 className={styles.button}
                 icon="plus"
-                onClick={() => handleIncrement(product.id, product.name)}
+                onClick={() => handleIncrement(product.id)}
                 data-id="product-increment-btn"
               />
             </Button.Group>

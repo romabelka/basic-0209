@@ -45,7 +45,7 @@ function Cart({ productId = {}, menu }) {
 }
 
 const mapStateToProps = storeState => ({
-  productId: storeState.order || 0
+  productId: storeState.order
 });
 
 export default connect(mapStateToProps)(Cart);
