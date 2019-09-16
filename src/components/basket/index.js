@@ -7,8 +7,13 @@ import styles from "./basket.module.css";
 import BasketRow from "./basket-row";
 import BasketItem from "./basket-item";
 import { connect } from "react-redux";
+import {
+  orderedProductsSelector,
+  totalPriceSelector
+} from "../../redux/selectors";
 
 function Basket({ title = "Basket", className, total, orderProducts }) {
+  console.log("---", "rendering Basket");
   return (
     <div className={cx(styles.basket, className)}>
       <Typography.Title level={4} className={styles.title}>
@@ -30,23 +35,9 @@ function Basket({ title = "Basket", className, total, orderProducts }) {
 }
 
 export default connect(state => {
-  const allProducts = state.restaurants.flatMap(restaurant => restaurant.menu);
-
-  const orderProducts = Object.keys(state.order)
-    .filter(productId => state.order[productId] > 0)
-    .map(productId => allProducts.find(product => product.id === productId))
-    .map(product => ({
-      product,
-      amount: state.order[product.id]
-    }));
-
-  const total = orderProducts.reduce(
-    (acc, { product, amount }) => acc + product.price * amount,
-    0
-  );
-
+  console.log("---", "mapStateToProps");
   return {
-    total,
-    orderProducts
+    total: totalPriceSelector(state),
+    orderProducts: orderedProductsSelector(state)
   };
 })(Basket);
