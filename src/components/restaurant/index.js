@@ -4,6 +4,7 @@ import Menu from "../menu";
 import PropTypes from "prop-types";
 import ContentTabs from "../content-tabs";
 import Hero from "../app/hero";
+import styles from "./restaurant.module.css";
 
 function Restaurant({ restaurant }) {
   const contentItems = [
@@ -20,7 +21,7 @@ function Restaurant({ restaurant }) {
   return (
     <>
       <Hero heading={restaurant.name} />
-      <ContentTabs items={contentItems} />
+      <ContentTabs items={contentItems} tabPaneClassName={styles.tabPane} />
     </>
   );
 }

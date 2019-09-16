@@ -1,9 +1,16 @@
 import React from "react";
 import Restaurant from "../restaurant";
-import { restaurants } from "../../fixtures";
+import { connect } from "react-redux";
+import ContentTabs from "../content-tabs";
 
-function Content() {
-  return <Restaurant restaurant={restaurants[0]} />;
+function Content({ restaurants }) {
+  const items = restaurants.map(restaurant => ({
+    tabTitle: restaurant.name,
+    tabContent: <Restaurant restaurant={restaurant} />
+  }));
+  return <ContentTabs items={items} />;
 }
 
-export default Content;
+export default connect(state => ({
+  restaurants: state.restaurants
+}))(Content);
