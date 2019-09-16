@@ -29,8 +29,8 @@ class Menu extends React.Component {
     return (
       <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
         <Col xs={24} md={15} lg={12}>
-          {this.props.menu.map(product => (
-            <Product product={product} key={product.id} />
+          {this.props.menu.map(id => (
+            <Product id={id} key={id} />
           ))}
         </Col>
         <Col xs={0} md={7} lg={6}>

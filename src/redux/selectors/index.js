@@ -2,16 +2,15 @@ import { createSelector } from "reselect";
 
 export const restaurantsSelector = state => state.restaurants;
 export const orderSelector = state => state.order;
+export const productsSelector = state => state.products;
 
 export const orderedProductsSelector = createSelector(
-  restaurantsSelector,
+  productsSelector,
   orderSelector,
-  (restaurants, order) => {
-    const allProducts = restaurants.flatMap(restaurant => restaurant.menu);
-
+  (products, order) => {
     return Object.keys(order)
       .filter(productId => order[productId] > 0)
-      .map(productId => allProducts.find(product => product.id === productId))
+      .map(productId => products[productId])
       .map(product => ({
         product,
         amount: order[product.id]
