@@ -67,7 +67,8 @@ Product.propTypes = {
 };
 
 const mapStateToProps = (storeState, ownProps) => ({
-  amount: storeState.order[ownProps.product.id] || 0
+  amount: storeState.order[ownProps.id] || 0,
+  product: storeState.products[ownProps.id]
 });
 
 const mapDispatchToProps = {
