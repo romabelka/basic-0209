@@ -12,5 +12,5 @@ function Content({ restaurants }) {
 }
 
 export default connect(state => ({
-  restaurants: state.restaurants
+  restaurants: Object.values(state.restaurants)
 }))(Content);
