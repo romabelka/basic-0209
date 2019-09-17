@@ -7,8 +7,8 @@ function Reviews({ reviews }) {
   return (
     <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
       <Col xs={24} md={16}>
-        {reviews.map(review => (
-          <Review {...review} key={review.id} data-id="review-list-item" />
+        {reviews.map(id => (
+          <Review key={id} id={id} data-id="review-list-item" />
         ))}
         <ReviewForm onSubmit={() => {}} />
       </Col>
