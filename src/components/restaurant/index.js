@@ -6,32 +6,30 @@ import ContentTabs from "../content-tabs";
 import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 
-function Restaurant({ restaurant }) {
+function Restaurant({ restaurant, name }) {
   const contentItems = [
     {
       tabTitle: "Menu",
-      tabContent: <Menu menu={restaurant.menu} />
+      tabContent: <Menu id={restaurant} />
     },
+
     {
       tabTitle: "Reviews",
-      tabContent: <Reviews reviews={restaurant.reviews} />
+      tabContent: <Reviews id={restaurant} />
     }
   ];
 
   return (
     <>
-      <Hero heading={restaurant.name} />
+      <Hero heading={name} />
       <ContentTabs items={contentItems} tabPaneClassName={styles.tabPane} />
     </>
   );
 }
 
 Restaurant.propTypes = {
-  restaurant: PropTypes.shape({
-    name: PropTypes.string,
-    menu: PropTypes.array,
-    reviews: PropTypes.array
-  })
+  restaurant: PropTypes.string,
+  name: PropTypes.string
 };
 
 export default Restaurant;
