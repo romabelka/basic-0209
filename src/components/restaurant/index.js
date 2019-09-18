@@ -5,8 +5,10 @@ import PropTypes from "prop-types";
 import ContentTabs from "../content-tabs";
 import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
+import { connect } from "react-redux";
+import { createRestarauntReviewsSelector } from "../../redux/selectors";
 
-function Restaurant({ restaurant }) {
+function Restaurant({ restaurant, reviews }) {
   const contentItems = [
     {
       tabTitle: "Menu",
@@ -14,7 +16,7 @@ function Restaurant({ restaurant }) {
     },
     {
       tabTitle: "Reviews",
-      tabContent: <Reviews reviews={restaurant.reviews} />
+      tabContent: <Reviews reviews={reviews} restaurantId={restaurant.id} />
     }
   ];
 
@@ -31,7 +33,18 @@ Restaurant.propTypes = {
     name: PropTypes.string,
     menu: PropTypes.array,
     reviews: PropTypes.array
-  })
+  }),
+  // from redux
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      userId: PropTypes.string,
+      text: PropTypes.string,
+      rating: PropTypes.number
+    })
+  )
 };
 
-export default Restaurant;
+export default connect((state, props) => ({
+  reviews: createRestarauntReviewsSelector(props.restaurant)(state)
+}))(Restaurant);

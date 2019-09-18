@@ -3,6 +3,7 @@ import { createSelector } from "reselect";
 export const restaurantsSelector = state => state.restaurants;
 export const orderSelector = state => state.order;
 export const productsSelector = state => state.products;
+export const reviewsSelector = state => state.reviews;
 
 export const orderedProductsSelector = createSelector(
   productsSelector,
@@ -27,3 +28,14 @@ export const totalPriceSelector = createSelector(
     );
   }
 );
+
+export const createRestarauntReviewsSelector = restaurant =>
+  createSelector(
+    restaurantsSelector,
+    reviewsSelector,
+    (restaurants, reviews) => {
+      return Object.values(reviews).filter(review =>
+        restaurant.reviews.includes(review.id)
+      );
+    }
+  );
