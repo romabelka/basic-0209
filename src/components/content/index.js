@@ -4,10 +4,13 @@ import { connect } from "react-redux";
 import ContentTabs from "../content-tabs";
 
 function Content({ restaurants }) {
-  const items = restaurants.map(restaurant => ({
-    tabTitle: restaurant.name,
-    tabContent: <Restaurant restaurant={restaurant} />
-  }));
+  const items = Object.entries(restaurants).map(([key, restaurant]) => {
+    return {
+      tabTitle: restaurant.name,
+      tabContent: <Restaurant restaurant={restaurant} />
+    };
+  });
+
   return <ContentTabs items={items} />;
 }
 

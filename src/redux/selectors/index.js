@@ -3,6 +3,8 @@ import { createSelector } from "reselect";
 export const restaurantsSelector = state => state.restaurants;
 export const orderSelector = state => state.order;
 export const productsSelector = state => state.products;
+export const usersSelector = state => state.users;
+export const reviewsSelector = state => state.reviews;
 
 export const orderedProductsSelector = createSelector(
   productsSelector,
@@ -25,5 +27,21 @@ export const totalPriceSelector = createSelector(
       (acc, { product, amount }) => acc + product.price * amount,
       0
     );
+  }
+);
+
+export const mappedReviewsSelector = createSelector(
+  reviewsSelector,
+  usersSelector,
+  (reviews, users) => {
+    return Object.entries(reviews).map(([key, review]) => {
+      return {
+        id: review.id,
+        user:
+          (users[review.userId] && users[review.userId].name) || "Anonymous",
+        text: review.text,
+        rating: review.rating
+      };
+    });
   }
 );

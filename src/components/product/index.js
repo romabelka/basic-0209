@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, Card, Col, Row, Typography } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -12,9 +12,9 @@ function Product({
   handleDecrement,
   fetchProduct
 }) {
-  useEffect(() => {
-    fetchProduct && fetchProduct(product.id);
-  }, [product.id]);
+  // useEffect(() => {
+  //   fetchProduct && fetchProduct(product.id);
+  // }, [product.id]);
 
   return (
     <Card className={styles.productDetailedOrderCard}>
