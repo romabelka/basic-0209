@@ -1,6 +1,7 @@
 import { Card, Col, Row, Typography } from "antd";
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import Rate from "../../rate";
 import styles from "./review.module.css";
@@ -27,14 +28,18 @@ const Review = ({ user, text, rating }) => (
   </Card>
 );
 
-Review.defaultProps = {
-  user: "Anonymous"
-};
-
 Review.propTypes = {
   user: PropTypes.string,
   text: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired
 };
 
-export default Review;
+const mapStateToProps = (storeState, ownProps) => ({
+  user: storeState.reviews[ownProps.id].userId
+    ? storeState.users[storeState.reviews[ownProps.id].userId].name
+    : "Anonymous",
+  text: storeState.reviews[ownProps.id].text,
+  rating: storeState.reviews[ownProps.id].rating
+});
+
+export default connect(mapStateToProps)(Review);
