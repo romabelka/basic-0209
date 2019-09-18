@@ -1,18 +1,23 @@
 import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import useInput from "../../../hooks/use-input";
+import { submitReview } from "./../../../redux/ac/index";
 
 import Rate from "../../rate";
 import styles from "./review-form.module.css";
 
-const AddReview = ({ onSubmit }) => {
+const AddReview = ({ onSubmit, restaurantId }) => {
   const [rate, setRate] = useState();
-  const [text, setText, isValidText] = useInput();
+  const [text, setText, isValidText, resetText] = useInput();
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    onSubmit(text, rate);
+    if (!isValidText) return;
+    onSubmit(text, rate, restaurantId);
+    setRate(0);
+    resetText();
   };
 
   return (
@@ -55,7 +60,11 @@ const AddReview = ({ onSubmit }) => {
 };
 
 AddReview.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  restaurantId: PropTypes.string
 };
 
-export default AddReview;
+export default connect(
+  null,
+  { onSubmit: submitReview }
+)(AddReview);

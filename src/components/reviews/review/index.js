@@ -28,10 +28,6 @@ const Review = ({ user, text, rating }) => (
   </Card>
 );
 
-Review.defaultProps = {
-  user: "Anonymous"
-};
-
 Review.propTypes = {
   user: PropTypes.string,
   text: PropTypes.string.isRequired,
@@ -39,7 +35,9 @@ Review.propTypes = {
 };
 
 const mapStateToProps = (storeState, ownProps) => ({
-  user: storeState.users[storeState.reviews[ownProps.id].userId].name,
+  user: storeState.reviews[ownProps.id].userId
+    ? storeState.users[storeState.reviews[ownProps.id].userId].name
+    : "Anonymous",
   text: storeState.reviews[ownProps.id].text,
   rating: storeState.reviews[ownProps.id].rating
 });
