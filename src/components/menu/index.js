@@ -3,6 +3,7 @@ import Product from "../product";
 import * as PropTypes from "prop-types";
 import { Col, Row, Typography } from "antd";
 import Basket from "../basket";
+import { connect } from "react-redux";
 
 class Menu extends React.Component {
   state = {
@@ -41,8 +42,12 @@ class Menu extends React.Component {
   }
 }
 
+const mapStateToProps = (storeState, ownProps) => ({
+  menu: storeState.restaurants[ownProps.id]["menu"]
+});
+
 Menu.propTypes = {
-  menu: PropTypes.array.isRequired
+  id: PropTypes.string.isRequired
 };
 
-export default Menu;
+export default connect(mapStateToProps)(Menu);

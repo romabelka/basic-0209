@@ -1,11 +1,11 @@
 import { Card, Col, Row, Typography } from "antd";
 import React from "react";
 import PropTypes from "prop-types";
-
 import Rate from "../../rate";
 import styles from "./review.module.css";
+import { connect } from "react-redux";
 
-const Review = ({ user, text, rating }) => (
+const Review = ({ id, review }) => (
   <Card className={styles.review}>
     <Row type="flex" align="middle">
       <Col xs={24} md={18} align="left">
@@ -14,14 +14,14 @@ const Review = ({ user, text, rating }) => (
           level={4}
           data-id="review-user"
         >
-          {user}
+          {review.user}
         </Typography.Title>
         <Typography.Text className={styles.comment} data-id="review-text">
-          {text}
+          {review.text}
         </Typography.Text>
       </Col>
       <Col xs={8} md={6} align="right" className={styles.rateColumn}>
-        <Rate disabled value={rating} />
+        <Rate disabled value={review.rating} />
       </Col>
     </Row>
   </Card>
@@ -37,4 +37,8 @@ Review.propTypes = {
   rating: PropTypes.number.isRequired
 };
 
-export default Review;
+const mapStateToProps = (storeState, ownProps) => ({
+  review: storeState.reviews[ownProps.id]
+});
+
+export default connect(mapStateToProps)(Review);
