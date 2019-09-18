@@ -6,6 +6,7 @@ export default (initialValue = "", validate = nonEmpty) => {
   const [state, setState] = useState(initialValue);
 
   const handleChange = ev => setState(ev.target.value);
+  const resetValue = () => setState("");
 
-  return [state, handleChange, validate(state)];
+  return [state, handleChange, resetValue, validate(state)];
 };

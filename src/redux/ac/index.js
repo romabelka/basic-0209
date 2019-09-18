@@ -1,4 +1,4 @@
-import { DECREMENT, INCREMENT } from "../constants";
+import { DECREMENT, INCREMENT, ADD_REVIEW } from "../constants";
 
 export const increment = id => ({
   type: INCREMENT,
@@ -8,4 +8,12 @@ export const increment = id => ({
 export const decrement = id => ({
   type: DECREMENT,
   payload: { id }
+});
+
+export const addReview = (restaurantId, text, rating) => ({
+  type: ADD_REVIEW,
+  uuid: "",
+  restaurantId,
+  text,
+  rating
 });
