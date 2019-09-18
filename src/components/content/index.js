@@ -2,6 +2,7 @@ import React from "react";
 import Restaurant from "../restaurant";
 import { connect } from "react-redux";
 import ContentTabs from "../content-tabs";
+import { restaurantsSelector } from "../../redux/selectors";
 
 function Content({ restaurants }) {
   const items = restaurants.map(restaurant => ({
@@ -12,5 +13,5 @@ function Content({ restaurants }) {
 }
 
 export default connect(state => ({
-  restaurants: state.restaurants
+  restaurants: Object.values(restaurantsSelector(state))
 }))(Content);
