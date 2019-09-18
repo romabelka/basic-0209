@@ -6,13 +6,14 @@ import useInput from "../../../hooks/use-input";
 import Rate from "../../rate";
 import styles from "./review-form.module.css";
 
-const AddReview = ({ onSubmit }) => {
+const AddReview = ({ id, onSubmit }) => {
   const [rate, setRate] = useState();
   const [text, setText, isValidText] = useInput();
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    onSubmit(text, rate);
+    console.log(id, text, rate);
+    onSubmit(id, text, rate);
   };
 
   return (

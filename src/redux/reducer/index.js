@@ -6,7 +6,7 @@ import products from "./products";
 
 export default combineReducers({
   order: orderReducer,
-  restaurants,
+  restaurants: restaurants,
   reviews,
   products
 });
