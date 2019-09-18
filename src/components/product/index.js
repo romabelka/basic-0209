@@ -66,10 +66,12 @@ Product.propTypes = {
   decrement: PropTypes.func
 };
 
-const mapStateToProps = (storeState, ownProps) => ({
-  amount: storeState.order[ownProps.id] || 0,
-  product: storeState.products[ownProps.id]
-});
+const mapStateToProps = (storeState, ownProps) => {
+  return {
+    amount: storeState.order[ownProps.id] || 0,
+    product: storeState.products[ownProps.id]
+  };
+};
 
 const mapDispatchToProps = {
   handleDecrement: decrement, //handleDecrement = (...args) => dispatch(decrement(...args))

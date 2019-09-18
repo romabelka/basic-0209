@@ -13,7 +13,6 @@ import {
 } from "../../redux/selectors";
 
 function Basket({ title = "Basket", className, total, orderProducts }) {
-  console.log("---", "rendering Basket");
   return (
     <div className={cx(styles.basket, className)}>
       <Typography.Title level={4} className={styles.title}>
@@ -35,7 +34,6 @@ function Basket({ title = "Basket", className, total, orderProducts }) {
 }
 
 export default connect(state => {
-  console.log("---", "mapStateToProps");
   return {
     total: totalPriceSelector(state),
     orderProducts: orderedProductsSelector(state)

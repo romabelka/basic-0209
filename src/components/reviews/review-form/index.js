@@ -5,14 +5,16 @@ import useInput from "../../../hooks/use-input";
 
 import Rate from "../../rate";
 import styles from "./review-form.module.css";
+import { connect } from "react-redux";
+import { saveReview, saveToRestaurant } from "../../../redux/ac";
 
-const AddReview = ({ onSubmit }) => {
+const AddReview = ({ onSubmitSaveReview, restaurant }) => {
   const [rate, setRate] = useState();
   const [text, setText, isValidText] = useInput();
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    onSubmit(text, rate);
+    onSubmitSaveReview(text, rate, restaurant);
   };
 
   return (
@@ -55,7 +57,18 @@ const AddReview = ({ onSubmit }) => {
 };
 
 AddReview.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmitSaveReview: PropTypes.func.isRequired
 };
 
-export default AddReview;
+const mapStateToProps = (storeState, ownProps) => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  onSubmitSaveReview: saveReview
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddReview);
