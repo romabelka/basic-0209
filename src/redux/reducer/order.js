@@ -11,10 +11,14 @@ export default (state = {}, action) => {
         [payload.id]: (state[payload.id] || 0) + 1
       };
     case DECREMENT:
-      return {
+      let newState = {
         ...state,
         [payload.id]: (state[payload.id] || 0) - 1
       };
+
+      // if (newState[payload.id] < 1) delete newState[payload.id]
+
+      return newState;
 
     default:
       return state;

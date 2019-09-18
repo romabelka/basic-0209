@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 import Rate from "../../rate";
 import styles from "./review.module.css";
+import { connect } from "react-redux";
+import { reviewSelector } from "../../../redux/selectors";
 
 const Review = ({ user, text, rating }) => (
   <Card className={styles.review}>
@@ -37,4 +39,6 @@ Review.propTypes = {
   rating: PropTypes.number.isRequired
 };
 
-export default Review;
+const mapStateToProps = (state, ownProps) => reviewSelector(state)(ownProps.id);
+
+export default connect(mapStateToProps)(Review);

@@ -1,9 +1,7 @@
 import { normalizedDishes } from "../../fixtures";
+import { listToObjectById } from "../../utils";
 
-const defaultProducts = normalizedDishes.reduce((acc, product) => {
-  acc[product.id] = product;
-  return acc;
-}, {});
+const defaultProducts = listToObjectById(normalizedDishes);
 
 export default (products = defaultProducts, action) => {
   const { type } = action;

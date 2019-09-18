@@ -14,7 +14,9 @@ function Restaurant({ restaurant }) {
     },
     {
       tabTitle: "Reviews",
-      tabContent: <Reviews reviews={restaurant.reviews} />
+      tabContent: (
+        <Reviews reviews={restaurant.reviews} restaurantId={restaurant.id} />
+      )
     }
   ];
 
