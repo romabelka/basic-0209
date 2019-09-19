@@ -7,12 +7,12 @@ import Rate from "../../rate";
 import styles from "./review-form.module.css";
 
 const AddReview = ({ onSubmit }) => {
-  const [rate, setRate] = useState();
+  const [rating, setRating] = useState();
   const [text, setText, isValidText] = useInput();
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    onSubmit(text, rate);
+    onSubmit(text, rating);
   };
 
   return (
@@ -37,10 +37,10 @@ const AddReview = ({ onSubmit }) => {
               />
             </Form.Item>
             <div>
-              Rating:{" "}
+              Rating:
               <Rate
-                value={rate}
-                onChange={setRate}
+                value={rating}
+                onChange={setRating}
                 data-id="review-form-rate"
               />
             </div>
@@ -55,7 +55,7 @@ const AddReview = ({ onSubmit }) => {
 };
 
 AddReview.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func
 };
 
 export default AddReview;
