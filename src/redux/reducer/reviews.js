@@ -7,14 +7,14 @@ const defaultReviews = normalizedReviews.reduce((acc, item) => {
 }, {});
 
 export default (reviews = defaultReviews, action) => {
-  const { type, payload } = action;
+  const { type, payload, generate } = action;
 
   switch (type) {
     case ADD_REVIEW:
       return {
         ...reviews,
-        [payload.id]: {
-          id: payload.id,
+        [generate.uuid]: {
+          id: generate.uuid,
           userId: payload.userId,
           text: payload.text,
           rating: payload.rating

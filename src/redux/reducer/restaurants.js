@@ -7,7 +7,7 @@ const defaultRestaurants = normalizedRestaurants.reduce((acc, item) => {
 }, {});
 
 export default (restaurants = defaultRestaurants, action) => {
-  const { type, payload } = action;
+  const { type, payload, generate } = action;
 
   switch (type) {
     case ADD_REVIEW:
@@ -15,7 +15,7 @@ export default (restaurants = defaultRestaurants, action) => {
         ...restaurants,
         [payload.restaurantId]: {
           ...restaurants[payload.restaurantId],
-          reviews: [...restaurants[payload.restaurantId].reviews, payload.id]
+          reviews: [...restaurants[payload.restaurantId].reviews, generate.uuid]
         }
       };
 

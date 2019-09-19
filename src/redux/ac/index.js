@@ -18,5 +18,6 @@ export const addReview = ({
   restaurantId
 }) => ({
   type: ADD_REVIEW,
-  payload: { id, userId, text, rating, restaurantId }
+  payload: { id, userId, text, rating, restaurantId },
+  generate: { uuid: null }
 });
