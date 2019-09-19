@@ -5,14 +5,14 @@ import Review from "./review";
 import ReviewForm from "./review-form";
 import { addReview } from "../../redux/ac";
 
-function Reviews({ restaurantId, onSubmit, reviews }) {
+function Reviews({ restaurant, reviews, onSubmit }) {
   return (
     <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
       <Col xs={24} md={16}>
         {reviews.map(review => (
           <Review {...review} key={review.id} data-id="review-list-item" />
         ))}
-        <ReviewForm onSubmit={(...args) => onSubmit(...args, restaurantId)} />
+        <ReviewForm onSubmit={(...args) => onSubmit(...args, restaurant.id)} />
       </Col>
     </Row>
   );
@@ -20,12 +20,20 @@ function Reviews({ restaurantId, onSubmit, reviews }) {
 
 Reviews.propTypes = {};
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    reviews: ownProps.restaurant.reviews.map(
+      reviewId => state.reviews[reviewId]
+    )
+  };
+};
+
 const mapDispatchToProps = {
   onSubmit: (text, rating, restaurantId) =>
     addReview({ text, rating, restaurantId })
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Reviews);

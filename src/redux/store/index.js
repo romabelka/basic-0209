@@ -3,7 +3,7 @@ import reducer from "../reducer";
 import logger from "../middlewares/logger";
 import uuidGenerator from "../middlewares/uuidGenerator";
 
-const enhancer = applyMiddleware(logger, uuidGenerator);
+const enhancer = applyMiddleware(uuidGenerator, logger);
 
 const store = createStore(reducer, enhancer);
 
