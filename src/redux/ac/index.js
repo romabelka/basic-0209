@@ -1,4 +1,9 @@
-import { ADD_REVIEW, DECREMENT, INCREMENT } from "../constants";
+import {
+  ADD_REVIEW,
+  DECREMENT,
+  FETCH_RESTAURANTS,
+  INCREMENT
+} from "../constants";
 
 export const increment = id => ({
   type: INCREMENT,
@@ -14,4 +19,9 @@ export const addReview = (review, restaurantId) => ({
   type: ADD_REVIEW,
   payload: { review, restaurantId },
   generateId: true
+});
+
+export const fetchRestaurants = () => ({
+  type: FETCH_RESTAURANTS,
+  callAPI: "/api/restaurants"
 });
