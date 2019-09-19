@@ -2,6 +2,7 @@
   "name": "basic-02-09",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "antd": "^3.23.1",
     "classnames": "^2.2.6",
@@ -16,7 +17,8 @@
     "uuid": "^3.3.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"npm run api\"",
+    "api": "node simple_api/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -37,6 +39,7 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^4.1.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "husky": "^2.3.0",
