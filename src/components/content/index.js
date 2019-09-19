@@ -1,14 +1,21 @@
 import React, { useEffect } from "react";
+import {} from "antd";
 import Restaurant from "../restaurant";
 import { connect } from "react-redux";
 import ContentTabs from "../content-tabs";
-import { restaurantsListSelector } from "../../redux/selectors";
+import {
+  restaurantsListSelector,
+  restaurantsLoading
+} from "../../redux/selectors";
 import { fetchRestaurants } from "../../redux/ac";
+import Loader from "../loader";
 
-function Content({ restaurants, fetchRestaurants }) {
+function Content({ restaurants, loading, fetchRestaurants }) {
   useEffect(() => {
     fetchRestaurants();
   }, [fetchRestaurants]);
+
+  if (loading) return <Loader />;
 
   const items = restaurants.map(restaurant => ({
     tabTitle: restaurant.name,
@@ -19,7 +26,8 @@ function Content({ restaurants, fetchRestaurants }) {
 
 export default connect(
   state => ({
-    restaurants: restaurantsListSelector(state)
+    restaurants: restaurantsListSelector(state),
+    loading: restaurantsLoading(state)
   }),
   { fetchRestaurants }
 )(Content);

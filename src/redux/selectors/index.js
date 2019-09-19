@@ -1,7 +1,9 @@
 import { createSelector } from "reselect";
 
 export const restaurantsListSelector = state =>
-  state.restaurants.valueSeq().toArray();
+  state.restaurants.entities.valueSeq().toArray();
+export const restaurantsLoading = state => state.restaurants.loading;
+
 export const orderSelector = state => state.order;
 export const productsSelector = state => state.products;
 export const productAmountSelector = (state, props) =>
