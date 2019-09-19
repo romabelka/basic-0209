@@ -1,21 +1,24 @@
+import { Record } from "immutable";
 import { normalizedRestaurants } from "../../fixtures";
-import { arrToMap } from "../utils";
+import { arrToImmutableMap } from "../utils";
 import { ADD_REVIEW } from "../constants";
 
+const RestaurantRecord = Record({
+  id: null,
+  name: "",
+  reviews: [],
+  menu: []
+});
+
 export default (
-  state = arrToMap(normalizedRestaurants),
+  state = arrToImmutableMap(normalizedRestaurants, RestaurantRecord),
   { type, payload, id }
 ) => {
   switch (type) {
     case ADD_REVIEW:
-      const restaurant = state[payload.restaurantId];
-      return {
-        ...state,
-        [payload.restaurantId]: {
-          ...restaurant,
-          reviews: restaurant.reviews.concat(id)
-        }
-      };
+      return state.updateIn([payload.restaurantId, "reviews"], reviews =>
+        reviews.concat(id)
+      );
 
     default:
       return state;

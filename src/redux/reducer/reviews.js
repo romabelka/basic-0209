@@ -1,14 +1,22 @@
+import { Map, Record } from "immutable";
 import { normalizedReviews } from "../../fixtures";
-import { arrToMap } from "../utils";
+import { arrToImmutableMap } from "../utils";
 import { ADD_REVIEW } from "../constants";
 
+const ReviewRecord = Record({
+  id: null,
+  text: "",
+  rating: null,
+  userId: null
+});
+
 export default (
-  reviews = arrToMap(normalizedReviews),
+  reviews = new Map(arrToImmutableMap(normalizedReviews, ReviewRecord)),
   { type, payload, id }
 ) => {
   switch (type) {
     case ADD_REVIEW:
-      return { ...reviews, [id]: { ...payload.review, id } };
+      return reviews.set(id, new ReviewRecord({ ...payload.review, id }));
 
     default:
       return reviews;

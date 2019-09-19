@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 
 export const restaurantsListSelector = state =>
-  Object.values(state.restaurants);
+  state.restaurants.valueSeq().toArray();
 export const orderSelector = state => state.order;
 export const productsSelector = state => state.products;
 export const productAmountSelector = (state, props) =>
@@ -11,7 +11,7 @@ export const productSelector = (state, props) => state.products[props.id];
 export const userSelector = (state, props) => state.users[props.id];
 
 export const reviewSelector = (state, props) => {
-  const review = state.reviews[props.id];
+  const review = state.reviews.get(props.id).toJS();
   const user = userSelector(state, { id: review.userId });
   return {
     ...review,
