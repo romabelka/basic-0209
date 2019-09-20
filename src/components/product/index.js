@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styles from "./product.module.css";
 import { decrement, increment } from "../../redux/ac";
+import { productAmountSelector, productSelector } from "../../redux/selectors";
 
 function Product({
   product,
@@ -67,8 +68,8 @@ Product.propTypes = {
 };
 
 const mapStateToProps = (storeState, ownProps) => ({
-  amount: storeState.order[ownProps.id] || 0,
-  product: storeState.products[ownProps.id]
+  amount: productAmountSelector(storeState, ownProps),
+  product: productSelector(storeState, ownProps)
 });
 
 const mapDispatchToProps = {
