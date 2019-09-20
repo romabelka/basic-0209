@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 
 import Rate from "../../rate";
 import styles from "./review.module.css";
+import { connect } from "react-redux";
+import { reviewSelector } from "../../../redux/selectors";
 
-const Review = ({ user, text, rating }) => (
+const Review = ({ review: { user = "Anonymous", text, rating } }) => (
   <Card className={styles.review}>
     <Row type="flex" align="middle">
       <Col xs={24} md={18} align="left">
@@ -27,14 +29,14 @@ const Review = ({ user, text, rating }) => (
   </Card>
 );
 
-Review.defaultProps = {
-  user: "Anonymous"
-};
-
 Review.propTypes = {
-  user: PropTypes.string,
-  text: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired
+  review: PropTypes.shape({
+    user: PropTypes.string,
+    text: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired
+  })
 };
 
-export default Review;
+export default connect((state, props) => ({
+  review: reviewSelector(state, props)
+}))(Review);

@@ -3,14 +3,14 @@ import { Col, Row } from "antd";
 import Review from "./review";
 import ReviewForm from "./review-form";
 
-function Reviews({ reviews }) {
+function Reviews({ restaurant }) {
   return (
     <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
       <Col xs={24} md={16}>
-        {reviews.map(review => (
-          <Review {...review} key={review.id} data-id="review-list-item" />
+        {restaurant.reviews.map(id => (
+          <Review id={id} key={id} data-id="review-list-item" />
         ))}
-        <ReviewForm onSubmit={() => {}} />
+        <ReviewForm restaurantId={restaurant.id} />
       </Col>
     </Row>
   );
