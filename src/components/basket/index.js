@@ -34,10 +34,7 @@ function Basket({ title = "Basket", className, total, orderProducts }) {
   );
 }
 
-export default connect(state => {
-  console.log("---", "mapStateToProps");
-  return {
-    total: totalPriceSelector(state),
-    orderProducts: orderedProductsSelector(state)
-  };
-})(Basket);
+export default connect(state => ({
+  total: totalPriceSelector(state),
+  orderProducts: orderedProductsSelector(state)
+}))(Basket);
