@@ -48,12 +48,18 @@ export const reviewsLoadingSelector = (state, restaurantId) => {
 };
 
 export const orderedProductsSelector = createSelector(
-  productsSelector,
+  state => state.products,
   orderSelector,
   (products, order) => {
-    return Object.keys(order)
+    const allProductRecords = {};
+    products.forEach(({ entities }) => {
+      if (entities) {
+        entities.forEach(product => (allProductRecords[product.id] = product));
+      }
+    });
+    return Object.keys(order.toJS())
       .filter(productId => order.get(productId) > 0)
-      .map(productId => products.get(productId))
+      .map(productId => allProductRecords[productId])
       .map(product => ({
         product,
         amount: order.get(product.id)
