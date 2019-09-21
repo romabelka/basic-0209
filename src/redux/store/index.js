@@ -1,7 +1,13 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import reducer from "../reducer";
+import logger from "../middlewares/logger";
+import generateId from "../middlewares/generateId";
+import api from "../middlewares/api";
 
-const store = createStore(reducer);
+const enhancer = applyMiddleware(thunk, generateId, api, logger);
+
+const store = createStore(reducer, enhancer);
 
 //dev only
 window.store = store;
