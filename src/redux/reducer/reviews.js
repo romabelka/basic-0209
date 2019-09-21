@@ -1,4 +1,4 @@
-import { Map, Record } from "immutable";
+import { Record } from "immutable";
 import { normalizedReviews } from "../../fixtures";
 import { arrToImmutableMap } from "../utils";
 import { ADD_REVIEW } from "../constants";
@@ -11,7 +11,7 @@ const ReviewRecord = Record({
 });
 
 export default (
-  reviews = new Map(arrToImmutableMap(normalizedReviews, ReviewRecord)),
+  reviews = arrToImmutableMap(normalizedReviews, ReviewRecord),
   { type, payload, id }
 ) => {
   switch (type) {
