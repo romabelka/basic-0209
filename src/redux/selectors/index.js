@@ -5,10 +5,21 @@ export const restaurantsListSelector = state =>
 export const restaurantsLoading = state => state.restaurants.loading;
 
 export const orderSelector = state => state.order;
-export const productsSelector = state => state.products;
-export const productAmountSelector = (state, props) =>
+export const orderAmountSelector = (state, props) =>
   state.order.get(props.id) || 0;
-export const productSelector = (state, props) => state.products.get(props.id);
+
+export const productsSelector = (state, restaurantId) => {
+  const record = state.products.get(restaurantId);
+  return record && record.entities.valueSeq().toArray();
+};
+export const productsLoadingSelector = (state, restaurantId) => {
+  const record = state.products.get(restaurantId);
+  return record ? record.loading : true;
+};
+export const productSelector = (state, props) => {
+  const record = state.products.get(props.restaurant.id);
+  return record && record.entities.get(props.id);
+};
 
 export const userSelector = (state, props) => state.users.get(props.id);
 

@@ -7,8 +7,13 @@ import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 import { connect } from "react-redux";
 import { fetchProducts } from "../../redux/ac";
+import {
+  productsLoadingSelector,
+  productsSelector
+} from "../../redux/selectors";
+import Loader from "../loader";
 
-function Restaurant({ restaurant, fetchProducts }) {
+function Restaurant({ restaurant, products, productsLoading, fetchProducts }) {
   useEffect(() => {
     fetchProducts(restaurant.id);
   }, [restaurant, fetchProducts]);
@@ -16,7 +21,11 @@ function Restaurant({ restaurant, fetchProducts }) {
   const contentItems = [
     {
       tabTitle: "Menu",
-      tabContent: <Menu menu={restaurant.menu} />
+      tabContent: productsLoading ? (
+        <Loader />
+      ) : (
+        <Menu restaurant={restaurant} menu={products} />
+      )
     },
     {
       tabTitle: "Reviews",
@@ -41,6 +50,9 @@ Restaurant.propTypes = {
 };
 
 export default connect(
-  null,
+  (state, ownProps) => ({
+    products: productsSelector(state, ownProps.restaurant.id),
+    productsLoading: productsLoadingSelector(state, ownProps.restaurant.id)
+  }),
   { fetchProducts }
 )(Restaurant);
