@@ -1,7 +1,18 @@
+import { OrderedMap, Record } from "immutable";
 import { normalizedDishes } from "../../fixtures";
-import { arrToMap } from "../utils";
+import { arrToImmutableMap } from "../utils";
 
-export default (products = arrToMap(normalizedDishes), action) => {
+const ProductRecord = Record({
+  id: null,
+  ingredients: [],
+  name: "",
+  price: 0
+});
+
+export default (
+  products = arrToImmutableMap(normalizedDishes, ProductRecord),
+  action
+) => {
   const { type } = action;
 
   switch (type) {
