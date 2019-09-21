@@ -24,12 +24,27 @@ export const productSelector = (state, props) => {
 export const userSelector = (state, props) => state.users.get(props.id);
 
 export const reviewSelector = (state, props) => {
-  const review = state.reviews.get(props.id).toJS();
+  const { restaurantId, id } = props;
+  const restaurantReviews = state.reviews.get(restaurantId);
+  if (!restaurantReviews) {
+    return null;
+  }
+  const review = restaurantReviews.entities.get(id).toJS();
   const user = userSelector(state, { id: review.userId });
   return {
     ...review,
     user: user && user.name
   };
+};
+
+export const reviewsSelector = (state, restaurantId) => {
+  const restaurantReviews = state.reviews.get(restaurantId);
+  return restaurantReviews && restaurantReviews.entities.valueSeq().toArray();
+};
+
+export const reviewsLoadingSelector = (state, restaurantId) => {
+  const restaurantReviews = state.reviews.get(restaurantId);
+  return restaurantReviews ? restaurantReviews.loading : true;
 };
 
 export const orderedProductsSelector = createSelector(

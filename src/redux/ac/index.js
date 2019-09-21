@@ -2,6 +2,7 @@ import {
   ADD_REVIEW,
   DECREMENT,
   FETCH_PRODUCTS,
+  FETCH_REVIEWS,
   FETCH_RESTAURANTS,
   INCREMENT,
   START,
@@ -56,3 +57,9 @@ export const fetchProducts = restaurantId => async dispatch => {
     dispatch(action);
   }
 };
+
+export const fetchReviews = restaurantId => ({
+  type: FETCH_REVIEWS,
+  payload: { restaurantId },
+  callAPI: `/api/reviews?id=${restaurantId}`
+});

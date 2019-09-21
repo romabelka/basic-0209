@@ -6,17 +6,31 @@ import ContentTabs from "../content-tabs";
 import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 import { connect } from "react-redux";
-import { fetchProducts } from "../../redux/ac";
+import { fetchProducts, fetchReviews } from "../../redux/ac";
 import {
   productsLoadingSelector,
-  productsSelector
+  productsSelector,
+  reviewsLoadingSelector,
+  reviewsSelector
 } from "../../redux/selectors";
 import Loader from "../loader";
 
-function Restaurant({ restaurant, products, productsLoading, fetchProducts }) {
+function Restaurant({
+  restaurant,
+  products,
+  productsLoading,
+  reviews,
+  reviewsLoading,
+  fetchProducts,
+  fetchReviews
+}) {
   useEffect(() => {
     fetchProducts(restaurant.id);
   }, [restaurant, fetchProducts]);
+
+  useEffect(() => {
+    fetchReviews(restaurant.id);
+  }, [restaurant, fetchReviews]);
 
   const contentItems = [
     {
@@ -29,7 +43,11 @@ function Restaurant({ restaurant, products, productsLoading, fetchProducts }) {
     },
     {
       tabTitle: "Reviews",
-      tabContent: <Reviews restaurant={restaurant} />
+      tabContent: reviewsLoading ? (
+        <Loader />
+      ) : (
+        <Reviews restaurant={restaurant} reviews={reviews} />
+      )
     }
   ];
 
@@ -52,7 +70,9 @@ Restaurant.propTypes = {
 export default connect(
   (state, ownProps) => ({
     products: productsSelector(state, ownProps.restaurant.id),
-    productsLoading: productsLoadingSelector(state, ownProps.restaurant.id)
+    productsLoading: productsLoadingSelector(state, ownProps.restaurant.id),
+    reviews: reviewsSelector(state, ownProps.restaurant.id),
+    reviewsLoading: reviewsLoadingSelector(state, ownProps.restaurant.id)
   }),
-  { fetchProducts }
+  { fetchProducts, fetchReviews }
 )(Restaurant);
