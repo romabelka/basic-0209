@@ -7,10 +7,10 @@ export const restaurantsLoading = state => state.restaurants.loading;
 export const orderSelector = state => state.order;
 export const productsSelector = state => state.products;
 export const productAmountSelector = (state, props) =>
-  state.order[props.id] || 0;
-export const productSelector = (state, props) => state.products[props.id];
+  state.order.get(props.id) || 0;
+export const productSelector = (state, props) => state.products.get(props.id);
 
-export const userSelector = (state, props) => state.users[props.id];
+export const userSelector = (state, props) => state.users.get(props.id);
 
 export const reviewSelector = (state, props) => {
   const review = state.reviews.get(props.id).toJS();
@@ -26,11 +26,11 @@ export const orderedProductsSelector = createSelector(
   orderSelector,
   (products, order) => {
     return Object.keys(order)
-      .filter(productId => order[productId] > 0)
-      .map(productId => products[productId])
+      .filter(productId => order.get(productId) > 0)
+      .map(productId => products.get(productId))
       .map(product => ({
         product,
-        amount: order[product.id]
+        amount: order.get(product.id)
       }));
   }
 );
