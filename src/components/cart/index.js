@@ -6,13 +6,18 @@ import { restaurants } from "../../fixtures";
 import PropTypes from "prop-types";
 import "./cart.css";
 
-export const Cart = ({ order }) => {
-  const selectedProducts = getSelectedProducts(
-    order,
-    restaurants.map(i => i.menu).reduce((acc, curr) => [...acc, ...curr])
-  );
+const MainBlock = selectedProducts => {
+  const getCommonPrice = (items = []) => {
+    if (!items.length) return 0;
+    return items.map(i => i.price * i.count).reduce((acc, curr) => acc + curr);
+  };
 
-  const MainBlock = (
+  const getCommonCount = (items = []) => {
+    if (!items.length) return 0;
+    return items.map(i => i.count).reduce((acc, curr) => acc + curr);
+  };
+
+  return (
     <>
       <section data-id="cart-list">
         <Typography.Title level={3}> Dishes </Typography.Title>
@@ -42,20 +47,32 @@ export const Cart = ({ order }) => {
       </section>
     </>
   );
+};
 
-  const EmptyBlock = (
-    <Typography.Text strong> Make your choise! </Typography.Text>
-  );
+const EmptyBlock = () => (
+  <Typography.Text strong> Make your choise! </Typography.Text>
+);
 
+export const Cart = ({ selectedProducts }) => {
   return (
     <div className="cart">
       <Typography.Title level={2}>Cart</Typography.Title>
-      {selectedProducts.length ? MainBlock : EmptyBlock}
+      {selectedProducts.length ? (
+        <MainBlock selectedProducts={selectedProducts} />
+      ) : (
+        <EmptyBlock />
+      )}
     </div>
   );
 };
 
-const getSelectedProducts = (order, allProducts) => {
+Cart.propTypes = {
+  order: PropTypes.shape({
+    [PropTypes.string]: PropTypes.number
+  })
+};
+
+const getSelectedProducts = (order = {}, allProducts = []) => {
   let products = [];
   for (let key in order) {
     if (!order[key]) continue;
@@ -71,24 +88,11 @@ const getSelectedProducts = (order, allProducts) => {
   return products;
 };
 
-const getCommonPrice = (items = []) => {
-  if (!items.length) return 0;
-  return items.map(i => i.price * i.count).reduce((acc, curr) => acc + curr);
-};
-
-const getCommonCount = (items = []) => {
-  if (!items.length) return 0;
-  return items.map(i => i.count).reduce((acc, curr) => acc + curr);
-};
-
 const mapStateToProps = (storeState, ownProps) => ({
-  order: storeState.order || {}
+  selectedProducts: getSelectedProducts(
+    storeState.order,
+    restaurants.map(i => i.menu).reduce((acc, curr) => [...acc, ...curr])
+  )
 });
 
 export default connect(mapStateToProps)(Cart);
-
-Cart.propTypes = {
-  order: PropTypes.shape({
-    [PropTypes.string]: PropTypes.number
-  })
-};

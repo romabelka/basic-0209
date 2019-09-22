@@ -13,10 +13,7 @@ export default (state = {}, action) => {
     case DECREMENT:
       return {
         ...state,
-        [payload.id]:
-          state[payload.id] > 0
-            ? (state[payload.id] || 0) - 1
-            : state[payload.id]
+        [payload.id]: Math.max((state[payload.id] || 0) - 1, 0)
       };
 
     default:
