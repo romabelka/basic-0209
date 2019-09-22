@@ -9,6 +9,7 @@ export const reviewsLoading = state => state.reviews.loading;
 
 export const orderSelector = state => state.order.toJS();
 export const productsSelector = state => state.products.entities;
+export const reviewsSelector = state => state.reviews.entities;
 export const productAmountSelector = (state, props) =>
   state.order[props.id] || 0;
 export const productSelector = (state, props) =>
@@ -31,7 +32,7 @@ export const orderedProductsSelector = createSelector(
   (products, order) => {
     return Object.keys(order)
       .filter(productId => order[productId] > 0)
-      .map(productId => products.entities.get(productId))
+      .map(productId => products.get(productId))
       .map(product => ({
         product,
         amount: order[product.id]

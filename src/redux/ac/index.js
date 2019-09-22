@@ -30,6 +30,15 @@ export const fetchRestaurants = () => ({
   callAPI: "/api/restaurants"
 });
 
+// export const fetchProducts = restaurantId => ({
+//   type: FETCH_PRODUCTS,
+//   callAPI: `/api/dishes?id=${restaurantId}`
+// });
+//
+// export const fetchReviews = restaurantId => ({
+//   type: FETCH_REVIEWS,
+//   callAPI: `/api/reviews?id=${restaurantId}`
+// });
 export const fetchProducts = restaurantId => async dispatch => {
   dispatch({
     payload: { restaurantId },

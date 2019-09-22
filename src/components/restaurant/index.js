@@ -15,8 +15,7 @@ function Restaurant({ restaurant, products, loading, fetchProducts }) {
     fetchProducts(restaurant.id);
   }, [restaurant, fetchProducts]);
 
-  // if (loading) return <Loader />;
-
+  // if (loading) return (<Loader />);
   const contentItems = [
     {
       tabTitle: "Menu",
@@ -46,7 +45,7 @@ Restaurant.propTypes = {
 
 export default connect(
   state => ({
-    products: productsSelector,
+    products: productsSelector(state),
     loading: productsLoading(state)
   }),
   { fetchProducts }
