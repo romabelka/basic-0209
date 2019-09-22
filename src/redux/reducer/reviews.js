@@ -21,7 +21,7 @@ export default (reviews = new ReducerRecord(), { type, payload, id }) => {
         .set(
           "entities",
           reviews.entities.merge(arrToImmutableMap(payload, ReviewRecord))
-        ); // есть другой способ это сделать?
+        );
 
     case FETCH_REVIEWS + ERROR:
       return reviews.set("error", payload).set("loading", false);

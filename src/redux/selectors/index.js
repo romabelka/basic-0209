@@ -17,7 +17,6 @@ export const userSelector = (state, props) => state.users.get(props.id);
 export const reviewsLoading = state => state.reviews.loading;
 
 export const reviewSelector = (state, props) => {
-  // есть нормальный способ это сделать?
   const review = state.reviews.entities.get(props.id);
   if (!review) return {};
   const user = userSelector(state, { id: review.userId });
