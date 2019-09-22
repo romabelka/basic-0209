@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import styles from "./product.module.css";
 import { decrement, increment } from "../../redux/ac";
 import { productAmountSelector, productSelector } from "../../redux/selectors";
+import Loader from "../loader";
 
 function Product({
   product,
@@ -14,9 +15,10 @@ function Product({
   fetchProduct
 }) {
   useEffect(() => {
-    fetchProduct && fetchProduct(product.id);
-  }, [product.id]);
+    product && fetchProduct && fetchProduct(product.id);
+  }, [product]);
 
+  if (!product) return <Loader />;
   return (
     <Card className={styles.productDetailedOrderCard}>
       <Row type="flex" justify="space-between">
