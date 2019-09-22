@@ -33,7 +33,7 @@ Review.propTypes = {
   review: PropTypes.shape({
     user: PropTypes.string,
     text: PropTypes.string,
-    rating: PropTypes.number.isRequired
+    rating: PropTypes.number
   })
 };
 
