@@ -3,10 +3,10 @@ import {
   DECREMENT,
   FETCH_PRODUCTS,
   FETCH_RESTAURANTS,
-  INCREMENT,
-  START,
-  SUCCESS
+  FETCH_REVIEWS,
+  INCREMENT
 } from "../constants";
+import { thunk } from "../utils";
 
 export const increment = id => ({
   type: INCREMENT,
@@ -24,23 +24,11 @@ export const addReview = (review, restaurantId) => ({
   generateId: true
 });
 
-export const fetchRestaurants = () => ({
-  type: FETCH_RESTAURANTS,
-  callAPI: "/api/restaurants"
-});
+export const fetchRestaurants = () =>
+  thunk(FETCH_RESTAURANTS, "/api/restaurants");
 
-export const fetchProducts = restaurantId => async dispatch => {
-  dispatch({
-    payload: { restaurantId },
-    type: FETCH_PRODUCTS + START
-  });
+export const fetchProducts = restaurantId =>
+  thunk(FETCH_PRODUCTS, `/api/dishes?id=${restaurantId}`);
 
-  const data = await fetch(`/api/dishes?id=${restaurantId}`);
-  const response = await data.json();
-
-  dispatch({
-    payload: { restaurantId },
-    type: FETCH_PRODUCTS + SUCCESS,
-    response
-  });
-};
+export const fetchReviews = restaurantId =>
+  thunk(FETCH_REVIEWS, `/api/reviews?id=${restaurantId}`);

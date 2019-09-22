@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { Col, Row } from "antd";
 import Review from "./review";
 import ReviewForm from "./review-form";
+import { reviewsLoading } from "./../../redux/selectors/index";
+import { fetchReviews } from "../../redux/ac";
+import Loader from "../loader";
 
-function Reviews({ restaurant }) {
+function Reviews({ restaurant, loading, fetchReviews }) {
+  useEffect(() => {
+    fetchReviews(restaurant.id);
+  }, [restaurant.id, fetchReviews]);
+  if (loading || !restaurant) return <Loader />;
   return (
     <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
       <Col xs={24} md={16}>
@@ -18,4 +26,9 @@ function Reviews({ restaurant }) {
 
 Reviews.propTypes = {};
 
-export default Reviews;
+export default connect(
+  state => ({
+    loading: reviewsLoading(state)
+  }),
+  { fetchReviews }
+)(Reviews);
