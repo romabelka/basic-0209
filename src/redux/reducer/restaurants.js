@@ -1,5 +1,5 @@
-import { OrderedMap, Record } from "immutable";
-import { arrToImmutableMap } from "../utils";
+import { Record } from "immutable";
+import { arrToImmutableMap, ReducerRecord } from "../utils";
 import {
   ADD_REVIEW,
   ERROR,
@@ -15,17 +15,7 @@ const RestaurantRecord = Record({
   menu: []
 });
 
-const ReducerRecord = Record({
-  entities: new OrderedMap(),
-  loading: false,
-  loaded: false,
-  error: null
-});
-
-export default (
-  state = new ReducerRecord(),
-  { type, payload, id, response, error }
-) => {
+export default (state = new ReducerRecord(), { type, payload, id }) => {
   switch (type) {
     case FETCH_RESTAURANTS + START:
       return state.set("error", null).set("loading", true);
@@ -33,12 +23,11 @@ export default (
     case FETCH_RESTAURANTS + SUCCESS:
       return state
         .set("loading", false)
-        .set("loaded", true)
         .set("error", null)
-        .set("entities", arrToImmutableMap(response, RestaurantRecord));
+        .set("entities", arrToImmutableMap(payload, RestaurantRecord));
 
     case FETCH_RESTAURANTS + ERROR:
-      return state.set("error", error).set("loading", false);
+      return state.set("error", payload).set("loading", false);
 
     case ADD_REVIEW:
       return state.updateIn(
