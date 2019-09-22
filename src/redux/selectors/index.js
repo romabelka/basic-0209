@@ -4,12 +4,25 @@ export const restaurantsListSelector = state =>
   state.restaurants.entities.valueSeq().toArray();
 export const restaurantsLoading = state => state.restaurants.loading;
 
-export const orderSelector = state => state.order;
-export const productsSelector = state => state.products;
+export const productsSelector = state => state.products.entities.toObject();
+export const productsListSelector = state =>
+  state.products.entities.valueSeq().toArray();
+export const productsLoading = state => {
+  return state.products.loading;
+};
+export const productSelector = (state, props) => {
+  return productsSelector(state)[props.id];
+};
+
+export const productLoading = createSelector(
+  productSelector,
+  productsLoading,
+  (product, loading) => !product || loading
+);
+
 export const productAmountSelector = (state, props) =>
   state.order[props.id] || 0;
-export const productSelector = (state, props) => state.products[props.id];
-
+export const orderSelector = state => state.order;
 export const userSelector = (state, props) => state.users[props.id];
 
 export const reviewSelector = (state, props) => {

@@ -7,11 +7,12 @@ import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 import { connect } from "react-redux";
 import { fetchProducts } from "../../redux/ac";
+import { productsLoading } from "../../redux/selectors";
 
-function Restaurant({ restaurant, fetchProducts }) {
+function Restaurant({ restaurant, fetchProducts, productsLoading }) {
   useEffect(() => {
     fetchProducts(restaurant.id);
-  }, [restaurant, fetchProducts]);
+  }, [restaurant.id, fetchProducts]);
 
   const contentItems = [
     {
