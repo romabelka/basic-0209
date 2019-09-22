@@ -15,7 +15,6 @@ function Restaurant({ restaurant, products, loading, fetchProducts }) {
     fetchProducts(restaurant.id);
   }, [restaurant, fetchProducts]);
 
-  // if (loading) return (<Loader />);
   const contentItems = [
     {
       tabTitle: "Menu",

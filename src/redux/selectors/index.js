@@ -18,7 +18,8 @@ export const productSelector = (state, props) =>
 export const userSelector = (state, props) => state.users.get(props.id);
 
 export const reviewSelector = (state, props) => {
-  const review = state.reviews.get(props.id).toJS();
+  const review = state.reviews.entities.get(props.id);
+  console.log(review);
   const user = userSelector(state, { id: review.userId });
   return {
     ...review,

@@ -1,4 +1,3 @@
-import { normalizedDishes } from "../../fixtures";
 import { OrderedMap, Record } from "immutable";
 import { arrToImmutableMap } from "../utils";
 import { ERROR, FETCH_PRODUCTS, START, SUCCESS } from "../constants";

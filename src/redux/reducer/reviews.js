@@ -1,5 +1,4 @@
 import { Map, OrderedMap, Record } from "immutable";
-import { normalizedReviews } from "../../fixtures";
 import { arrToImmutableMap } from "../utils";
 import { ADD_REVIEW, FETCH_PRODUCTS, START, SUCCESS } from "../constants";
 
@@ -11,7 +10,7 @@ const ReviewRecord = Record({
 });
 
 const ReducerRecord = Record({
-  entities: new OrderedMap(),
+  entities: new Map(),
   loading: true,
   loaded: false,
   error: null
