@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import {} from "antd";
 import Restaurant from "../restaurant";
 import { connect } from "react-redux";
 import ContentTabs from "../content-tabs";
@@ -15,7 +14,7 @@ function Content({ restaurants, loading, fetchRestaurants }) {
     fetchRestaurants();
   }, [fetchRestaurants]);
 
-  if (loading) return <Loader />;
+  if (loading) return <Loader size="large" tip="Loading..." />;
 
   const items = restaurants.map(restaurant => ({
     tabTitle: restaurant.name,

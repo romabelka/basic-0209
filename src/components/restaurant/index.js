@@ -5,18 +5,12 @@ import PropTypes from "prop-types";
 import ContentTabs from "../content-tabs";
 import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
-import { connect } from "react-redux";
-import { fetchProducts } from "../../redux/ac";
 
 function Restaurant({ restaurant, fetchProducts }) {
-  useEffect(() => {
-    fetchProducts(restaurant.id);
-  }, [restaurant, fetchProducts]);
-
   const contentItems = [
     {
       tabTitle: "Menu",
-      tabContent: <Menu menu={restaurant.menu} />
+      tabContent: <Menu restaurant={restaurant} />
     },
     {
       tabTitle: "Reviews",
@@ -40,7 +34,4 @@ Restaurant.propTypes = {
   })
 };
 
-export default connect(
-  null,
-  { fetchProducts }
-)(Restaurant);
+export default Restaurant;

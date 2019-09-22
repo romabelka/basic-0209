@@ -1,10 +1,22 @@
-import { normalizedDishes } from "../../fixtures";
-import { arrToMap } from "../utils";
+import { Record, OrderedMap } from "immutable";
+import { FETCH_PRODUCTS, SUCCESS } from "../constants";
 
-export default (products = arrToMap(normalizedDishes), action) => {
-  const { type } = action;
+const ProductRecord = Record({
+  id: null,
+  name: null,
+  price: null,
+  ingredients: []
+});
+
+export default (products = new OrderedMap(), action) => {
+  const { type, response } = action;
 
   switch (type) {
+    case FETCH_PRODUCTS + SUCCESS:
+      return response.reduce(
+        (acc, item) => acc.set(item.id, new ProductRecord(item)),
+        products
+      );
     default:
       return products;
   }
