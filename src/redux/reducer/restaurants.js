@@ -1,4 +1,5 @@
-import { OrderedMap, Record } from "immutable";
+import { Record } from "immutable";
+import { ReducerRecord } from "../types";
 import { arrToImmutableMap } from "../utils";
 import {
   ADD_REVIEW,
@@ -13,13 +14,6 @@ const RestaurantRecord = Record({
   name: "",
   reviews: [],
   menu: []
-});
-
-const ReducerRecord = Record({
-  entities: new OrderedMap(),
-  loading: false,
-  loaded: false,
-  error: null
 });
 
 export default (

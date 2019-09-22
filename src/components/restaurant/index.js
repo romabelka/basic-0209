@@ -11,7 +11,7 @@ import { fetchProducts } from "../../redux/ac";
 function Restaurant({ restaurant, fetchProducts }) {
   useEffect(() => {
     fetchProducts(restaurant.id);
-  }, [restaurant, fetchProducts]);
+  }, [restaurant.id, fetchProducts]);
 
   const contentItems = [
     {

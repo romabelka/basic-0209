@@ -3,9 +3,11 @@ import {
   DECREMENT,
   FETCH_PRODUCTS,
   FETCH_RESTAURANTS,
+  FETCH_REVIEWS,
   INCREMENT,
   START,
-  SUCCESS
+  SUCCESS,
+  ERROR
 } from "../constants";
 
 export const increment = id => ({
@@ -35,12 +37,44 @@ export const fetchProducts = restaurantId => async dispatch => {
     type: FETCH_PRODUCTS + START
   });
 
-  const data = await fetch(`/api/dishes?id=${restaurantId}`);
-  const response = await data.json();
+  try {
+    const data = await fetch(`/api/dishes?id=${restaurantId}`);
+    const response = await data.json();
 
+    dispatch({
+      payload: { restaurantId },
+      type: FETCH_PRODUCTS + SUCCESS,
+      response
+    });
+  } catch (error) {
+    dispatch({
+      payload: { restaurantId },
+      type: FETCH_PRODUCTS + ERROR,
+      error
+    });
+  }
+};
+
+export const fetchReviews = restaurantId => async dispatch => {
   dispatch({
     payload: { restaurantId },
-    type: FETCH_PRODUCTS + SUCCESS,
-    response
+    type: FETCH_REVIEWS + START
   });
+
+  const fullResponse = await fetch(`/api/reviews?id=${restaurantId}`);
+
+  if (!fullResponse.ok) {
+    dispatch({
+      payload: { restaurantId },
+      type: FETCH_REVIEWS + ERROR,
+      error: fullResponse.statusText
+    });
+  } else {
+    const response = await fullResponse.json();
+    dispatch({
+      payload: { restaurantId },
+      type: FETCH_REVIEWS + SUCCESS,
+      response
+    });
+  }
 };

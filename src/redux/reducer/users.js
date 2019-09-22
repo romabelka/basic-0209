@@ -1,7 +1,16 @@
 import { normalizedUsers } from "../../fixtures";
-import { arrToMap } from "../utils";
+import { arrToImmutableMap } from "../utils";
+import { Record } from "immutable";
 
-export default (users = arrToMap(normalizedUsers), action) => {
+const UserRecord = Record({
+  id: null,
+  name: ""
+});
+
+export default (
+  users = arrToImmutableMap(normalizedUsers, UserRecord),
+  action
+) => {
   const { type } = action;
 
   switch (type) {

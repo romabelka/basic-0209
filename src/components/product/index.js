@@ -25,7 +25,7 @@ function Product({
             {product.name}
           </Typography.Title>
           <Typography.Paragraph className={styles.description}>
-            {product.ingredients.join(", ")}
+            {product.ingredients && product.ingredients.join(", ")}
           </Typography.Paragraph>
           <div className={styles.price}>{product.price} $</div>
         </Col>
@@ -58,7 +58,7 @@ Product.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string,
     price: PropTypes.number,
-    ingredients: PropTypes.array.isRequired
+    ingredients: PropTypes.array
   }).isRequired,
   fetchProduct: PropTypes.func,
   // from amount decorator
@@ -69,7 +69,7 @@ Product.propTypes = {
 
 const mapStateToProps = (storeState, ownProps) => ({
   amount: productAmountSelector(storeState, ownProps),
-  product: productSelector(storeState, ownProps)
+  product: productSelector(storeState, ownProps) || {}
 });
 
 const mapDispatchToProps = {
