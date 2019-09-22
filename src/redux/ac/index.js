@@ -5,7 +5,9 @@ import {
   FETCH_RESTAURANTS,
   INCREMENT,
   START,
-  SUCCESS
+  SUCCESS,
+  ERROR,
+  FETCH_REVIEWS
 } from "../constants";
 
 export const increment = id => ({
@@ -24,23 +26,35 @@ export const addReview = (review, restaurantId) => ({
   generateId: true
 });
 
-export const fetchRestaurants = () => ({
-  type: FETCH_RESTAURANTS,
-  callAPI: "/api/restaurants"
-});
-
-export const fetchProducts = restaurantId => async dispatch => {
+const fetchApi = (type, payload, url) => async dispatch => {
   dispatch({
-    payload: { restaurantId },
-    type: FETCH_PRODUCTS + START
+    payload,
+    type: type + START
   });
 
-  const data = await fetch(`/api/dishes?id=${restaurantId}`);
-  const response = await data.json();
+  try {
+    const data = await fetch(url);
+    const response = await data.json();
 
-  dispatch({
-    payload: { restaurantId },
-    type: FETCH_PRODUCTS + SUCCESS,
-    response
-  });
+    dispatch({
+      payload,
+      type: type + SUCCESS,
+      response
+    });
+  } catch (error) {
+    dispatch({
+      payload,
+      type: type + ERROR,
+      error
+    });
+  }
 };
+
+export const fetchRestaurants = () =>
+  fetchApi(FETCH_RESTAURANTS, {}, "/api/restaurants");
+
+export const fetchProducts = restaurantId =>
+  fetchApi(FETCH_PRODUCTS, { restaurantId }, `/api/dishes?id=${restaurantId}`);
+
+export const fetchReviews = restaurantId =>
+  fetchApi(FETCH_REVIEWS, { restaurantId }, `/api/reviews?id=${restaurantId}`);

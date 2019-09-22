@@ -1,7 +1,8 @@
 import React from "react";
+import { Spin } from "antd";
 
 function Loader(props) {
-  return <div>Loading...</div>;
+  return <Spin tip="Loading..." {...props} />;
 }
 
 Loader.propTypes = {};

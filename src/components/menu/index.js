@@ -1,13 +1,21 @@
 import React from "react";
 import Product from "../product";
 import * as PropTypes from "prop-types";
-import { Col, Row, Typography } from "antd";
+import { Col, Row, Typography, Empty } from "antd";
 import Basket from "../basket";
+import { fetchProducts } from "../../redux/ac";
+import { connect } from "react-redux";
+import Loader from "../loader";
 
 class Menu extends React.Component {
   state = {
     error: null
   };
+
+  componentDidMount() {
+    const { productsLoading, productsLoaded, id } = this.props.restaurant;
+    if (!productsLoaded && !productsLoading) this.props.fetchProducts(id);
+  }
 
   //componentWillMount() {} deprecated -> constructor() || componentDidMount()
 
@@ -26,10 +34,15 @@ class Menu extends React.Component {
           {this.state.error.message}
         </Typography.Title>
       );
+
+    const { productsLoading, productsLoaded, menu } = this.props.restaurant;
+
+    if (productsLoading) return <Loader type="medium" />;
+    if (!productsLoaded) return <Empty />;
     return (
       <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
         <Col xs={24} md={15} lg={12}>
-          {this.props.menu.map(id => (
+          {menu.map(id => (
             <Product id={id} key={id} />
           ))}
         </Col>
@@ -42,7 +55,16 @@ class Menu extends React.Component {
 }
 
 Menu.propTypes = {
-  menu: PropTypes.array.isRequired
+  restaurant: PropTypes.shape({
+    menu: PropTypes.array.isRequired,
+    productsLoaded: PropTypes.bool.isRequired,
+    productsLoading: PropTypes.bool.isRequired
+  }).isRequired
 };
 
-export default Menu;
+export default connect(
+  () => ({}),
+  {
+    fetchProducts
+  }
+)(Menu);
