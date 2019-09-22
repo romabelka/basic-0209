@@ -1,16 +1,8 @@
-import { arrToImmutableMap } from "../utils";
+import { arrToImmutableMap, createReducerRecord } from "../utils";
 import { Record, OrderedMap } from "immutable";
 import { FETCH_PRODUCTS, START, SUCCESS, ERROR } from "../constants";
 
-const ReducerRecord = new Record({
-  entities: new OrderedMap(),
-  loaded: false,
-  loading: true,
-  error: ""
-});
-
-const ProductRecord = new Record({
-  restaurantId: "",
+const ProductRecord = Record({
   id: "",
   name: "",
   price: null,
@@ -18,8 +10,8 @@ const ProductRecord = new Record({
 });
 
 export default (
-  state = new ReducerRecord(),
-  { type, payload, response, error }
+  state = createReducerRecord(new OrderedMap()),
+  { type, response, error }
 ) => {
   switch (type) {
     case FETCH_PRODUCTS + START:

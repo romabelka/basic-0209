@@ -6,7 +6,8 @@ import {
   INCREMENT,
   START,
   SUCCESS,
-  ERROR
+  ERROR,
+  FETCH_REVIEWS
 } from "../constants";
 
 export const increment = id => ({
@@ -48,6 +49,29 @@ export const fetchProducts = restaurantId => async dispatch => {
     dispatch({
       payload: { restaurantId },
       type: FETCH_PRODUCTS + ERROR,
+      error
+    });
+  }
+};
+
+export const fetchReviews = restaurantId => async dispatch => {
+  dispatch({
+    payload: { restaurantId },
+    type: FETCH_REVIEWS + START
+  });
+
+  try {
+    const data = await fetch(`/api/reviews?=id=${restaurantId}`);
+    const response = await data.json();
+    dispatch({
+      type: FETCH_REVIEWS + SUCCESS,
+      payload: { restaurantId },
+      response
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_REVIEWS + ERROR,
+      payload: { restaurantId },
       error
     });
   }

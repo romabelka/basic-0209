@@ -7,7 +7,7 @@ import { decrement, increment } from "../../redux/ac";
 import {
   productAmountSelector,
   productSelector,
-  productLoading
+  productLoadingSelector
 } from "../../redux/selectors";
 import Loader from "../loader";
 
@@ -75,7 +75,7 @@ Product.propTypes = {
 const mapStateToProps = (storeState, ownProps) => ({
   amount: productAmountSelector(storeState, ownProps),
   product: productSelector(storeState, ownProps),
-  loading: productLoading(storeState, ownProps)
+  loading: productLoadingSelector(storeState, ownProps)
 });
 
 const mapDispatchToProps = {

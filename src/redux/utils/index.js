@@ -1,4 +1,4 @@
-import { OrderedMap } from "immutable";
+import { OrderedMap, Record } from "immutable";
 
 export const arrToMap = arr =>
   arr.reduce((acc, item) => {
@@ -13,3 +13,11 @@ export const arrToImmutableMap = (arr, DataRecord) =>
       return acc;
     }, {})
   );
+
+export const createReducerRecord = items =>
+  Record({
+    entities: items,
+    loaded: false,
+    loading: false,
+    error: ""
+  })();
