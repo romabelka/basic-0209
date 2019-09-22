@@ -5,29 +5,39 @@ import PropTypes from "prop-types";
 import Rate from "../../rate";
 import styles from "./review.module.css";
 import { connect } from "react-redux";
-import { reviewSelector } from "../../../redux/selectors";
+import {
+  reviewSelector,
+  reviewLoadingSelector
+} from "../../../redux/selectors";
+import Loader from "../../loader";
 
-const Review = ({ review: { user = "Anonymous", text, rating } }) => (
-  <Card className={styles.review}>
-    <Row type="flex" align="middle">
-      <Col xs={24} md={18} align="left">
-        <Typography.Title
-          className={styles.name}
-          level={4}
-          data-id="review-user"
-        >
-          {user}
-        </Typography.Title>
-        <Typography.Text className={styles.comment} data-id="review-text">
-          {text}
-        </Typography.Text>
-      </Col>
-      <Col xs={8} md={6} align="right" className={styles.rateColumn}>
-        <Rate disabled value={rating} />
-      </Col>
-    </Row>
-  </Card>
-);
+const Review = ({ review: { user = "Anonymous", text, rating }, loading }) => {
+  if (loading) {
+    return <Loader />;
+  }
+
+  return (
+    <Card className={styles.review}>
+      <Row type="flex" align="middle">
+        <Col xs={24} md={18} align="left">
+          <Typography.Title
+            className={styles.name}
+            level={4}
+            data-id="review-user"
+          >
+            {user}
+          </Typography.Title>
+          <Typography.Text className={styles.comment} data-id="review-text">
+            {text}
+          </Typography.Text>
+        </Col>
+        <Col xs={8} md={6} align="right" className={styles.rateColumn}>
+          <Rate disabled value={rating} />
+        </Col>
+      </Row>
+    </Card>
+  );
+};
 
 Review.propTypes = {
   review: PropTypes.shape({
@@ -38,5 +48,6 @@ Review.propTypes = {
 };
 
 export default connect((state, props) => ({
-  review: reviewSelector(state, props)
+  review: reviewSelector(state, props),
+  loading: reviewLoadingSelector(state, props)
 }))(Review);

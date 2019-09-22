@@ -1,21 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, Card, Col, Row, Typography } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styles from "./product.module.css";
 import { decrement, increment } from "../../redux/ac";
-import { productAmountSelector, productSelector } from "../../redux/selectors";
+import {
+  productAmountSelector,
+  productSelector,
+  productLoadingSelector
+} from "../../redux/selectors";
+import Loader from "../loader";
 
 function Product({
   product,
   amount,
   handleIncrement,
   handleDecrement,
-  fetchProduct
+  loading
 }) {
-  useEffect(() => {
-    fetchProduct && fetchProduct(product.id);
-  }, [product.id]);
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Card className={styles.productDetailedOrderCard}>
@@ -59,7 +64,7 @@ Product.propTypes = {
     name: PropTypes.string,
     price: PropTypes.number,
     ingredients: PropTypes.array.isRequired
-  }).isRequired,
+  }),
   fetchProduct: PropTypes.func,
   // from amount decorator
   amount: PropTypes.number,
@@ -69,7 +74,8 @@ Product.propTypes = {
 
 const mapStateToProps = (storeState, ownProps) => ({
   amount: productAmountSelector(storeState, ownProps),
-  product: productSelector(storeState, ownProps)
+  product: productSelector(storeState, ownProps),
+  loading: productLoadingSelector(storeState, ownProps)
 });
 
 const mapDispatchToProps = {

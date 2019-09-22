@@ -6,12 +6,16 @@ import ContentTabs from "../content-tabs";
 import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 import { connect } from "react-redux";
-import { fetchProducts } from "../../redux/ac";
+import { fetchProducts, fetchReviews } from "../../redux/ac";
 
-function Restaurant({ restaurant, fetchProducts }) {
+function Restaurant({ restaurant, fetchProducts, fetchReviews }) {
   useEffect(() => {
     fetchProducts(restaurant.id);
-  }, [restaurant, fetchProducts]);
+  }, [restaurant.id, fetchProducts]);
+
+  useEffect(() => {
+    fetchReviews(restaurant.id);
+  }, [restaurant.id, fetchReviews]);
 
   const contentItems = [
     {
@@ -42,5 +46,5 @@ Restaurant.propTypes = {
 
 export default connect(
   null,
-  { fetchProducts }
+  { fetchProducts, fetchReviews }
 )(Restaurant);
