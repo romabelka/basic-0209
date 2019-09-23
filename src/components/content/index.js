@@ -11,12 +11,6 @@ import Loader from "../loader";
 import styles from "./content.module.css";
 
 function Content({ restaurants, loading, fetchRestaurants, match, history }) {
-  useEffect(() => {
-    fetchRestaurants();
-  }, [fetchRestaurants]);
-
-  if (loading) return <Loader />;
-
   return (
     <Tabs
       activeKey={match.params.id}
