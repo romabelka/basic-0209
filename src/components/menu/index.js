@@ -3,6 +3,13 @@ import Product from "../product";
 import * as PropTypes from "prop-types";
 import { Col, Row, Typography } from "antd";
 import Basket from "../basket";
+import { connect } from "react-redux";
+import {
+  productsLoadedSelector,
+  productsLoadingSelector
+} from "../../redux/selectors";
+import Loader from "../loader";
+import { fetchProducts } from "../../redux/ac";
 
 class Menu extends React.Component {
   state = {
@@ -19,6 +26,10 @@ class Menu extends React.Component {
     this.setState({ error });
   }
 
+  componentDidMount() {
+    this.props.fetchProducts(this.props.restaurant.id);
+  }
+
   render() {
     if (this.state.error)
       return (
@@ -26,10 +37,13 @@ class Menu extends React.Component {
           {this.state.error.message}
         </Typography.Title>
       );
+
+    if (this.props.loading) return <Loader />;
+
     return (
       <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
         <Col xs={24} md={15} lg={12}>
-          {this.props.menu.map(id => (
+          {this.props.restaurant.menu.map(id => (
             <Product id={id} key={id} />
           ))}
         </Col>
@@ -42,7 +56,16 @@ class Menu extends React.Component {
 }
 
 Menu.propTypes = {
-  menu: PropTypes.array.isRequired
+  restaurant: PropTypes.object.isRequired,
+  //from connect
+  loading: PropTypes.bool,
+  loaded: PropTypes.bool
 };
 
-export default Menu;
+export default connect(
+  (state, props) => ({
+    loading: productsLoadingSelector(state, props),
+    loaded: productsLoadedSelector(state, props)
+  }),
+  { fetchProducts }
+)(Menu);
