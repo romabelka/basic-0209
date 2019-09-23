@@ -3,13 +3,16 @@ import React from "react";
 
 import Header from "./header";
 import Content from "../content";
+import Basket from "../basket";
+import { Route } from "react-router-dom";
 
 function App() {
   return (
     <Layout>
       <Header />
       <main role="main">
-        <Content />
+        <Route path="/checkout" component={Basket} />
+        <Route path="/restaurants" component={Content} />
       </main>
     </Layout>
   );
