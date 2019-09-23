@@ -1,22 +1,17 @@
+import { OrderedMap } from "immutable";
 import { DECREMENT, INCREMENT } from "../constants";
 
-//{[productId]: amount}
-export default (state = {}, action) => {
-  const { type, payload } = action;
-
+export default (order = new OrderedMap(), { type, payload }) => {
   switch (type) {
     case INCREMENT:
-      return {
-        ...state,
-        [payload.id]: (state[payload.id] || 0) + 1
-      };
+      return order.set(payload.id, (order.get(payload.id) || 0) + 1);
     case DECREMENT:
-      return {
-        ...state,
-        [payload.id]: Math.max((state[payload.id] || 0) - 1, 0)
-      };
+      return order.set(
+        payload.id,
+        Math.max((order.get(payload.id) || 0) - 1, 0)
+      );
 
     default:
-      return state;
+      return order;
   }
 };

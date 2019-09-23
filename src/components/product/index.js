@@ -1,22 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, Card, Col, Row, Typography } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styles from "./product.module.css";
 import { decrement, increment } from "../../redux/ac";
-import { productAmountSelector, productSelector } from "../../redux/selectors";
+import { productAmountSelector } from "../../redux/selectors";
 
-function Product({
-  product,
-  amount,
-  handleIncrement,
-  handleDecrement,
-  fetchProduct
-}) {
-  useEffect(() => {
-    fetchProduct && fetchProduct(product.id);
-  }, [product.id]);
-
+function Product({ product, amount, handleIncrement, handleDecrement }) {
   return (
     <Card className={styles.productDetailedOrderCard}>
       <Row type="flex" justify="space-between">
@@ -68,8 +58,7 @@ Product.propTypes = {
 };
 
 const mapStateToProps = (storeState, ownProps) => ({
-  amount: productAmountSelector(storeState, ownProps),
-  product: productSelector(storeState, ownProps)
+  amount: productAmountSelector(storeState, ownProps.product)
 });
 
 const mapDispatchToProps = {
