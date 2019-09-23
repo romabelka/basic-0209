@@ -12,7 +12,7 @@ function App() {
       <Header />
       <main role="main">
         <Route path="/checkout" component={Basket} />
-        <Route path="/restaurants" component={Content} />
+        <Route path="/restaurants/:id" component={Content} />
       </main>
     </Layout>
   );
