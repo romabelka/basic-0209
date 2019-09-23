@@ -3,6 +3,7 @@ import {
   DECREMENT,
   FETCH_PRODUCTS,
   FETCH_RESTAURANTS,
+  FETCH_REVIEWS,
   INCREMENT,
   START,
   SUCCESS
@@ -41,6 +42,22 @@ export const fetchProducts = restaurantId => async dispatch => {
   dispatch({
     payload: { restaurantId },
     type: FETCH_PRODUCTS + SUCCESS,
+    response
+  });
+};
+
+export const fetchReviews = restaurantId => async dispatch => {
+  dispatch({
+    payload: { restaurantId },
+    type: FETCH_REVIEWS + START
+  });
+
+  const data = await fetch(`/api/reviews?id=${restaurantId}`);
+  const response = await data.json();
+
+  dispatch({
+    payload: { restaurantId },
+    type: FETCH_REVIEWS + SUCCESS,
     response
   });
 };

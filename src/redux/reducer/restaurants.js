@@ -17,7 +17,7 @@ const RestaurantRecord = Record({
 
 const ReducerRecord = Record({
   entities: new OrderedMap(),
-  loading: false,
+  loading: true,
   loaded: false,
   error: null
 });

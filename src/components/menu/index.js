@@ -1,14 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 import Product from "../product";
 import * as PropTypes from "prop-types";
 import { Col, Row, Typography } from "antd";
 import Basket from "../basket";
+import Loader from "../loader";
+import { productsLoading, productsError } from "../../redux/selectors";
 
 class Menu extends React.Component {
-  state = {
-    error: null
-  };
-
   //componentWillMount() {} deprecated -> constructor() || componentDidMount()
 
   //componentWillReceiveProps() {} deprecated -> componentDidUpdate() || static getDerivedStateFromProps()
@@ -20,12 +19,15 @@ class Menu extends React.Component {
   }
 
   render() {
-    if (this.state.error)
+    if (this.props.error)
       return (
         <Typography.Title level={2}>
-          {this.state.error.message}
+          {this.props.error.message}
         </Typography.Title>
       );
+
+    if (this.props.loading) return <Loader />;
+
     return (
       <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
         <Col xs={24} md={15} lg={12}>
@@ -45,4 +47,7 @@ Menu.propTypes = {
   menu: PropTypes.array.isRequired
 };
 
-export default Menu;
+export default connect(state => ({
+  loading: productsLoading(state),
+  error: productsError(state)
+}))(Menu);
