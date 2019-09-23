@@ -4,8 +4,7 @@ import Product from "../product";
 import * as PropTypes from "prop-types";
 import { Col, Row, Typography } from "antd";
 import Basket from "../basket";
-import Loader from "../loader";
-import { productsLoading, productsError } from "../../redux/selectors";
+import { productsError } from "../../redux/selectors";
 
 class Menu extends React.Component {
   //componentWillMount() {} deprecated -> constructor() || componentDidMount()
@@ -26,13 +25,11 @@ class Menu extends React.Component {
         </Typography.Title>
       );
 
-    if (this.props.loading) return <Loader />;
-
     return (
       <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
         <Col xs={24} md={15} lg={12}>
-          {this.props.menu.map(id => (
-            <Product id={id} key={id} />
+          {this.props.menu.map(product => (
+            <Product product={product} key={product.id} />
           ))}
         </Col>
         <Col xs={0} md={7} lg={6}>
@@ -48,6 +45,5 @@ Menu.propTypes = {
 };
 
 export default connect(state => ({
-  loading: productsLoading(state),
   error: productsError(state)
 }))(Menu);

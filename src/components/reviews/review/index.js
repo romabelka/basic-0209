@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import Rate from "../../rate";
 import styles from "./review.module.css";
 import { connect } from "react-redux";
-import { reviewSelector } from "../../../redux/selectors";
 
 const Review = ({ review: { user, text, rating } }) => (
   <Card className={styles.review}>
@@ -37,6 +36,7 @@ Review.propTypes = {
   })
 };
 
-export default connect((state, props) => ({
-  review: reviewSelector(state, props)
-}))(Review);
+export default connect(
+  null,
+  null
+)(Review);

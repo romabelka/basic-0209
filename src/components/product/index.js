@@ -4,11 +4,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styles from "./product.module.css";
 import { decrement, increment } from "../../redux/ac";
-import { productAmountSelector, productSelector } from "../../redux/selectors";
+import { productAmountSelector } from "../../redux/selectors";
 
 function Product({ product, amount, handleIncrement, handleDecrement }) {
-  if (!product) return null;
-
   return (
     <Card className={styles.productDetailedOrderCard}>
       <Row type="flex" justify="space-between">
@@ -60,8 +58,7 @@ Product.propTypes = {
 };
 
 const mapStateToProps = (storeState, ownProps) => ({
-  amount: productAmountSelector(storeState, ownProps),
-  product: productSelector(storeState, ownProps)
+  amount: productAmountSelector(storeState, ownProps.product)
 });
 
 const mapDispatchToProps = {
