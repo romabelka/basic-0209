@@ -11,26 +11,38 @@ import { fetchRestaurants } from "../../../redux/ac";
 import Loader from "../../loader";
 
 function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
+  console.log("--- 1", match);
   useEffect(() => {
     fetchRestaurants();
   }, [fetchRestaurants]);
 
   if (loading) return <Loader />;
 
-  if (match.isExact)
-    return (
-      <div>
-        <Typography.Title level={1}>
-          Please select a restaurant
-        </Typography.Title>
-        {restaurants.map(restaurant => (
-          <div key={restaurant.id}>
-            <Link to={`${match.path}/${restaurant.id}`}>{restaurant.name}</Link>
-          </div>
-        ))}
-      </div>
-    );
-  return <Route path={`${match.path}/:id`} component={Content} />;
+  return (
+    <Route
+      path={`${match.path}/:id`}
+      children={routeProps => {
+        console.log("--- 2", routeProps.match);
+        if (!routeProps.match)
+          return (
+            <div>
+              <Typography.Title level={1}>
+                Please select a restaurant
+              </Typography.Title>
+              {restaurants.map(restaurant => (
+                <div key={restaurant.id}>
+                  <Link to={`${match.path}/${restaurant.id}`}>
+                    {restaurant.name}
+                  </Link>
+                </div>
+              ))}
+            </div>
+          );
+
+        return <Content {...routeProps} />;
+      }}
+    />
+  );
 }
 
 RestaurantsPage.propTypes = {};

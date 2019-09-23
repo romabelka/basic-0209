@@ -7,7 +7,6 @@ import {
   restaurantsLoading
 } from "../../redux/selectors";
 import { fetchRestaurants } from "../../redux/ac";
-import Loader from "../loader";
 import styles from "./content.module.css";
 
 function Content({ restaurants, loading, fetchRestaurants, match, history }) {
