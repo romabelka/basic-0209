@@ -27,7 +27,10 @@ class Menu extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchProducts(this.props.restaurant.id);
+    const { loading, loaded, fetchProducts, restaurant } = this.props;
+    if (!loading && !loaded) {
+      fetchProducts(restaurant.id);
+    }
   }
 
   render() {
