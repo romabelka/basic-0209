@@ -6,18 +6,21 @@ import styles from "./content-tabs.module.css";
 
 const { TabPane } = Tabs;
 
-function ContentTabs({ items, tabPaneClassName }) {
+function ContentTabs({ items, tabPaneClassName, match, history }) {
   return (
     <Tabs
-      defaultActiveKey="0"
+      activeKey={match.params.tabId}
+      onTabClick={tabId =>
+        history.push(`/restaurants/${match.params.id}/${tabId}`)
+      }
       tabPosition="top"
       animated={false}
       className={styles.contentTabs}
     >
-      {items.map((item, i) => (
+      {items.map(item => (
         <TabPane
           tab={item.tabTitle}
-          key={i}
+          key={item.tabId}
           className={cx(styles.tabPane, tabPaneClassName)}
         >
           <Row type="flex" justify="center">
