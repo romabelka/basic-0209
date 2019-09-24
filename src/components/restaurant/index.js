@@ -25,7 +25,7 @@ function Restaurant({ restaurant, match }) {
     <>
       <Hero heading={restaurant.name} />
       <Route
-        path={`${match.path}/:tab`}
+        path={`${match.path}/:tabId`}
         children={routeProps => {
           if (match.isExact && !routeProps.match) {
             return <Redirect to={`/restaurants/${match.params.id}/menu`} />;

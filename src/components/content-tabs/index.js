@@ -9,7 +9,7 @@ const { TabPane } = Tabs;
 function ContentTabs({ items, tabPaneClassName, match, history }) {
   return (
     <Tabs
-      activeKey={match.params.tab}
+      activeKey={match.params.tabId}
       onTabClick={tabId =>
         history.push(`/restaurants/${match.params.id}/${tabId}`)
       }
@@ -17,7 +17,7 @@ function ContentTabs({ items, tabPaneClassName, match, history }) {
       animated={false}
       className={styles.contentTabs}
     >
-      {items.map((item, i) => (
+      {items.map(item => (
         <TabPane
           tab={item.tabTitle}
           key={item.tabId}
