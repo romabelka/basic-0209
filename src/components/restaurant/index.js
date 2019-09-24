@@ -1,4 +1,5 @@
 import React from "react";
+import { Route, Redirect } from "react-router-dom";
 import Reviews from "../reviews";
 import Menu from "../menu";
 import PropTypes from "prop-types";
@@ -6,22 +7,39 @@ import ContentTabs from "../content-tabs";
 import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 
-function Restaurant({ restaurant }) {
+function Restaurant({ restaurant, match }) {
   const contentItems = [
     {
       tabTitle: "Menu",
-      tabContent: <Menu restaurant={restaurant} />
+      tabContent: <Menu restaurant={restaurant} />,
+      tabId: "menu"
     },
     {
       tabTitle: "Reviews",
-      tabContent: <Reviews restaurant={restaurant} />
+      tabContent: <Reviews restaurant={restaurant} />,
+      tabId: "reviews"
     }
   ];
 
   return (
     <>
       <Hero heading={restaurant.name} />
-      <ContentTabs items={contentItems} tabPaneClassName={styles.tabPane} />
+      <Route
+        path={`${match.path}/:tab`}
+        children={routeProps => {
+          if (match.isExact && !routeProps.match) {
+            return <Redirect to={`/restaurants/${match.params.id}/menu`} />;
+          } else {
+            return (
+              <ContentTabs
+                items={contentItems}
+                tabPaneClassName={styles.tabPane}
+                {...routeProps}
+              />
+            );
+          }
+        }}
+      />
     </>
   );
 }

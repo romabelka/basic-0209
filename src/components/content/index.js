@@ -26,7 +26,7 @@ function Content({ restaurants, loading, fetchRestaurants, match, history }) {
         >
           <Row type="flex" justify="center">
             <Col span={24}>
-              <Restaurant restaurant={restaurant} />
+              <Restaurant restaurant={restaurant} match={match} />
             </Col>
           </Row>
         </Tabs.TabPane>
