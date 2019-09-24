@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, Card, Col, Row, Typography } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -6,16 +6,8 @@ import styles from "./product.module.css";
 import { decrement, increment } from "../../redux/ac";
 import { productAmountSelector, productSelector } from "../../redux/selectors";
 
-function Product({
-  product,
-  amount,
-  handleIncrement,
-  handleDecrement,
-  fetchProduct
-}) {
-  useEffect(() => {
-    fetchProduct && fetchProduct(product.id);
-  }, [product.id]);
+function Product({ product, amount, handleIncrement, handleDecrement }) {
+  if (!product) return null;
 
   return (
     <Card className={styles.productDetailedOrderCard}>
@@ -59,8 +51,7 @@ Product.propTypes = {
     name: PropTypes.string,
     price: PropTypes.number,
     ingredients: PropTypes.array.isRequired
-  }).isRequired,
-  fetchProduct: PropTypes.func,
+  }),
   // from amount decorator
   amount: PropTypes.number,
   increment: PropTypes.func,

@@ -1,20 +1,16 @@
+import { Map } from "immutable";
 import { DECREMENT, INCREMENT } from "../constants";
 
 //{[productId]: amount}
-export default (state = {}, action) => {
+export default (state = new Map({}), action) => {
   const { type, payload } = action;
 
   switch (type) {
     case INCREMENT:
-      return {
-        ...state,
-        [payload.id]: (state[payload.id] || 0) + 1
-      };
+      return state.update(payload.id, 0, amount => amount + 1);
+
     case DECREMENT:
-      return {
-        ...state,
-        [payload.id]: Math.max((state[payload.id] || 0) - 1, 0)
-      };
+      return state.update(payload.id, 0, amount => Math.max(amount - 1, 0));
 
     default:
       return state;
