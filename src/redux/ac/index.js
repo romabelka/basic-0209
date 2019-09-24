@@ -3,10 +3,16 @@ import {
   DECREMENT,
   FETCH_PRODUCTS,
   FETCH_RESTAURANTS,
+  FETCH_REVIEWS,
   INCREMENT,
   START,
   SUCCESS
 } from "../constants";
+import {
+  restaurantSelector,
+  reviewsLoadedSelector,
+  reviewsLoadingSelector
+} from "../selectors";
 
 export const increment = id => ({
   type: INCREMENT,
@@ -35,12 +41,32 @@ export const fetchProducts = restaurantId => async dispatch => {
     type: FETCH_PRODUCTS + START
   });
 
-  const data = await fetch(`/api/dishes?id=${restaurantId}`);
-  const response = await data.json();
+  const response = await fetch(`/api/dishes?id=${restaurantId}`);
+  const products = await response.json();
+
+  dispatch({
+    payload: { restaurantId, products },
+    type: FETCH_PRODUCTS + SUCCESS
+  });
+};
+
+export const fetchReviews = restaurantId => async (dispatch, getState) => {
+  const restaurant = restaurantSelector(getState(), { id: restaurantId });
+  const loading = reviewsLoadingSelector(getState(), { restaurant });
+  const loaded = reviewsLoadedSelector(getState(), { restaurant });
+
+  if (loading || loaded) return;
 
   dispatch({
     payload: { restaurantId },
-    type: FETCH_PRODUCTS + SUCCESS,
-    response
+    type: FETCH_REVIEWS + START
+  });
+
+  const response = await fetch(`/api/reviews?id=${restaurantId}`);
+  const reviews = await response.json();
+
+  dispatch({
+    payload: { restaurantId, reviews },
+    type: FETCH_REVIEWS + SUCCESS
   });
 };

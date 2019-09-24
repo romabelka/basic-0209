@@ -3,17 +3,29 @@ import { createSelector } from "reselect";
 export const restaurantsListSelector = state =>
   state.restaurants.entities.valueSeq().toArray();
 export const restaurantsLoading = state => state.restaurants.loading;
+export const restaurantSelector = (state, { id }) =>
+  state.restaurants.getIn(["entities", id]);
 
 export const orderSelector = state => state.order;
-export const productsSelector = state => state.products;
+export const productsSelector = state => state.products.entities;
 export const productAmountSelector = (state, props) =>
-  state.order[props.id] || 0;
-export const productSelector = (state, props) => state.products[props.id];
+  state.order.get(props.id) || 0;
+export const productSelector = (state, props) =>
+  state.products.getIn(["entities", props.id]);
+export const productsLoadingSelector = (state, props) =>
+  state.products.loading.has(props.restaurant.id);
+export const productsLoadedSelector = (state, props) =>
+  state.products.loaded.has(props.restaurant.id);
+
+export const reviewsLoadingSelector = (state, props) =>
+  state.reviews.loading.has(props.restaurant.id);
+export const reviewsLoadedSelector = (state, props) =>
+  state.reviews.loaded.has(props.restaurant.id);
 
 export const userSelector = (state, props) => state.users[props.id];
 
 export const reviewSelector = (state, props) => {
-  const review = state.reviews.get(props.id).toJS();
+  const review = state.reviews.getIn(["entities", props.id]).toJS();
   const user = userSelector(state, { id: review.userId });
   return {
     ...review,
@@ -25,12 +37,13 @@ export const orderedProductsSelector = createSelector(
   productsSelector,
   orderSelector,
   (products, order) => {
-    return Object.keys(order)
-      .filter(productId => order[productId] > 0)
-      .map(productId => products[productId])
+    return order
+      .keySeq()
+      .filter(productId => order.get(productId) > 0)
+      .map(productId => products.get(productId))
       .map(product => ({
         product,
-        amount: order[product.id]
+        amount: order.get(product.id)
       }));
   }
 );
