@@ -10,10 +10,12 @@ function Restaurant({ restaurant }) {
   const contentItems = [
     {
       tabTitle: "Menu",
+      tabKey: "menu",
       tabContent: <Menu restaurant={restaurant} />
     },
     {
       tabTitle: "Reviews",
+      tabKey: "reviews",
       tabContent: <Reviews restaurant={restaurant} />
     }
   ];

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, Redirect } from "react-router-dom";
 import Content from "../../content";
 import { Typography } from "antd";
 import { connect } from "react-redux";
@@ -23,7 +23,10 @@ function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
       path={`${match.path}/:id`}
       children={routeProps => {
         console.log("--- 2", routeProps.match);
-        if (!routeProps.match)
+        if (!routeProps.match) {
+          if (restaurants.length)
+            return <Redirect to={`${match.path}/${restaurants[0].id}`} />;
+
           return (
             <div>
               <Typography.Title level={1}>
@@ -38,7 +41,7 @@ function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
               ))}
             </div>
           );
-
+        }
         return <Content {...routeProps} />;
       }}
     />
