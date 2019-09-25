@@ -20,9 +20,12 @@ export const productsLoadedSelector = (state, props) =>
 export const reviewsLoadingSelector = (state, props) =>
   state.reviews.loading.has(props.restaurant.id);
 export const reviewsLoadedSelector = (state, props) =>
-  state.reviews.loaded.has(props.restaurant.id);
+  state.reviews.loaded.has(props.restaurant.id) && usersLoadedSelector(state);
 
-export const userSelector = (state, props) => state.users[props.id];
+export const usersLoadedSelector = state => state.users.loaded;
+export const usersLoadingSelector = state => state.users.loading;
+export const userSelector = (state, props) =>
+  state.users.entities.get(props.id);
 
 export const reviewSelector = (state, props) => {
   const review = state.reviews.getIn(["entities", props.id]).toJS();

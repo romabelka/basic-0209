@@ -12,8 +12,6 @@ function ContentTabs({ items, tabPaneClassName, match, history }) {
     <Route
       path={`${match.path}/:id`}
       children={routeProps => {
-        console.log("--- a", routeProps, items);
-
         const activeKey = routeProps.match ? routeProps.match.params.id : null;
 
         if (

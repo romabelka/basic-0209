@@ -6,12 +6,16 @@ import {
   FETCH_REVIEWS,
   INCREMENT,
   START,
-  SUCCESS
+  SUCCESS,
+  FETCH_USERS,
+  ERROR
 } from "../constants";
 import {
   restaurantSelector,
   reviewsLoadedSelector,
-  reviewsLoadingSelector
+  reviewsLoadingSelector,
+  usersLoadedSelector,
+  usersLoadingSelector
 } from "../selectors";
 
 export const increment = id => ({
@@ -50,12 +54,41 @@ export const fetchProducts = restaurantId => async dispatch => {
   });
 };
 
+const fetchUsers = (dispatch, getState) => {
+  const loaded = usersLoadedSelector(getState());
+  const loading = usersLoadingSelector(getState());
+
+  if (loaded || loading) return;
+
+  dispatch({
+    type: FETCH_USERS + START
+  });
+
+  fetch("/api/users")
+    .then(response =>
+      response.json().then(users =>
+        dispatch({
+          type: FETCH_USERS + SUCCESS,
+          response: users
+        })
+      )
+    )
+    .catch(error =>
+      dispatch({
+        type: FETCH_USERS + ERROR,
+        error
+      })
+    );
+};
+
 export const fetchReviews = restaurantId => async (dispatch, getState) => {
   const restaurant = restaurantSelector(getState(), { id: restaurantId });
   const loading = reviewsLoadingSelector(getState(), { restaurant });
   const loaded = reviewsLoadedSelector(getState(), { restaurant });
 
   if (loading || loaded) return;
+
+  dispatch(fetchUsers);
 
   dispatch({
     payload: { restaurantId },

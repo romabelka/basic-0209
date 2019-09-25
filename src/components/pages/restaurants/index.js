@@ -11,7 +11,6 @@ import { fetchRestaurants } from "../../../redux/ac";
 import Loader from "../../loader";
 
 function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
-  console.log("--- 1", match);
   useEffect(() => {
     fetchRestaurants();
   }, [fetchRestaurants]);
@@ -22,7 +21,6 @@ function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
     <Route
       path={`${match.path}/:id`}
       children={routeProps => {
-        console.log("--- 2", routeProps.match);
         if (!routeProps.match) {
           if (restaurants.length)
             return <Redirect to={`${match.path}/${restaurants[0].id}`} />;
