@@ -6,7 +6,8 @@ const ProductRecord = Record({
   id: null,
   name: "",
   price: null,
-  ingredients: []
+  ingredients: [],
+  restaurantId: null
 });
 
 const ReducerRecord = Record({
@@ -26,11 +27,17 @@ export default (state = new ReducerRecord(), action) => {
       );
 
     case FETCH_PRODUCTS + SUCCESS:
+      const productsWIthRestaurantId = payload.products.map(product => ({
+        ...product,
+        restaurantId: payload.restaurantId
+      }));
       return state
         .update("loading", loading => loading.remove(payload.restaurantId))
         .update("loaded", loading => loading.add(payload.restaurantId))
         .update("entities", entities =>
-          entities.merge(arrToImmutableMap(payload.products, ProductRecord))
+          entities.merge(
+            arrToImmutableMap(productsWIthRestaurantId, ProductRecord)
+          )
         );
 
     default:
