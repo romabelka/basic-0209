@@ -1,11 +1,28 @@
 import { normalizedUsers } from "../../fixtures";
-import { arrToMap } from "../utils";
+import { arrToImmutableMap, arrToMap } from "../utils";
+import { OrderedMap, Record } from "immutable";
+import { FETCH_USERS, SUCCESS } from "../constants";
 
-export default (users = arrToMap(normalizedUsers), action) => {
-  const { type } = action;
+const UsersRecord = Record({
+  id: null,
+  name: ""
+});
+
+const ReducerRecord = Record({
+  entities: new OrderedMap(),
+  loaded: false
+});
+
+export default (state = new ReducerRecord(), action) => {
+  const { type, payload } = action;
 
   switch (type) {
+    case FETCH_USERS + SUCCESS:
+      return state
+        .set("loaded", true)
+        .set("entities", arrToImmutableMap(payload.users, UsersRecord));
+
     default:
-      return users;
+      return state;
   }
 };

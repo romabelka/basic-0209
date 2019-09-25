@@ -6,18 +6,29 @@ import styles from "./content-tabs.module.css";
 
 const { TabPane } = Tabs;
 
-function ContentTabs({ items, tabPaneClassName }) {
+function ContentTabs({
+  items,
+  activeTabKey,
+  tabPaneClassName,
+  match,
+  history,
+  masterUrl
+}) {
+  const props = {
+    tabPosition: "top",
+    animated: false,
+    className: styles.contentTabs,
+    onTabClick: key => history.push(`${masterUrl}/${key}`)
+  };
+
+  if (activeTabKey) props.activeKey = activeTabKey;
+
   return (
-    <Tabs
-      defaultActiveKey="0"
-      tabPosition="top"
-      animated={false}
-      className={styles.contentTabs}
-    >
+    <Tabs {...props}>
       {items.map((item, i) => (
         <TabPane
           tab={item.tabTitle}
-          key={i}
+          key={item.id}
           className={cx(styles.tabPane, tabPaneClassName)}
         >
           <Row type="flex" justify="center">
