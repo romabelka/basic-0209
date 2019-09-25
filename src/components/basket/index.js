@@ -15,6 +15,7 @@ import {
 
 function Basket({ title = "Basket", className, total, orderProducts }) {
   console.log("---", "rendering Basket");
+  console.log("products in basket", orderProducts.toJS());
   return (
     <div className={cx(styles.basket, className)}>
       <Typography.Title level={4} className={styles.title}>
