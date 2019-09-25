@@ -4,6 +4,7 @@ import {
   FETCH_PRODUCTS,
   FETCH_RESTAURANTS,
   FETCH_REVIEWS,
+  FETCH_USERS,
   INCREMENT,
   START,
   SUCCESS
@@ -11,7 +12,8 @@ import {
 import {
   restaurantSelector,
   reviewsLoadedSelector,
-  reviewsLoadingSelector
+  reviewsLoadingSelector,
+  usersLoadedSelector
 } from "../selectors";
 
 export const increment = id => ({
@@ -54,6 +56,7 @@ export const fetchReviews = restaurantId => async (dispatch, getState) => {
   const restaurant = restaurantSelector(getState(), { id: restaurantId });
   const loading = reviewsLoadingSelector(getState(), { restaurant });
   const loaded = reviewsLoadedSelector(getState(), { restaurant });
+  const usersLoaded = usersLoadedSelector(getState());
 
   if (loading || loaded) return;
 
@@ -62,8 +65,24 @@ export const fetchReviews = restaurantId => async (dispatch, getState) => {
     type: FETCH_REVIEWS + START
   });
 
-  const response = await fetch(`/api/reviews?id=${restaurantId}`);
-  const reviews = await response.json();
+  const usersLoader = () =>
+    !usersLoaded ? fetch("/api/users") : Promise.resolve();
+
+  const [usersResponse, reviewsResponse] = await Promise.all([
+    usersLoader(),
+    fetch(`/api/reviews?id=${restaurantId}`)
+  ]);
+
+  if (!usersLoaded) {
+    const users = await usersResponse.json();
+
+    dispatch({
+      payload: { users },
+      type: FETCH_USERS + SUCCESS
+    });
+  }
+
+  const reviews = await reviewsResponse.json();
 
   dispatch({
     payload: { restaurantId, reviews },

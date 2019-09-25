@@ -10,6 +10,7 @@ import {
 } from "../../redux/selectors";
 import Loader from "../loader";
 import { fetchProducts } from "../../redux/ac";
+import logger from "../../redux/middlewares/logger";
 
 class Menu extends React.Component {
   state = {
