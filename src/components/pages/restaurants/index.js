@@ -20,7 +20,7 @@ function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
 
   return (
     <Route
-      path={`${match.path}/:id`}
+      path={`${match.path}/:id/:tab?`}
       children={routeProps => {
         console.log("--- 2", routeProps.match);
         if (!routeProps.match)
