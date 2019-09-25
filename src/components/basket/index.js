@@ -15,13 +15,19 @@ import {
 
 function Basket({ title = "Basket", className, total, orderProducts }) {
   console.log("---", "rendering Basket");
+
   return (
     <div className={cx(styles.basket, className)}>
       <Typography.Title level={4} className={styles.title}>
         {title}
       </Typography.Title>
-      {orderProducts.map(({ product, amount }) => (
-        <BasketItem product={product} amount={amount} key={product.id} />
+      {orderProducts.map(({ product, amount, restaurant }) => (
+        <BasketItem
+          product={product}
+          amount={amount}
+          restaurant={restaurant}
+          key={product.id}
+        />
       ))}
       <hr />
 

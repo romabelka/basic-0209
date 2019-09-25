@@ -36,14 +36,18 @@ export const reviewSelector = (state, props) => {
 export const orderedProductsSelector = createSelector(
   productsSelector,
   orderSelector,
-  (products, order) => {
+  restaurantsListSelector,
+  (products, order, restaurants) => {
+    console.log("products", products);
+    console.log("order", order);
     return order
       .keySeq()
       .filter(productId => order.get(productId) > 0)
       .map(productId => products.get(productId))
       .map(product => ({
         product,
-        amount: order.get(product.id)
+        amount: order.get(product.id),
+        restaurant: restaurants.find(item => item.menu.includes(product.id))
       }));
   }
 );
