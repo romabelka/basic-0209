@@ -12,7 +12,6 @@ import Loader from "../loader";
 import { fetchProducts } from "../../redux/ac";
 import { withRouter } from "react-router";
 import { compose } from "redux";
-import { Route } from "react-router-dom";
 
 class Menu extends React.Component {
   state = {
@@ -59,32 +58,6 @@ class Menu extends React.Component {
       </Row>
     );
   }
-
-  // render() {
-  //   const { match, location, history } = this.props;
-  //     return(<Route path={`${match.path}/menu`} render={() => {
-  //       if (this.state.error)
-  //       return (
-  //         <Typography.Title level={2}>
-  //           {this.state.error.message}
-  //         </Typography.Title>
-  //       );
-
-  //     if (this.props.loading) return <Loader />;
-
-  //     return (
-  //       <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
-  //         <Col xs={24} md={15} lg={12}>
-  //           {this.props.restaurant.menu.map(id => (
-  //             <Product id={id} key={id} />
-  //           ))}
-  //         </Col>
-  //         <Col xs={0} md={7} lg={6}>
-  //           <Basket />
-  //         </Col>
-  //       </Row>
-  //     );
-  //   }}/>);
 }
 
 Menu.propTypes = {
@@ -104,11 +77,3 @@ export default compose(
     { fetchProducts }
   )
 )(Menu);
-
-// export default connect(
-//   (state, props) => ({
-//     loading: productsLoadingSelector(state, props),
-//     loaded: productsLoadedSelector(state, props)
-//   }),
-//   { fetchProducts }
-// )(Menu);
