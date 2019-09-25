@@ -1,9 +1,9 @@
-import { Layout, Typography } from "antd";
+import { Layout } from "antd";
 import React from "react";
 
 import Header from "./header";
 import Basket from "../basket";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import RestaurantsPage from "../pages/restaurants";
 
 function App() {
@@ -14,12 +14,7 @@ function App() {
         <Switch>
           <Route path="/checkout" exact component={Basket} />
           <Route path="/restaurants" component={RestaurantsPage} />
-          <Route
-            path="/"
-            render={() => (
-              <Typography.Title level={1}>Not Found Page</Typography.Title>
-            )}
-          />
+          <Route path="/" render={() => <Redirect to="/restaurants" />} />
         </Switch>
       </main>
     </Layout>
