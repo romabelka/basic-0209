@@ -3,12 +3,17 @@ import { Button, Col, Row, Typography } from "antd";
 import { increment, decrement } from "../../../redux/ac";
 import styles from "./basket-item.module.css";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 function BasketItem({ product, amount, increment, decrement }) {
   return (
     <Row type="flex" align="middle" className={styles.basketItem}>
       <Col span={12} align="left">
-        <Typography.Text>{product.name}</Typography.Text>
+        <Typography.Text>
+          <Link to={`/restaurants/${product.restaurantId}`}>
+            {product.name}
+          </Link>
+        </Typography.Text>
       </Col>
       <Col span={12} align="right">
         <div className={styles.counter}>

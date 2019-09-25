@@ -10,6 +10,8 @@ import {
 } from "../../redux/selectors";
 import Loader from "../loader";
 import { fetchProducts } from "../../redux/ac";
+import { withRouter } from "react-router";
+import { compose } from "redux";
 
 class Menu extends React.Component {
   state = {
@@ -65,10 +67,13 @@ Menu.propTypes = {
   loaded: PropTypes.bool
 };
 
-export default connect(
-  (state, props) => ({
-    loading: productsLoadingSelector(state, props),
-    loaded: productsLoadedSelector(state, props)
-  }),
-  { fetchProducts }
+export default compose(
+  withRouter,
+  connect(
+    (state, props) => ({
+      loading: productsLoadingSelector(state, props),
+      loaded: productsLoadedSelector(state, props)
+    }),
+    { fetchProducts }
+  )
 )(Menu);

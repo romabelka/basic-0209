@@ -1,5 +1,6 @@
 import { createSelector } from "reselect";
 
+export const restaurantsMapSelector = state => state.restaurants.entities;
 export const restaurantsListSelector = state =>
   state.restaurants.entities.valueSeq().toArray();
 export const restaurantsLoading = state => state.restaurants.loading;
@@ -36,11 +37,20 @@ export const reviewSelector = (state, props) => {
 export const orderedProductsSelector = createSelector(
   productsSelector,
   orderSelector,
-  (products, order) => {
+  restaurantsMapSelector,
+  (products, order, restaurants) => {
     return order
       .keySeq()
       .filter(productId => order.get(productId) > 0)
-      .map(productId => products.get(productId))
+      .map(productId => {
+        const restaurantId = restaurants.findKey(r =>
+          r.menu.includes(productId)
+        );
+        return {
+          restaurantId: restaurantId,
+          ...products.get(productId).toJS()
+        };
+      })
       .map(product => ({
         product,
         amount: order.get(product.id)
