@@ -2,26 +2,48 @@ import React from "react";
 import Reviews from "../reviews";
 import Menu from "../menu";
 import PropTypes from "prop-types";
-import ContentTabs from "../content-tabs";
+import { Redirect, Route, withRouter } from "react-router-dom";
 import Hero from "../app/hero";
+import { Tabs } from "antd";
 import styles from "./restaurant.module.css";
 
-function Restaurant({ restaurant }) {
-  const contentItems = [
-    {
-      tabTitle: "Menu",
-      tabContent: <Menu restaurant={restaurant} />
-    },
-    {
-      tabTitle: "Reviews",
-      tabContent: <Reviews restaurant={restaurant} />
-    }
-  ];
+function Restaurant({ restaurant, match, location, history }) {
+  const { path: routePrefix, url: baseUrl } = match;
 
   return (
     <>
       <Hero heading={restaurant.name} />
-      <ContentTabs items={contentItems} tabPaneClassName={styles.tabPane} />
+      <Route
+        path={`${routePrefix}/:tab`}
+        children={routeProps => {
+          console.log("--- 3", routeProps.match);
+          if (!routeProps.match) {
+            return <Redirect to={`${baseUrl}/menu`} />;
+          }
+          const {
+            match: {
+              params: { tab }
+            }
+          } = routeProps;
+          return (
+            <Tabs
+              activeKey={tab}
+              onTabClick={key => history.push(`${baseUrl}/${key}`)}
+            >
+              <Tabs.TabPane key="menu" tab="Menu" className={styles.tabPane}>
+                <Menu restaurant={restaurant} />
+              </Tabs.TabPane>
+              <Tabs.TabPane
+                key="reviews"
+                tab="Reviews"
+                className={styles.tabPane}
+              >
+                <Reviews restaurant={restaurant} />
+              </Tabs.TabPane>
+            </Tabs>
+          );
+        }}
+      />
     </>
   );
 }
@@ -34,4 +56,4 @@ Restaurant.propTypes = {
   })
 };
 
-export default Restaurant;
+export default withRouter(Restaurant);
