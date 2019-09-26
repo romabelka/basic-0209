@@ -5,48 +5,54 @@ import PropTypes from "prop-types";
 import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 import { Col, Row, Tabs } from "antd";
-import { Route } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 
 function Restaurant({ restaurant }) {
   return (
     <>
       <Hero heading={restaurant.name} />
-      <Route
-        path="/restaurants/:id/:tab"
-        render={({
-          match: {
-            params: { tab, id }
-          },
-          history
-        }) => (
-          <Tabs
-            activeKey={tab}
-            onTabClick={tab => history.push(`/restaurants/${id}/${tab}`)}
-            tabPosition="top"
-            animated={false}
-            className={styles.contentTabs}
-          >
-            <Tabs.TabPane tab="Menu" key="menu" className={styles.tabPane}>
-              <Row type="flex" justify="center">
-                <Col span={24}>
-                  <Menu restaurant={restaurant} />
-                </Col>
-              </Row>
-            </Tabs.TabPane>
-            <Tabs.TabPane
-              tab="Reviews"
-              key="reviews"
-              className={styles.tabPane}
+      <Switch>
+        <Route
+          path="/restaurants/:id/:tab"
+          render={({
+            match: {
+              params: { tab, id }
+            },
+            history
+          }) => (
+            <Tabs
+              activeKey={tab}
+              onTabClick={tab => history.push(`/restaurants/${id}/${tab}`)}
+              tabPosition="top"
+              animated={false}
+              className={styles.contentTabs}
             >
-              <Row type="flex" justify="center">
-                <Col span={24}>
-                  <Reviews restaurant={restaurant} />
-                </Col>
-              </Row>
-            </Tabs.TabPane>
-          </Tabs>
-        )}
-      />
+              <Tabs.TabPane tab="Menu" key="menu" className={styles.tabPane}>
+                <Row type="flex" justify="center">
+                  <Col span={24}>
+                    <Menu restaurant={restaurant} />
+                  </Col>
+                </Row>
+              </Tabs.TabPane>
+              <Tabs.TabPane
+                tab="Reviews"
+                key="reviews"
+                className={styles.tabPane}
+              >
+                <Row type="flex" justify="center">
+                  <Col span={24}>
+                    <Reviews restaurant={restaurant} />
+                  </Col>
+                </Row>
+              </Tabs.TabPane>
+            </Tabs>
+          )}
+        />
+        <Redirect
+          from="/restaurants/:id"
+          to={`/restaurants/${restaurant.id}/menu`}
+        />
+      </Switch>
     </>
   );
 }
