@@ -13,15 +13,19 @@ import {
   orderedProductsSelector,
   totalPriceSelector
 } from "../../redux/selectors";
+import { Consumer as UserConsumer } from "../../contexts/user-context";
 import "./basket.css";
 
 function Basket({ title = "Basket", className, total, orderProducts }) {
-  console.log("---", "rendering Basket");
   return (
     <div className={cx(styles.basket, className)}>
-      <Typography.Title level={4} className={styles.title}>
-        {title}
-      </Typography.Title>
+      <UserConsumer>
+        {username => (
+          <Typography.Title level={4} className={styles.title}>
+            {username}`s order
+          </Typography.Title>
+        )}
+      </UserConsumer>
       <TransitionGroup>
         {orderProducts.map(({ product, amount, restaurant }) => (
           <CSSTransition timeout={500} classNames="basket-item-animation">

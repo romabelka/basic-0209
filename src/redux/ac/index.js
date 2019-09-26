@@ -76,7 +76,7 @@ export const fetchReviews = restaurantId => async (dispatch, getState) => {
         type: FETCH_USERS + START
       });
 
-      const usersResponse = await fetch("/api/user");
+      const usersResponse = await fetch("/api/users");
       if (!usersResponse.ok) throw new Error();
 
       const users = await usersResponse.json();
