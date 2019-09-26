@@ -20,9 +20,13 @@ function Basket({ title = "Basket", className, total, orderProducts }) {
   return (
     <div className={cx(styles.basket, className)}>
       <UserConsumer>
-        {username => (
-          <Typography.Title level={4} className={styles.title}>
-            {username}`s order
+        {({ name, setName }) => (
+          <Typography.Title
+            level={4}
+            className={styles.title}
+            onClick={() => setName("hohoho")}
+          >
+            {name}`s order
           </Typography.Title>
         )}
       </UserConsumer>

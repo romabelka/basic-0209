@@ -14,7 +14,7 @@ function App() {
   }, [setName]);
 
   return (
-    <UserProvider value={name}>
+    <UserProvider value={{ name, setName }}>
       <Layout>
         <Header />
         <main role="main">

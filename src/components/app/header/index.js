@@ -7,14 +7,14 @@ import userContext from "../../../contexts/user-context";
 import { Typography } from "antd";
 
 function Header() {
-  const username = useContext(userContext);
+  const { name } = useContext(userContext);
 
   return (
     <header className={styles.header}>
       <Link to="/restaurants">
         <Logo />
       </Link>
-      <Typography.Text>Hello: {username}</Typography.Text>
+      <Typography.Text>Hello: {name}</Typography.Text>
     </header>
   );
 }
