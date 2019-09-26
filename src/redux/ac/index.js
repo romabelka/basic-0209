@@ -4,6 +4,7 @@ import {
   FETCH_PRODUCTS,
   FETCH_RESTAURANTS,
   FETCH_REVIEWS,
+  FETCH_USERS,
   INCREMENT,
   START,
   SUCCESS
@@ -11,7 +12,9 @@ import {
 import {
   restaurantSelector,
   reviewsLoadedSelector,
-  reviewsLoadingSelector
+  reviewsLoadingSelector,
+  usersLoadingSelector,
+  usersLoadedSelector
 } from "../selectors";
 
 export const increment = id => ({
@@ -68,5 +71,25 @@ export const fetchReviews = restaurantId => async (dispatch, getState) => {
   dispatch({
     payload: { restaurantId, reviews },
     type: FETCH_REVIEWS + SUCCESS
+  });
+};
+
+export const fetchUsers = () => async (dispatch, getState) => {
+  const loading = usersLoadingSelector(getState());
+  const loaded = usersLoadedSelector(getState());
+
+  if (loading || loaded) return;
+
+  dispatch({
+    payload: {},
+    type: FETCH_USERS + START
+  });
+
+  const response = await fetch(`/api/users`);
+  const users = await response.json();
+
+  dispatch({
+    payload: { users },
+    type: FETCH_USERS + SUCCESS
   });
 };

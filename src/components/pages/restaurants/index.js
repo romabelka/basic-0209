@@ -7,14 +7,21 @@ import {
   restaurantsListSelector,
   restaurantsLoading
 } from "../../../redux/selectors";
-import { fetchRestaurants } from "../../../redux/ac";
+import { fetchRestaurants, fetchUsers } from "../../../redux/ac";
 import Loader from "../../loader";
 
-function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
+function RestaurantsPage({
+  match,
+  fetchRestaurants,
+  fetchUsers,
+  restaurants,
+  loading
+}) {
   console.log("--- 1", match);
   useEffect(() => {
+    fetchUsers();
     fetchRestaurants();
-  }, [fetchRestaurants]);
+  }, [fetchRestaurants, fetchUsers]);
 
   if (loading) return <Loader />;
 
@@ -52,5 +59,5 @@ export default connect(
     restaurants: restaurantsListSelector(state),
     loading: restaurantsLoading(state)
   }),
-  { fetchRestaurants }
+  { fetchRestaurants, fetchUsers }
 )(RestaurantsPage);
