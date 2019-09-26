@@ -1,6 +1,8 @@
+import { replace } from "connected-react-router";
 import {
   ADD_REVIEW,
   DECREMENT,
+  ERROR,
   FETCH_PRODUCTS,
   FETCH_RESTAURANTS,
   FETCH_REVIEWS,
@@ -68,18 +70,33 @@ export const fetchReviews = restaurantId => async (dispatch, getState) => {
 
   const reviewsRequest = fetch(`/api/reviews?id=${restaurantId}`);
 
-  if (!usersLoaded) {
+  try {
+    if (!usersLoaded) {
+      dispatch({
+        type: FETCH_USERS + START
+      });
+
+      const usersResponse = await fetch("/api/user");
+      if (!usersResponse.ok) throw new Error();
+
+      const users = await usersResponse.json();
+
+      dispatch({
+        type: FETCH_USERS + SUCCESS,
+        payload: { users }
+      });
+    }
+  } catch (e) {
     dispatch({
-      type: FETCH_USERS + START
+      type: FETCH_USERS + ERROR
     });
 
-    const usersResponse = await fetch("/api/users");
-    const users = await usersResponse.json();
-
     dispatch({
-      type: FETCH_USERS + SUCCESS,
-      payload: { users }
+      type: FETCH_REVIEWS + ERROR,
+      payload: { restaurantId }
     });
+
+    dispatch(replace("/error"));
   }
 
   const response = await reviewsRequest;
