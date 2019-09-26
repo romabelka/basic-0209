@@ -2,6 +2,7 @@ import Button from "antd/es/button";
 import cx from "classnames";
 import React from "react";
 import { Typography } from "antd";
+import { Link } from "react-router-dom";
 
 import styles from "./basket.module.css";
 import BasketRow from "./basket-row";
@@ -27,9 +28,11 @@ function Basket({ title = "Basket", className, total, orderProducts }) {
       <BasketRow leftContent="Sub-total" rightContent={`${total} $`} />
       <BasketRow leftContent="Delivery costs" rightContent="FREE" />
       <BasketRow leftContent="Total" rightContent={`${total} $`} />
-      <Button type="primary" size="large" block>
-        order
-      </Button>
+      <Link to="/checkout">
+        <Button type="primary" size="large" block>
+          order
+        </Button>
+      </Link>
     </div>
   );
 }

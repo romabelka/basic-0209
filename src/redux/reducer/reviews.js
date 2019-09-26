@@ -1,7 +1,6 @@
-import { Map, Record } from "immutable";
-import { normalizedReviews } from "../../fixtures";
+import { OrderedMap, Record, Set } from "immutable";
 import { arrToImmutableMap } from "../utils";
-import { ADD_REVIEW } from "../constants";
+import { ADD_REVIEW, FETCH_REVIEWS, START, SUCCESS } from "../constants";
 
 const ReviewRecord = Record({
   id: null,
@@ -10,15 +9,35 @@ const ReviewRecord = Record({
   userId: null
 });
 
-export default (
-  reviews = new Map(arrToImmutableMap(normalizedReviews, ReviewRecord)),
-  { type, payload, id }
-) => {
+const ReducerRecord = Record({
+  entities: new OrderedMap(),
+  loading: new Set(),
+  loaded: new Set(),
+  error: null
+});
+
+export default (state = new ReducerRecord(), { type, payload, id }) => {
   switch (type) {
     case ADD_REVIEW:
-      return reviews.set(id, new ReviewRecord({ ...payload.review, id }));
+      return state.setIn(
+        ["entities", id],
+        new ReviewRecord({ ...payload.review, id })
+      );
+
+    case FETCH_REVIEWS + START:
+      return state.update("loading", loading =>
+        loading.add(payload.restaurantId)
+      );
+
+    case FETCH_REVIEWS + SUCCESS:
+      return state
+        .update("loading", loading => loading.remove(payload.restaurantId))
+        .update("loaded", loading => loading.add(payload.restaurantId))
+        .update("entities", entities =>
+          entities.merge(arrToImmutableMap(payload.reviews, ReviewRecord))
+        );
 
     default:
-      return reviews;
+      return state;
   }
 };
