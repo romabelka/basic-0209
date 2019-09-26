@@ -13,7 +13,7 @@ function Content({ restaurants, loading, fetchRestaurants, match, history }) {
   return (
     <Tabs
       activeKey={match.params.id}
-      onTabClick={id => history.push(`/restaurants/${id}`)}
+      onTabClick={id => history.push(`/restaurants/${id}/menu`)}
       tabPosition="top"
       animated={false}
       className={styles.contentTabs}
