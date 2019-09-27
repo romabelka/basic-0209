@@ -22,7 +22,10 @@ export const reviewsLoadingSelector = (state, props) =>
 export const reviewsLoadedSelector = (state, props) =>
   state.reviews.loaded.has(props.restaurant.id);
 
-export const userSelector = (state, props) => state.users[props.id];
+export const userSelector = (state, props) =>
+  state.users.getIn(["entities", props.id]);
+export const usersLoadingSelector = state => state.users.loading;
+export const usersLoadedSelector = state => state.users.loaded;
 
 export const reviewSelector = (state, props) => {
   const review = state.reviews.getIn(["entities", props.id]).toJS();
@@ -35,14 +38,18 @@ export const reviewSelector = (state, props) => {
 
 export const orderedProductsSelector = createSelector(
   productsSelector,
+  restaurantsListSelector,
   orderSelector,
-  (products, order) => {
+  (products, restaurants, order) => {
     return order
       .keySeq()
       .filter(productId => order.get(productId) > 0)
       .map(productId => products.get(productId))
       .map(product => ({
         product,
+        restaurant: restaurants.find(restaurant =>
+          restaurant.menu.includes(product.id)
+        ),
         amount: order.get(product.id)
       }));
   }

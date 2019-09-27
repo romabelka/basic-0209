@@ -9,6 +9,8 @@ export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 
 export const FETCH_REVIEWS = "FETCH_REVIEWS";
 
+export const FETCH_USERS = "FETCH_USERS";
+
 export const START = "_START";
 export const SUCCESS = "_SUCCESS";
 export const ERROR = "_ERROR";
