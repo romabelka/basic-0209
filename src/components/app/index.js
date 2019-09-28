@@ -7,7 +7,7 @@ import { Route, Switch } from "react-router-dom";
 import RestaurantsPage from "../pages/restaurants";
 import { Provider as UserProvider } from "../../contexts/user-context";
 import { Provider as LanguageProvider } from "../../contexts/language-context";
-import { localization } from "../../localization/localization";
+import { localization } from "../../contexts/localization/localization";
 import { Consumer as LanguageConsumer } from "../../contexts/language-context";
 
 function App() {
