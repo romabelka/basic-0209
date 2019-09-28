@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-const language = createContext();
+const context = createContext("english");
 
-export const { Consumer, Provider } = language;
-export default language;
+export const { Consumer, Provider } = context;
+export default context;
