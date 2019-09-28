@@ -9,6 +9,7 @@ import {
 } from "../../../redux/selectors";
 import { fetchRestaurants } from "../../../redux/ac";
 import Loader from "../../loader";
+import { Consumer as LanguageConsumer } from "../../../contexts/language-context";
 
 function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
   useEffect(() => {
@@ -24,9 +25,15 @@ function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
         if (!routeProps.match)
           return (
             <div>
-              <Typography.Title level={1}>
-                Please select a restaurant
-              </Typography.Title>
+              <LanguageConsumer>
+                {({ language }) => {
+                  return (
+                    <Typography.Title level={1}>
+                      {language.SELECT_RESTAURANT}
+                    </Typography.Title>
+                  );
+                }}
+              </LanguageConsumer>
               {restaurants.map(restaurant => (
                 <div key={restaurant.id}>
                   <Link to={`${match.path}/${restaurant.id}/menu`}>

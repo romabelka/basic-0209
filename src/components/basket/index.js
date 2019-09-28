@@ -14,6 +14,7 @@ import {
   totalPriceSelector
 } from "../../redux/selectors";
 import { Consumer as UserConsumer } from "../../contexts/user-context";
+import { Consumer as LanguageConsumer } from "../../contexts/language-context";
 import "./basket.css";
 
 function Basket({ title = "Basket", className, total, orderProducts }) {
@@ -43,15 +44,31 @@ function Basket({ title = "Basket", className, total, orderProducts }) {
         ))}
       </TransitionGroup>
       <hr />
-
-      <BasketRow leftContent="Sub-total" rightContent={`${total} $`} />
-      <BasketRow leftContent="Delivery costs" rightContent="FREE" />
-      <BasketRow leftContent="Total" rightContent={`${total} $`} />
-      <Link to="/checkout">
-        <Button type="primary" size="large" block>
-          order
-        </Button>
-      </Link>
+      <LanguageConsumer>
+        {({ language }) => {
+          return (
+            <>
+              <BasketRow
+                leftContent={language.SUB_TOTAL}
+                rightContent={`${total} $`}
+              />
+              <BasketRow
+                leftContent={language.DELIVERY_COSTS}
+                rightContent={language.FREE}
+              />
+              <BasketRow
+                leftContent={language.TOTAL}
+                rightContent={`${total} $`}
+              />
+              <Link to="/checkout">
+                <Button type="primary" size="large" block>
+                  {language.ORDER}
+                </Button>
+              </Link>
+            </>
+          );
+        }}
+      </LanguageConsumer>
     </div>
   );
 }
