@@ -13,13 +13,16 @@ import {
   orderedProductsSelector,
   totalPriceSelector
 } from "../../redux/selectors";
-import { Consumer as UserConsumer } from "../../contexts/user-context";
+//import { Consumer as UserConsumer } from "../../contexts/user-context";
 import "./basket.css";
+import { Consumer as LocalizationConsumer } from "../../contexts/localization-context";
 
 function Basket({ title = "Basket", className, total, orderProducts }) {
   return (
-    <div className={cx(styles.basket, className)}>
-      <UserConsumer>
+    <LocalizationConsumer>
+      {({ translate }) => (
+        <div className={cx(styles.basket, className)}>
+          {/* <UserConsumer>
         {({ name, setName }) => (
           <Typography.Title
             level={4}
@@ -29,30 +32,48 @@ function Basket({ title = "Basket", className, total, orderProducts }) {
             {name}`s order
           </Typography.Title>
         )}
-      </UserConsumer>
-      <TransitionGroup>
-        {orderProducts.map(({ product, amount, restaurant }) => (
-          <CSSTransition timeout={500} classNames="basket-item-animation">
-            <BasketItem
-              product={product}
-              amount={amount}
-              restaurant={restaurant}
-              key={product.id}
-            />
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
-      <hr />
+      </UserConsumer> */}
+          <Typography.Title level={4} className={styles.title}>
+            {translate("basketTitle")}
+          </Typography.Title>
+          <TransitionGroup>
+            {orderProducts.map(({ product, amount, restaurant }) => (
+              <CSSTransition
+                timeout={500}
+                classNames="basket-item-animation"
+                key={product.id}
+              >
+                <BasketItem
+                  product={product}
+                  amount={amount}
+                  restaurant={restaurant}
+                  key={product.id}
+                />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+          <hr />
 
-      <BasketRow leftContent="Sub-total" rightContent={`${total} $`} />
-      <BasketRow leftContent="Delivery costs" rightContent="FREE" />
-      <BasketRow leftContent="Total" rightContent={`${total} $`} />
-      <Link to="/checkout">
-        <Button type="primary" size="large" block>
-          order
-        </Button>
-      </Link>
-    </div>
+          <BasketRow
+            leftContent={translate("subTotal")}
+            rightContent={`${total} $`}
+          />
+          <BasketRow
+            leftContent={translate("delivery")}
+            rightContent={translate("free")}
+          />
+          <BasketRow
+            leftContent={translate("total")}
+            rightContent={`${total} $`}
+          />
+          <Link to="/checkout">
+            <Button type="primary" size="large" block>
+              {translate("orderButton")}
+            </Button>
+          </Link>
+        </div>
+      )}
+    </LocalizationConsumer>
   );
 }
 
