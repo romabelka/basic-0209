@@ -1,10 +1,9 @@
 import Button from "antd/es/button";
 import cx from "classnames";
-import React from "react";
 import { Typography } from "antd";
 import { Link } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-
+import React, { useContext } from "react";
 import styles from "./basket.module.css";
 import BasketRow from "./basket-row";
 import BasketItem from "./basket-item";
@@ -14,9 +13,11 @@ import {
   totalPriceSelector
 } from "../../redux/selectors";
 import { Consumer as UserConsumer } from "../../contexts/user-context";
+import langContext from "../../contexts/lang-context";
 import "./basket.css";
 
 function Basket({ title = "Basket", className, total, orderProducts }) {
+  const { lang } = useContext(langContext);
   return (
     <div className={cx(styles.basket, className)}>
       <UserConsumer>
@@ -24,7 +25,10 @@ function Basket({ title = "Basket", className, total, orderProducts }) {
           <Typography.Title
             level={4}
             className={styles.title}
-            onClick={() => setName("hohoho")}
+            onClick={() => {
+              setName("hohoho");
+              console.log(name);
+            }}
           >
             {name}`s order
           </Typography.Title>
@@ -44,12 +48,12 @@ function Basket({ title = "Basket", className, total, orderProducts }) {
       </TransitionGroup>
       <hr />
 
-      <BasketRow leftContent="Sub-total" rightContent={`${total} $`} />
-      <BasketRow leftContent="Delivery costs" rightContent="FREE" />
-      <BasketRow leftContent="Total" rightContent={`${total} $`} />
+      <BasketRow leftContent={lang.sub_total} rightContent={`${total} $`} />
+      <BasketRow leftContent={lang.delivery_costs} rightContent="FREE" />
+      <BasketRow leftContent={lang.total} rightContent={`${total} $`} />
       <Link to="/checkout">
         <Button type="primary" size="large" block>
-          order
+          {lang.order}
         </Button>
       </Link>
     </div>
