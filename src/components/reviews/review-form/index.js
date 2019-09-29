@@ -7,10 +7,12 @@ import Rate from "../../rate";
 import styles from "./review-form.module.css";
 import { connect } from "react-redux";
 import { addReview } from "../../../redux/ac";
+import useTranslate from "../../../hooks/use-translate";
 
 const AddReview = ({ onSubmit }) => {
   const [rate, setRate] = useState();
   const [text, setText, isValidText] = useInput();
+  const t = useTranslate();
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -22,7 +24,7 @@ const AddReview = ({ onSubmit }) => {
       <Row type="flex" align="middle">
         <Col xs={24} md={18} align="left">
           <Typography.Title className={styles.addReviewTitle} level={4}>
-            Leave your review
+            {t("Leave your review")}
           </Typography.Title>
           <Form onSubmit={handleSubmit} data-id="review-form">
             <Form.Item>
@@ -39,7 +41,7 @@ const AddReview = ({ onSubmit }) => {
               />
             </Form.Item>
             <div>
-              Rating:{" "}
+              {t("Rating")}:{" "}
               <Rate
                 value={rate}
                 onChange={setRate}
@@ -47,7 +49,7 @@ const AddReview = ({ onSubmit }) => {
               />
             </div>
             <Button htmlType="submit" className={styles.submitButton}>
-              PUBLISH REVIEW
+              {t("PUBLISH REVIEW")}
             </Button>
           </Form>
         </Col>

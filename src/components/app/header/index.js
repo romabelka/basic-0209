@@ -7,14 +7,14 @@ import userContext from "../../../contexts/user-context";
 import { Typography, Row, Col } from "antd";
 import LangSelect from "./lang-select";
 
-function Header(props) {
+function Header() {
   const { name } = useContext(userContext);
 
   return (
     <header className={styles.header}>
       <Row type="flex">
         <Col span={4} align="left">
-          <LangSelect {...props} />
+          <LangSelect />
         </Col>
         <Col span={20}>
           <Link to="/restaurants">

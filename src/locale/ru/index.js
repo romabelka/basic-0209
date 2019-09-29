@@ -5,5 +5,8 @@ export default {
   "Sub-total": "Итого",
   "Delivery costs": "Доставка",
   Total: "К оплате",
-  "Please select a restaurant": "Выберите ресторан"
+  "Please select a restaurant": "Выберите ресторан",
+  "Leave your review": "Оставьте отзыв",
+  Rating: "Рейтинг",
+  "PUBLISH REVIEW": "ОПУБЛИКОВАТЬ"
 };
