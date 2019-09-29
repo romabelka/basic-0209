@@ -1,6 +1,6 @@
 import { OrderedMap, Record, Set } from "immutable";
 import { arrToImmutableMap } from "../utils";
-import { ADD_REVIEW, FETCH_REVIEWS, START, SUCCESS } from "../constants";
+import { ADD_REVIEW, ERROR, FETCH_REVIEWS, START, SUCCESS } from "../constants";
 
 const ReviewRecord = Record({
   id: null,
@@ -36,6 +36,9 @@ export default (state = new ReducerRecord(), { type, payload, id }) => {
         .update("entities", entities =>
           entities.merge(arrToImmutableMap(payload.reviews, ReviewRecord))
         );
+
+    case FETCH_REVIEWS + ERROR:
+      return new ReducerRecord({});
 
     default:
       return state;
