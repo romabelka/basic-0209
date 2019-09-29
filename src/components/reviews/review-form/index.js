@@ -7,6 +7,7 @@ import Rate from "../../rate";
 import styles from "./review-form.module.css";
 import { connect } from "react-redux";
 import { addReview } from "../../../redux/ac";
+import { Consumer as LocalizationConsumer } from "../../../contexts/localization-context";
 
 const AddReview = ({ onSubmit }) => {
   const [rate, setRate] = useState();
@@ -18,41 +19,45 @@ const AddReview = ({ onSubmit }) => {
   };
 
   return (
-    <Card className={styles.reviewForm}>
-      <Row type="flex" align="middle">
-        <Col xs={24} md={18} align="left">
-          <Typography.Title className={styles.addReviewTitle} level={4}>
-            Leave your review
-          </Typography.Title>
-          <Form onSubmit={handleSubmit} data-id="review-form">
-            <Form.Item>
-              <Input.TextArea
-                rows={3}
-                value={text}
-                onChange={setText}
-                size="large"
-                className={{
-                  [styles.invalid]: !isValidText
-                }}
-                autosize={{ minRows: 3, maxRows: 6 }}
-                data-id="review-form-text"
-              />
-            </Form.Item>
-            <div>
-              Rating:{" "}
-              <Rate
-                value={rate}
-                onChange={setRate}
-                data-id="review-form-rate"
-              />
-            </div>
-            <Button htmlType="submit" className={styles.submitButton}>
-              PUBLISH REVIEW
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Card>
+    <LocalizationConsumer>
+      {({ translate }) => (
+        <Card className={styles.reviewForm}>
+          <Row type="flex" align="middle">
+            <Col xs={24} md={18} align="left">
+              <Typography.Title className={styles.addReviewTitle} level={4}>
+                {translate("leaveReview")}
+              </Typography.Title>
+              <Form onSubmit={handleSubmit} data-id="review-form">
+                <Form.Item>
+                  <Input.TextArea
+                    rows={3}
+                    value={text}
+                    onChange={setText}
+                    size="large"
+                    className={{
+                      [styles.invalid]: !isValidText
+                    }}
+                    autosize={{ minRows: 3, maxRows: 6 }}
+                    data-id="review-form-text"
+                  />
+                </Form.Item>
+                <div>
+                  {translate("rating")}:{" "}
+                  <Rate
+                    value={rate}
+                    onChange={setRate}
+                    data-id="review-form-rate"
+                  />
+                </div>
+                <Button htmlType="submit" className={styles.submitButton}>
+                  {translate("publishReview")}
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Card>
+      )}
+    </LocalizationConsumer>
   );
 };
 

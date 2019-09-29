@@ -1,4 +1,4 @@
-import { Card, Col, Row, Typography } from "antd";
+import { Col, Row, Typography } from "antd";
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { reviewSelector } from "../../../redux/selectors";
 
 const Review = ({ review: { user = "Anonymous", text, rating } }) => (
-  <Card className={styles.review}>
+  <Typography.Paragraph className={styles.review}>
     <Row type="flex" align="middle">
       <Col xs={24} md={18} align="left">
         <Typography.Title
@@ -26,7 +26,7 @@ const Review = ({ review: { user = "Anonymous", text, rating } }) => (
         <Rate disabled value={rating} />
       </Col>
     </Row>
-  </Card>
+  </Typography.Paragraph>
 );
 
 Review.propTypes = {

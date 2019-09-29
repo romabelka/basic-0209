@@ -4,7 +4,8 @@ import Logo from "./logo";
 import styles from "./header.module.css";
 import { Link } from "react-router-dom";
 import userContext from "../../../contexts/user-context";
-import { Typography } from "antd";
+import { Consumer as LocalizationConsumer } from "../../../contexts/localization-context";
+import { Typography, Button } from "antd";
 
 function Header() {
   const { name } = useContext(userContext);
@@ -15,6 +16,13 @@ function Header() {
         <Logo />
       </Link>
       <Typography.Text>Hello: {name}</Typography.Text>
+      <LocalizationConsumer>
+        {({ lang, toggleLang }) => (
+          <Button onClick={() => toggleLang()}>
+            {lang === "en" ? "ru" : "en"}
+          </Button>
+        )}
+      </LocalizationConsumer>
     </header>
   );
 }
