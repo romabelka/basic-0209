@@ -1,0 +1,66 @@
+{
+  "error_page": {
+    "en": "Error Page",
+    "ru": "Страница ошибки"
+  },
+  "signin_page": {
+    "en": "Sign In Page",
+    "ru": "Страница авторизации"
+  },
+  "notfound_page": {
+    "en": "Not Found Page",
+    "ru": "Страница не найдена"
+  },
+
+  "select_restaurant": {
+    "en": "Please select a restaurant",
+    "ru": "Выберите ресторан"
+  },
+
+  "menu": {
+    "en": "Menu",
+    "ru": "Меню"
+  },
+  "reviews": {
+    "en": "Reviews",
+    "ru": "Ревью"
+  },
+
+  "names_order": {
+    "en": "{name}`s order",
+    "ru": "Заказ для {name}"
+  },
+  "subtotal": {
+    "en": "Sub-total",
+    "ru": "Подитог"
+  },
+  "delivery_costs": {
+    "en": "Delivery costs",
+    "ru": "Доставка"
+  },
+  "free": {
+    "en": "FREE",
+    "ru": "БЕСПЛАТНО"
+  },
+  "total": {
+    "en": "Total",
+    "ru": "Итог"
+  },
+  "do_order": {
+    "en": "order",
+    "ru": "заказать"
+  },
+
+  "leave_your_review": {
+    "en": "Leave your review",
+    "ru": "Оставьте ваш отзыв"
+  },
+  "rating": {
+    "en": "Rating",
+    "ru": "Оценка"
+  },
+  "do_publish_review": {
+    "en": "PUBLISH REVIEW",
+    "ru": "ОПРАВИТЬ"
+  }
+}

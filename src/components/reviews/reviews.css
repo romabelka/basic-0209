@@ -1,0 +1,8 @@
+.review-list-item-animation-enter {
+  opacity: 0;
+}
+
+.review-list-item-animation-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
