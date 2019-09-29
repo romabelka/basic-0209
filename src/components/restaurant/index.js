@@ -6,8 +6,10 @@ import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 import { Col, Row, Tabs } from "antd";
 import { Route, Redirect, Switch } from "react-router-dom";
+import useTranslate from "../../hooks/use-translate";
 
 function Restaurant({ restaurant }) {
+  const t = useTranslate();
   return (
     <>
       <Hero heading={restaurant.name} />
@@ -27,7 +29,11 @@ function Restaurant({ restaurant }) {
               animated={false}
               className={styles.contentTabs}
             >
-              <Tabs.TabPane tab="Menu" key="menu" className={styles.tabPane}>
+              <Tabs.TabPane
+                tab={t("menuTabTitle")}
+                key="menu"
+                className={styles.tabPane}
+              >
                 <Row type="flex" justify="center">
                   <Col span={24}>
                     <Menu restaurant={restaurant} />
@@ -35,7 +41,7 @@ function Restaurant({ restaurant }) {
                 </Row>
               </Tabs.TabPane>
               <Tabs.TabPane
-                tab="Reviews"
+                tab={t("reviewsTabTitle")}
                 key="reviews"
                 className={styles.tabPane}
               >
