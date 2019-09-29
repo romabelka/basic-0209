@@ -9,6 +9,8 @@ import {
   reviewsLoadingSelector
 } from "../../redux/selectors";
 import Loader from "../loader";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "./reviews.css";
 
 function Reviews({ restaurant, loading, loaded, fetchReviews }) {
   useEffect(() => {
@@ -20,9 +22,17 @@ function Reviews({ restaurant, loading, loaded, fetchReviews }) {
   return (
     <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
       <Col xs={24} md={16}>
-        {restaurant.reviews.map(id => (
-          <Review id={id} key={id} data-id="review-list-item" />
-        ))}
+        <TransitionGroup>
+          {restaurant.reviews.map(id => (
+            <CSSTransition
+              key={id}
+              timeout={500}
+              classNames="review-item-animation"
+            >
+              <Review id={id} data-id="review-list-item" />
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
         <ReviewForm restaurantId={restaurant.id} />
       </Col>
     </Row>

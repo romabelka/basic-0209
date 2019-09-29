@@ -1,5 +1,5 @@
 import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import useInput from "../../../hooks/use-input";
 
@@ -7,10 +7,13 @@ import Rate from "../../rate";
 import styles from "./review-form.module.css";
 import { connect } from "react-redux";
 import { addReview } from "../../../redux/ac";
+import langContext from "../../../contexts/language-context";
+import texts from "../../../text-constants";
 
 const AddReview = ({ onSubmit }) => {
   const [rate, setRate] = useState();
   const [text, setText, isValidText] = useInput();
+  const { lang } = useContext(langContext);
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -22,7 +25,7 @@ const AddReview = ({ onSubmit }) => {
       <Row type="flex" align="middle">
         <Col xs={24} md={18} align="left">
           <Typography.Title className={styles.addReviewTitle} level={4}>
-            Leave your review
+            {texts[lang].LEAVE_REVIEW}
           </Typography.Title>
           <Form onSubmit={handleSubmit} data-id="review-form">
             <Form.Item>
@@ -39,7 +42,7 @@ const AddReview = ({ onSubmit }) => {
               />
             </Form.Item>
             <div>
-              Rating:{" "}
+              {texts[lang].RATING}:{" "}
               <Rate
                 value={rate}
                 onChange={setRate}
@@ -47,7 +50,7 @@ const AddReview = ({ onSubmit }) => {
               />
             </div>
             <Button htmlType="submit" className={styles.submitButton}>
-              PUBLISH REVIEW
+              {texts[lang].PUBLISH_REVIEW}
             </Button>
           </Form>
         </Col>
