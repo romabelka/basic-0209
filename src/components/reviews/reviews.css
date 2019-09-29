@@ -1,0 +1,16 @@
+.review-animation-enter {
+  transform: translateY(4000px);
+  transition: transform 300ms;
+}
+.review-animation-enter-active {
+  transform: translateY(4000px);
+  transition: transform 300ms;
+}
+.review-animation-exit {
+  transform: translateY(0);
+  transition: transform 300ms;
+}
+.review-animation-exit-active {
+  transform: translateY(0px);
+  transition: transform 300ms;
+}

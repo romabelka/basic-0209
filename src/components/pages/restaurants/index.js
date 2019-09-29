@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
 import Content from "../../content";
 import { Typography } from "antd";
@@ -9,11 +9,14 @@ import {
 } from "../../../redux/selectors";
 import { fetchRestaurants } from "../../../redux/ac";
 import Loader from "../../loader";
+import langContext from "../../../contexts/lang-context";
 
 function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
   useEffect(() => {
     fetchRestaurants();
   }, [fetchRestaurants]);
+
+  const { lang } = useContext(langContext);
 
   if (loading) return <Loader />;
 
@@ -25,7 +28,7 @@ function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
           return (
             <div>
               <Typography.Title level={1}>
-                Please select a restaurant
+                {lang.select_restaurant}
               </Typography.Title>
               {restaurants.map(restaurant => (
                 <div key={restaurant.id}>
