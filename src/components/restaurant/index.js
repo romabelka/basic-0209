@@ -6,6 +6,7 @@ import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 import { Col, Row, Tabs } from "antd";
 import { Route, Redirect, Switch } from "react-router-dom";
+import { Consumer as LangConsumer } from "../../contexts/lang/lang-context";
 
 function Restaurant({ restaurant }) {
   return (
@@ -20,32 +21,40 @@ function Restaurant({ restaurant }) {
             },
             history
           }) => (
-            <Tabs
-              activeKey={tab}
-              onTabClick={tab => history.push(`/restaurants/${id}/${tab}`)}
-              tabPosition="top"
-              animated={false}
-              className={styles.contentTabs}
-            >
-              <Tabs.TabPane tab="Menu" key="menu" className={styles.tabPane}>
-                <Row type="flex" justify="center">
-                  <Col span={24}>
-                    <Menu restaurant={restaurant} />
-                  </Col>
-                </Row>
-              </Tabs.TabPane>
-              <Tabs.TabPane
-                tab="Reviews"
-                key="reviews"
-                className={styles.tabPane}
-              >
-                <Row type="flex" justify="center">
-                  <Col span={24}>
-                    <Reviews restaurant={restaurant} />
-                  </Col>
-                </Row>
-              </Tabs.TabPane>
-            </Tabs>
+            <LangConsumer>
+              {({ getPhrase }) => (
+                <Tabs
+                  activeKey={tab}
+                  onTabClick={tab => history.push(`/restaurants/${id}/${tab}`)}
+                  tabPosition="top"
+                  animated={false}
+                  className={styles.contentTabs}
+                >
+                  <Tabs.TabPane
+                    tab="Menu"
+                    key="menu"
+                    className={styles.tabPane}
+                  >
+                    <Row type="flex" justify="center">
+                      <Col span={24}>
+                        <Menu restaurant={restaurant} />
+                      </Col>
+                    </Row>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane
+                    tab={getPhrase("reviews")}
+                    key="reviews"
+                    className={styles.tabPane}
+                  >
+                    <Row type="flex" justify="center">
+                      <Col span={24}>
+                        <Reviews restaurant={restaurant} />
+                      </Col>
+                    </Row>
+                  </Tabs.TabPane>
+                </Tabs>
+              )}
+            </LangConsumer>
           )}
         />
         <Redirect
