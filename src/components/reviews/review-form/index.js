@@ -1,5 +1,6 @@
 import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import langContext from "../../../contexts/lang-context";
 import PropTypes from "prop-types";
 import useInput from "../../../hooks/use-input";
 
@@ -11,6 +12,7 @@ import { addReview } from "../../../redux/ac";
 const AddReview = ({ onSubmit }) => {
   const [rate, setRate] = useState();
   const [text, setText, isValidText] = useInput();
+  const { t } = useContext(langContext);
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -47,7 +49,7 @@ const AddReview = ({ onSubmit }) => {
               />
             </div>
             <Button htmlType="submit" className={styles.submitButton}>
-              PUBLISH REVIEW
+              {t("PUBLISH_REVIEW")}
             </Button>
           </Form>
         </Col>

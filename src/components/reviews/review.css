@@ -1,0 +1,14 @@
+.review-item-animation-enter {
+  opacity: 0;
+}
+.review-item-animation-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.review-item-animation-exit {
+  opacity: 1;
+}
+.review-item-animation-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
