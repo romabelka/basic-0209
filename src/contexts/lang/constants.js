@@ -6,9 +6,6 @@ export const dictionary = {
 };
 
 export const getPhrase = lang => phrase => {
-  console.log("--->", lang, phrase);
-  console.log(dictionary);
-
   if (dictionary[phrase] && dictionary[phrase][lang]) {
     return dictionary[phrase][lang];
   } else return phrase;
