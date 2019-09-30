@@ -1,0 +1,17 @@
+.reviews-item-animation-enter {
+  opacity: 0;
+}
+
+.reviews-item-animation-enter-active {
+  opacity: 1;
+  transition: all 5000ms ease !important;
+}
+
+.reviews-item-animation-appear {
+  opacity: 0;
+}
+
+.reviews-item-animation-appear-active {
+  opacity: 1;
+  transition: all 5000ms ease !important;
+}

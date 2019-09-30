@@ -9,11 +9,13 @@ import {
 } from "../../../redux/selectors";
 import { fetchRestaurants } from "../../../redux/ac";
 import Loader from "../../loader";
+import useTranslate from "../../../hooks/use-translate";
 
 function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
   useEffect(() => {
     fetchRestaurants();
   }, [fetchRestaurants]);
+  const t = useTranslate();
 
   if (loading) return <Loader />;
 
@@ -25,7 +27,7 @@ function RestaurantsPage({ match, fetchRestaurants, restaurants, loading }) {
           return (
             <div>
               <Typography.Title level={1}>
-                Please select a restaurant
+                {t("Please select a restaurant")}
               </Typography.Title>
               {restaurants.map(restaurant => (
                 <div key={restaurant.id}>
