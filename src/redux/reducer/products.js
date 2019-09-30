@@ -17,23 +17,20 @@ const ReducerRecord = Record({
 });
 
 export default (state = new ReducerRecord(), action) => {
-  const { type, payload } = action;
+  //  return actionHandlers[action.type]?.(state, action) || state
+  return actionHandlers[action.type]
+    ? actionHandlers[action.type](state, action)
+    : state;
+};
 
-  switch (type) {
-    case FETCH_PRODUCTS + START:
-      return state.update("loading", loading =>
-        loading.add(payload.restaurantId)
-      );
-
-    case FETCH_PRODUCTS + SUCCESS:
-      return state
-        .update("loading", loading => loading.remove(payload.restaurantId))
-        .update("loaded", loading => loading.add(payload.restaurantId))
-        .update("entities", entities =>
-          entities.merge(arrToImmutableMap(payload.products, ProductRecord))
-        );
-
-    default:
-      return state;
-  }
+const actionHandlers = {
+  [FETCH_PRODUCTS + START]: (state, { payload }) =>
+    state.update("loading", loading => loading.add(payload.restaurantId)),
+  [FETCH_PRODUCTS + SUCCESS]: (state, { payload }) =>
+    state
+      .update("loading", loading => loading.remove(payload.restaurantId))
+      .update("loaded", loading => loading.add(payload.restaurantId))
+      .update("entities", entities =>
+        entities.merge(arrToImmutableMap(payload.products, ProductRecord))
+      )
 };
