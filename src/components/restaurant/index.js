@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import langContext from "../../contexts/lang-context";
 import Reviews from "../reviews";
 import Menu from "../menu";
 import PropTypes from "prop-types";
@@ -8,6 +9,7 @@ import { Col, Row, Tabs } from "antd";
 import { Route, Redirect, Switch } from "react-router-dom";
 
 function Restaurant({ restaurant }) {
+  const { t } = useContext(langContext);
   return (
     <>
       <Hero heading={restaurant.name} />
@@ -27,7 +29,11 @@ function Restaurant({ restaurant }) {
               animated={false}
               className={styles.contentTabs}
             >
-              <Tabs.TabPane tab="Menu" key="menu" className={styles.tabPane}>
+              <Tabs.TabPane
+                tab={t("MENU")}
+                key="menu"
+                className={styles.tabPane}
+              >
                 <Row type="flex" justify="center">
                   <Col span={24}>
                     <Menu restaurant={restaurant} />
@@ -35,7 +41,7 @@ function Restaurant({ restaurant }) {
                 </Row>
               </Tabs.TabPane>
               <Tabs.TabPane
-                tab="Reviews"
+                tab={t("REVIEWS")}
                 key="reviews"
                 className={styles.tabPane}
               >
