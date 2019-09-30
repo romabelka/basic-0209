@@ -1,0 +1,18 @@
+{
+  "en": {
+    "select_restaurant": "Please select a restaurant",
+    "not_found_page": "Not Found Page",
+    "error_page": "Error Page",
+    "sign_in_page": "Sign In Page",
+    "change_language": "switch to russian",
+    "order_btn": "order"
+  },
+  "ru": {
+    "select_restaurant": "Пожалуйста, выберите ресторан",
+    "not_found_page": "Страница не найдена",
+    "error_page": "Ошибка",
+    "sign_in_page": "Страница входа",
+    "change_language": "ангийская версия",
+    "order_btn": "заказать"
+  }
+}

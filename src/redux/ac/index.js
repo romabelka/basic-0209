@@ -15,8 +15,7 @@ import {
   restaurantSelector,
   reviewsLoadedSelector,
   reviewsLoadingSelector,
-  usersLoadedSelector,
-  usersLoadingSelector
+  usersLoadedSelector
 } from "../selectors";
 
 export const increment = id => ({

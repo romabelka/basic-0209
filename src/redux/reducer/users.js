@@ -1,7 +1,6 @@
-import { normalizedUsers } from "../../fixtures";
 import { arrToImmutableMap } from "../utils";
 import { OrderedMap, Record } from "immutable";
-import { FETCH_REVIEWS, FETCH_USERS, START, SUCCESS } from "../constants";
+import { FETCH_USERS, START, SUCCESS } from "../constants";
 
 const UserRecord = Record({
   id: null,

@@ -6,11 +6,14 @@ import "./index.css";
 import store from "./redux/store";
 import App from "./components/app";
 import history from "./history";
+import { LanguageProvider } from "./contexts/i18n-context";
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <LanguageProvider>
+        <App />
+      </LanguageProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
