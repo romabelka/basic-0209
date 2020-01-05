@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, Row, Col } from "antd";
+import { Row, Col, Tabs } from "antd";
 import Restaurant from "../restaurant";
 import { connect } from "react-redux";
 import {

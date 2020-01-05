@@ -1,3 +1,9 @@
+# How to start a project
+
+run `npm install && cd simple_api && npm install && cd ..`
+
+Then you can run `npm start` to lunch the app. It will be available on `localhost:3000`
+
 # HT1
 
 ## HT1.1 Добавить отображение списка отзывов

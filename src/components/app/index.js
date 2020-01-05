@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import Header from "./header";
 import Basket from "../basket";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import RestaurantsPage from "../pages/restaurants";
 import { Provider as UserProvider } from "../../contexts/user-context";
 import i18n from "../../contexts/i18n-context";
@@ -37,6 +37,7 @@ function App() {
                 </Typography.Title>
               )}
             />
+            <Redirect from="/" exact to="/restaurants" />
             <Route
               path="/"
               render={() => (
