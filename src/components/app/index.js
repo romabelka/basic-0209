@@ -37,7 +37,11 @@ function App() {
                 </Typography.Title>
               )}
             />
-            <Redirect from="/" exact to="/restaurants" />
+            <Redirect
+              from="/"
+              exact
+              to="/restaurants/a757a0e9-03c1-4a2a-b384-8ac21dbe2fb2/menu"
+            />
             <Route
               path="/"
               render={() => (
