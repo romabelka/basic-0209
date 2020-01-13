@@ -14,11 +14,23 @@ import {
 } from "../../redux/selectors";
 import "./basket.css";
 import i18n from "../../contexts/i18n-context";
+import { Typography } from "antd";
 
 function Basket({ title = "Basket", className, total, orderProducts }) {
   const { t } = useContext(i18n);
+  if (!total) {
+    return (
+      <div className={cx(styles.basket, className)}>
+        <Typography.Title level={4} style={{ paddingTop: 20 }}>
+          Select a meal from the list
+        </Typography.Title>
+      </div>
+    );
+  }
+
   return (
     <div className={cx(styles.basket, className)}>
+      <Typography.Title level={4}>Basket</Typography.Title>
       <TransitionGroup>
         {orderProducts.map(({ product, amount, restaurant }) => (
           <CSSTransition timeout={500} classNames="basket-item-animation">

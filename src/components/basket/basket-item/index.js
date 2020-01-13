@@ -30,6 +30,9 @@ function BasketItem({ product, amount, restaurant, increment, decrement }) {
             icon="plus"
             onClick={() => increment(product.id)}
           />
+          <Typography.Text className={styles.count}>
+            ${product.price * amount}
+          </Typography.Text>
         </div>
       </Col>
     </Row>
