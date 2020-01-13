@@ -1,43 +1,25 @@
 import React from "react";
-import { Row, Col, Tabs } from "antd";
+import { Row, Col } from "antd";
 import Restaurant from "../restaurant";
 import { connect } from "react-redux";
-import {
-  restaurantsListSelector,
-  restaurantsLoading
-} from "../../redux/selectors";
+import { restaurantSelector, restaurantsLoading } from "../../redux/selectors";
 import { fetchRestaurants } from "../../redux/ac";
-import styles from "./content.module.css";
+import Loader from "../loader";
 
-function Content({ restaurants, loading, fetchRestaurants, match, history }) {
+function Content({ restaurant, loading }) {
+  if (loading || !restaurant) return <Loader />;
   return (
-    <Tabs
-      activeKey={match.params.id}
-      onTabClick={id => history.push(`/restaurants/${id}/menu`)}
-      tabPosition="top"
-      animated={false}
-      className={styles.contentTabs}
-    >
-      {restaurants.map(restaurant => (
-        <Tabs.TabPane
-          tab={restaurant.name}
-          key={restaurant.id}
-          className={styles.tabPane}
-        >
-          <Row type="flex" justify="center">
-            <Col span={24}>
-              <Restaurant restaurant={restaurant} />
-            </Col>
-          </Row>
-        </Tabs.TabPane>
-      ))}
-    </Tabs>
+    <Row type="flex" justify="center">
+      <Col span={24}>
+        <Restaurant restaurant={restaurant} />
+      </Col>
+    </Row>
   );
 }
 
 export default connect(
-  state => ({
-    restaurants: restaurantsListSelector(state),
+  (state, ownProps) => ({
+    restaurant: restaurantSelector(state, ownProps.match.params),
     loading: restaurantsLoading(state)
   }),
   { fetchRestaurants }

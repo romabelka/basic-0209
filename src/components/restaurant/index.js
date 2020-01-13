@@ -6,11 +6,23 @@ import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 import { Col, Row, Tabs } from "antd";
 import { Route, Redirect, Switch } from "react-router-dom";
+import RateComponent from "../../components/rate";
 
 function Restaurant({ restaurant }) {
+  console.log("---", restaurant.averageRating);
   return (
     <>
-      <Hero heading={restaurant.name} />
+      <Hero
+        heading={restaurant.name}
+        img={restaurant.headerImage}
+        description={restaurant.cuisines.join(", ")}
+      >
+        <RateComponent
+          disabled
+          amount={restaurant.reviews.length}
+          value={restaurant.averageRating}
+        />
+      </Hero>
       <Switch>
         <Route
           path="/restaurants/:id/:tab"

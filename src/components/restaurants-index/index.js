@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Hero from "../app/hero";
 import styles from "./restaurants-index.module.css";
 import { Col, Row, Tabs, Typography } from "antd";
 import RestaurantItem from "./restaurant-item";
@@ -13,11 +12,17 @@ function RestaurantsIndex({ restaurants }) {
 
   return (
     <>
-      <Hero heading="Order food" description="from 100 restaurants">
-        <Typography style={{ color: "white", transform: "translate(0, 60px)" }}>
-          Chose your favourite cuisine:
-        </Typography>
-      </Hero>
+      <div className={styles.header}>
+        <div className={styles.headerCaption}>
+          <Typography.Title>Order Food</Typography.Title>
+          <Typography.Title level={3} style={{ margin: 0 }}>
+            From 175 Restaurants
+          </Typography.Title>
+          <Typography style={{ transform: "translate(0,40px)" }}>
+            Chose your favourite cuisine:
+          </Typography>
+        </div>
+      </div>
       <Tabs
         activeKey={activeTab}
         onTabClick={setActiveTab}

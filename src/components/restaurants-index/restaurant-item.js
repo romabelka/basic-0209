@@ -20,7 +20,10 @@ function RestaurantItem({ restaurant }) {
                   <p className={styles.description}>
                     {restaurant.cuisines.join(", ")}
                   </p>
-                  <RateComponent amount="27" value={3} />
+                  <RateComponent
+                    amount={restaurant.reviews.length}
+                    value={restaurant.averageRating}
+                  />
                 </div>
               </Col>
             </Row>
