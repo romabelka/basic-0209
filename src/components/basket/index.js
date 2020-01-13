@@ -16,7 +16,13 @@ import "./basket.css";
 import i18n from "../../contexts/i18n-context";
 import { Typography } from "antd";
 
-function Basket({ title = "Basket", className, total, orderProducts }) {
+function Basket({
+  title = "Basket",
+  className,
+  total,
+  orderProducts,
+  hideButton
+}) {
   const { t } = useContext(i18n);
   if (!total) {
     return (
@@ -48,11 +54,13 @@ function Basket({ title = "Basket", className, total, orderProducts }) {
       <BasketRow leftContent="Sub-total" rightContent={`${total} $`} />
       <BasketRow leftContent="Delivery costs" rightContent="FREE" />
       <BasketRow leftContent="Total" rightContent={`${total} $`} />
-      <Link to="/checkout">
-        <Button type="primary" size="large" block>
-          {t("order_btn")}
-        </Button>
-      </Link>
+      {!hideButton && (
+        <Link to="/checkout">
+          <Button type="primary" size="large" block>
+            {t("order_btn")}
+          </Button>
+        </Link>
+      )}
     </div>
   );
 }

@@ -5,7 +5,7 @@
     "error_page": "Error Page",
     "sign_in_page": "Sign In Page",
     "change_language": "switch to russian",
-    "order_btn": "order"
+    "order_btn": "checkout"
   },
   "ru": {
     "select_restaurant": "Пожалуйста, выберите ресторан",
@@ -13,6 +13,6 @@
     "error_page": "Ошибка",
     "sign_in_page": "Страница входа",
     "change_language": "ангийская версия",
-    "order_btn": "заказать"
+    "order_btn": "в корзину"
   }
 }
