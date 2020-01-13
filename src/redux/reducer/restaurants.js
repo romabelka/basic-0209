@@ -12,7 +12,8 @@ const RestaurantRecord = Record({
   id: null,
   name: "",
   reviews: [],
-  menu: []
+  menu: [],
+  cuisines: []
 });
 
 const ReducerRecord = Record({

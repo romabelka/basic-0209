@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  min-height: 140px;
+  min-height: 240px;
 }
 
 .heroImg {
@@ -17,6 +17,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background-color: #ffd25d;
 }
 
 .heading {

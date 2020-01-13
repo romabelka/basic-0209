@@ -1,13 +1,12 @@
 import React from "react";
 
-import DefaultHeroImg from "./hero-banner.jpg";
 import styles from "./hero.module.css";
 import { Typography } from "antd";
 
-function Hero({ img = DefaultHeroImg, heading, description, children }) {
+function Hero({ img, heading, description, children }) {
   return (
     <div className={styles.hero}>
-      <img src={img} className={styles.heroImg} alt="hero-banner" />
+      {img && <img src={img} className={styles.heroImg} alt="hero-banner" />}
       <div className={styles.heroCaption}>
         <Typography.Title level={2} className={styles.heading}>
           {heading}

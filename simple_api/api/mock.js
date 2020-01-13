@@ -16,7 +16,8 @@ const normalizedRestaurants = [
     reviews: [
       "5909796d-5030-4e36-adec-68b8f9ec2d96",
       "429dea85-11dd-4054-a31e-c60c92e17255"
-    ]
+    ],
+    cuisines: ["pizza", "sushi", "vegan"]
   },
   {
     id: "bb8afbec-2fec-491f-93e9-7f13950dd80b",
@@ -35,7 +36,8 @@ const normalizedRestaurants = [
       "53b642d7-5e86-4717-a466-0640a1dee076",
       "c27ab88e-375c-4e98-aa94-8a180150a797",
       "abc0c5e1-cd57-4f0a-99d9-00e6b4533b3a"
-    ]
+    ],
+    cuisines: ["steak"]
   },
   {
     id: "982bfbce-c5e0-41a0-9f99-d5c20ecee49d",
@@ -50,7 +52,8 @@ const normalizedRestaurants = [
       "64a4967c-2080-4a99-9074-4655a4569a95",
       "4bc8528e-26d1-46c3-a522-8e18d10c8c84"
     ],
-    reviews: ["13b642d7-5e86-4717-a466-0640a1dee076"]
+    reviews: ["13b642d7-5e86-4717-a466-0640a1dee076"],
+    cuisines: ["asian", "sushi", "seafood"]
   },
   {
     id: "d9241927-09e1-44f3-8986-a76346869037",
@@ -68,7 +71,8 @@ const normalizedRestaurants = [
     reviews: [
       "5db6247b-ab1c-49db-be1f-8dd27fd38b81",
       "381b0c31-6360-43ff-80d1-581a116159d8"
-    ]
+    ],
+    cuisines: ["pasta", "pizza"]
   }
 ];
 
