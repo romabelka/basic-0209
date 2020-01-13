@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Hero from "../app/hero";
 import styles from "./restaurants-index.module.css";
 import { Col, Row, Tabs, Typography } from "antd";
-import { Link } from "react-router-dom";
+import RestaurantItem from "./restaurant-item";
 
 function RestaurantsIndex({ restaurants }) {
   const [activeTab, setActiveTab] = useState();
@@ -32,12 +32,10 @@ function RestaurantsIndex({ restaurants }) {
                 {restaurants
                   .filter(restaurant => restaurant.cuisines.includes(cuisine))
                   .map(restaurant => (
-                    <Link
-                      to={`/restaurants/${restaurant.id}`}
+                    <RestaurantItem
+                      restaurant={restaurant}
                       key={restaurant.id}
-                    >
-                      {restaurant.name}
-                    </Link>
+                    />
                   ))}
               </Col>
             </Row>
