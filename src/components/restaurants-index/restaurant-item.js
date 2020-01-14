@@ -23,6 +23,7 @@ function RestaurantItem({ restaurant }) {
                   <RateComponent
                     amount={restaurant.reviews.length}
                     value={restaurant.averageRating}
+                    disabled
                   />
                 </div>
               </Col>
