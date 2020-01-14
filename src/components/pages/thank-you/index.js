@@ -1,8 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Typography } from "antd";
 
-function ThankYouPage(props) {
+function ThankYouPage() {
   return (
     <div>
       <Typography.Title>Thank You Page</Typography.Title>

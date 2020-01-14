@@ -11,6 +11,7 @@ import {
 const RestaurantRecord = Record({
   id: null,
   name: "",
+  logo: null,
   headerImage: null,
   averageRating: null,
   reviews: [],
