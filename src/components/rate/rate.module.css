@@ -1,5 +1,10 @@
 .customRate li {
-  margin-right: 0;
+  margin-right: 0 !important;
+}
+
+.customRateSm,
+.customRateSm li {
+  font-size: 16px !important;
 }
 
 .disabled {
@@ -9,6 +14,6 @@
 @media all and (max-width: 767px) {
   .customRate,
   .customRate li {
-    font-size: 16px;
+    font-size: 16px !important;
   }
 }

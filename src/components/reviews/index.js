@@ -19,7 +19,7 @@ function Reviews({ restaurant, loading, loaded, fetchReviews }) {
 
   return (
     <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
-      <Col xs={24} md={16}>
+      <Col xs={24} md={20} lg={16}>
         {restaurant.reviews.map(id => (
           <Review id={id} key={id} data-id="review-list-item" />
         ))}

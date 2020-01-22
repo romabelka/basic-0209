@@ -5,13 +5,14 @@ import PropTypes from "prop-types";
 
 import styles from "./rate.module.css";
 
-const Rate = ({ amount, value, onChange, disabled = false }) => (
+const Rate = ({ amount, value, onChange, sm = false, disabled = false }) => (
   <>
     <AntRate
       disabled={disabled}
       onChange={onChange}
       value={value}
       className={cx(styles.customRate, {
+        [styles.customRateSm]: sm,
         [styles.disabled]: disabled
       })}
     />

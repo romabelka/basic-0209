@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 import { Col, Row, Tabs } from "antd";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Redirect, Switch, Link } from "react-router-dom";
 import RateComponent from "../../components/rate";
 
 function Restaurant({ restaurant }) {
@@ -18,6 +18,7 @@ function Restaurant({ restaurant }) {
         description={restaurant.cuisines.join(", ")}
       >
         <RateComponent
+          sm
           disabled
           amount={restaurant.reviews.length}
           value={restaurant.averageRating}
@@ -32,32 +33,40 @@ function Restaurant({ restaurant }) {
             },
             history
           }) => (
-            <Tabs
-              activeKey={tab}
-              onTabClick={tab => history.push(`/restaurants/${id}/${tab}`)}
-              tabPosition="top"
-              animated={false}
-              className={styles.contentTabs}
-            >
-              <Tabs.TabPane tab="Menu" key="menu" className={styles.tabPane}>
-                <Row type="flex" justify="center">
-                  <Col span={24}>
-                    <Menu restaurant={restaurant} />
-                  </Col>
-                </Row>
-              </Tabs.TabPane>
-              <Tabs.TabPane
-                tab="Reviews"
-                key="reviews"
-                className={styles.tabPane}
+            <>
+              <Tabs
+                activeKey={tab}
+                onTabClick={tab => history.push(`/restaurants/${id}/${tab}`)}
+                tabPosition="top"
+                animated={false}
+                className={styles.contentTabs}
               >
-                <Row type="flex" justify="center">
-                  <Col span={24}>
-                    <Reviews restaurant={restaurant} />
-                  </Col>
-                </Row>
-              </Tabs.TabPane>
-            </Tabs>
+                <Tabs.TabPane tab="Menu" key="menu" className={styles.tabPane}>
+                  <Row type="flex" justify="center">
+                    <Col xs={24} lg={20}>
+                      <Menu restaurant={restaurant} />
+                    </Col>
+                  </Row>
+                </Tabs.TabPane>
+                <Tabs.TabPane
+                  tab="Reviews"
+                  key="reviews"
+                  className={styles.tabPane}
+                >
+                  <Row type="flex" justify="center">
+                    <Col xs={24} md={20}>
+                      <Reviews restaurant={restaurant} />
+                    </Col>
+                  </Row>
+                </Tabs.TabPane>
+              </Tabs>
+              <div className={styles.fixedMobileBasketPanel}>
+                <span>Basket € 8.95</span>
+                <Link to="/checkout" className={styles.checkoutBtn}>
+                  checkout
+                </Link>
+              </div>
+            </>
           )}
         />
         <Redirect

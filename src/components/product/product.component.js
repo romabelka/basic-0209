@@ -13,7 +13,7 @@ export default function Product({
 
   return (
     <Card className={styles.productDetailedOrderCard}>
-      <Row type="flex" justify="space-between">
+      <Row type="flex" justify="space-between" align="middle">
         <Col xs={16} md={16} lg={20} align="left">
           <Typography.Title level={4} className={styles.title}>
             {product.name}
@@ -23,7 +23,7 @@ export default function Product({
           </Typography.Paragraph>
           <div className={styles.price}>{product.price} $</div>
         </Col>
-        <Col xs={8} md={6} lg={4} align="right">
+        <Col xs={8} md={8} lg={4} align="right">
           <div className={styles.counter}>
             <div className={styles.count} data-id="product-amount">
               {amount}

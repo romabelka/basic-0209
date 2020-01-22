@@ -35,13 +35,17 @@
   color: #de9124;
 }
 
-@media all and (max-width: 767px) {
-  .productCard {
-    margin-bottom: 12px;
-  }
+.productCard {
+  margin-top: 12px !important;
+}
 
+.productCard > * {
+  padding: 20px !important;
+}
+
+@media all and (max-width: 767px) {
   .productCard > * {
-    padding: 12px;
+    padding: 12px !important;
   }
 
   .imgWrap {

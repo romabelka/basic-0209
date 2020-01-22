@@ -1,6 +1,17 @@
 .hero {
   position: relative;
-  min-height: 220px;
+  height: 220px;
+}
+
+.hero:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
 .heroImg {
@@ -17,16 +28,21 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  z-index: 2;
 }
 
 .heading {
   color: #fff !important;
-  margin: 0;
+  margin: 0 !important;
+  font-weight: 700 !important;
+  font-size: 36px !important;
 }
 
 .description {
   color: #fff;
-  margin: 0 0 10px;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  margin: 0 0 8px !important;
 }
 
 .colorWhite {
@@ -47,7 +63,7 @@
   }
 
   .heading {
-    font-size: 26px;
-    line-height: 31px;
+    font-size: 26px !important;
+    line-height: 31px !important;
   }
 }

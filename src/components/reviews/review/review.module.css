@@ -1,37 +1,35 @@
 .review {
   position: relative;
+  margin-bottom: 16px;
 }
 
-.review + .review {
-  margin-top: 16px;
+.review:last-child {
+  margin-bottom: 0;
+}
+
+.addReviewTitle,
+.name {
+  font-size: 18px !important;
+  line-height: 28px !important;
 }
 
 .addReviewTitle {
-  margin-bottom: 16px;
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: 600;
+  margin-bottom: 16px !important;
 }
 
 .name {
-  margin: 0 0 5px;
+  margin-bottom: 5px !important;
 }
 
 .comment {
   margin: 0;
+  font-size: 16px !important;
+  line-height: 24px !important;
 }
 
 @media all and (max-width: 767px) {
-  .review {
-    margin-bottom: 16px;
-  }
-
   .review > * {
     padding: 16px !important;
-  }
-
-  .review:last-child {
-    margin-bottom: 0;
   }
 
   .rateColumn {
@@ -40,14 +38,15 @@
     right: 16px;
   }
 
+  .addReviewTitle,
   .name {
-    font-size: 16px;
-    line-height: 24px;
-    margin-bottom: 10px;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    margin-bottom: 10px !important;
   }
 
   .comment {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 14px !important;
+    line-height: 20px !important;
   }
 }

@@ -24,8 +24,12 @@ const AddReview = ({ onSubmit }) => {
           <Typography.Title className={styles.addReviewTitle} level={4}>
             Leave your review
           </Typography.Title>
-          <Form onSubmit={handleSubmit} data-id="review-form">
-            <Form.Item>
+          <Form
+            onSubmit={handleSubmit}
+            data-id="review-form"
+            className={styles.reviewForm}
+          >
+            <Form.Item className={styles.reviewFormItem}>
               <Input.TextArea
                 rows={3}
                 value={text}
@@ -38,7 +42,7 @@ const AddReview = ({ onSubmit }) => {
                 data-id="review-form-text"
               />
             </Form.Item>
-            <div>
+            <div className={styles.rateWrap}>
               Rating:{" "}
               <Rate
                 value={rate}

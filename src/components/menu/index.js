@@ -44,16 +44,18 @@ class Menu extends React.Component {
     if (this.props.loading) return <Loader />;
 
     return (
-      <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
-        <Col xs={24} md={15} lg={12}>
-          {this.props.restaurant.menu.map(id => (
-            <Product id={id} key={id} />
-          ))}
-        </Col>
-        <Col xs={0} md={7} lg={6}>
-          <Basket />
-        </Col>
-      </Row>
+      <>
+        <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
+          <Col xs={24} md={15} lg={12}>
+            {this.props.restaurant.menu.map(id => (
+              <Product id={id} key={id} />
+            ))}
+          </Col>
+          <Col xs={0} md={7} lg={6}>
+            <Basket />
+          </Col>
+        </Row>
+      </>
     );
   }
 }

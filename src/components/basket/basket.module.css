@@ -3,16 +3,25 @@
   background-color: #fff0db;
 }
 
-.basket hr {
-  margin: 10px 0 !important;
+.hr {
+  margin: 14px 0 !important;
 }
 
 .title {
   text-align: center;
+  margin-bottom: 20px !important;
+  font-size: 18px !important;
 }
 
 .lastRow {
   margin-bottom: 20px;
+}
+
+.button {
+  margin-top: 22px;
+  font-size: 18px;
+  background-color: #e4661e !important;
+  border-color: #e4661e !important;
 }
 
 @media all and (max-width: 767px) {

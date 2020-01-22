@@ -29,12 +29,51 @@ hr {
   height: 1px;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.full-height-layout {
+  min-height: calc(100vh - 60px) !important;
+}
+
+h1.ant-typography,
+.ant-typography h1 {
+  font-weight: 700 !important;
+  text-align: center;
+  font-size: 52px !important;
+}
+
+.ant-typography strong {
+  font-weight: 700 !important;
+}
+
+.flex-grow-up {
+  flex-grow: 1;
+}
+
 .ant-form-item-label {
-  line-height: 30px !important;
+  line-height: 1 !important;
+  vertical-align: top !important;
+  margin-bottom: 8px;
+}
+
+.ant-form-item-label > label {
+  font-size: 16px !important;
+  color: #999 !important;
+}
+
+.ant-form-item-control {
+  line-height: initial !important;
+}
+
+.ant-input-lg {
+  height: 38px !important;
+  padding: 5px 11px !important;
 }
 
 .ant-tabs-nav-wrap {
-  background-color: #e5e5e5;
+  background-color: #e5e5e5 !important;
 }
 
 .ant-tabs-nav .ant-tabs-tab {
@@ -56,6 +95,10 @@ hr {
 
 .ant-layout {
   background-color: #fff !important;
+}
+
+.ant-card {
+  border-radius: 0 !important;
 }
 
 .ant-card-body {
@@ -102,6 +145,32 @@ hr {
   padding: 0 !important;
 }
 
+.ant-radio-group-small .ant-radio-button-wrapper {
+  height: auto !important;
+}
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  color: #ffd25d !important;
+}
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
+.ant-radio-button-wrapper {
+  background: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+  opacity: 1 !important;
+}
+
+.ant-radio-button-wrapper {
+  color: #fff !important;
+  border: none !important;
+  line-height: 1 !important;
+  padding: 0 9px !important;
+}
+
 @media all and (max-width: 767px) {
   .ant-card-body {
     padding: 12px 16px !important;
@@ -110,10 +179,18 @@ hr {
   .ant-form {
     padding: 20px 26px !important;
   }
+
+  .ant-form-item {
+    margin-bottom: 16px !important;
+  }
 }
 
 @media all and (min-width: 768px) {
   .content-wrap {
     padding: 60px 0;
+  }
+
+  .ant-form-item {
+    margin-bottom: 24px !important;
   }
 }

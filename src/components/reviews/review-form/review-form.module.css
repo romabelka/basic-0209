@@ -3,8 +3,20 @@
   margin-bottom: 0;
 }
 
+.reviewFormItem {
+  margin-bottom: 5px !important;
+}
+
+.rateWrap {
+  font-size: 16px;
+  line-height: 24px;
+  color: #000;
+}
+
 .addReviewTitle {
-  margin-bottom: 16px;
+  font-size: 18px !important;
+  line-height: 28px !important;
+  margin-bottom: 16px !important;
 }
 
 .submitButton {
@@ -26,6 +38,13 @@
 
 @media all and (max-width: 767px) {
   .reviewForm {
-    margin-bottom: 16px;
+    margin-bottom: 10px !important;
+    padding: 0 !important;
+  }
+
+  .addReviewTitle {
+    font-size: 16px !important;
+    line-height: 28px !important;
+    margin-bottom: 10px !important;
   }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import cx from "classnames";
 import { Button, Col, Row, Typography } from "antd";
 import { increment, decrement } from "../../../redux/ac";
 import styles from "./basket-item.module.css";
@@ -30,10 +31,10 @@ function BasketItem({ product, amount, restaurant, increment, decrement }) {
             icon="plus"
             onClick={() => increment(product.id)}
           />
-          <Typography.Text className={styles.count}>
-            ${product.price * amount}
-          </Typography.Text>
         </div>
+        <Typography.Text className={cx(styles.count, styles.price)}>
+          ${product.price * amount}
+        </Typography.Text>
       </Col>
     </Row>
   );

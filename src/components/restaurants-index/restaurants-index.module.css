@@ -5,7 +5,7 @@
 
 .tabPane {
   background-color: #fff;
-  padding: 0;
+  padding: 28px 0;
 }
 
 @media all and (max-width: 767px) {
@@ -26,8 +26,34 @@
   flex-direction: column;
 }
 
+.title {
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  margin: 0 0 6px !important;
+}
+
+.subtitle {
+  font-weight: 500 !important;
+  margin: 0 !important;
+}
+
 .header {
   position: relative;
   min-height: 220px;
   background-color: #ffd25d;
+}
+
+@media all and (max-width: 767px) {
+  .title {
+    font-size: 26px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .subtitle {
+    font-size: 22px !important;
+  }
+
+  .header {
+    min-height: 160px;
+  }
 }

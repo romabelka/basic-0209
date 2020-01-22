@@ -14,13 +14,12 @@ function RestaurantsIndex({ restaurants }) {
     <>
       <div className={styles.header}>
         <div className={styles.headerCaption}>
-          <Typography.Title>Order Food</Typography.Title>
-          <Typography.Title level={3} style={{ margin: 0 }}>
+          <Typography.Title level={2} className={styles.title}>
+            Order Food
+          </Typography.Title>
+          <Typography.Title level={3} className={styles.subtitle}>
             From 175 Restaurants
           </Typography.Title>
-          <Typography style={{ transform: "translate(0,40px)" }}>
-            Chose your favourite cuisine:
-          </Typography>
         </div>
       </div>
       <Tabs

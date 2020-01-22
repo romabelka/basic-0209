@@ -8,8 +8,55 @@
   padding: 62px 0;
 }
 
+.fixedMobileBasketPanel {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0;
+  padding: 12px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 500;
+  color: #1d1d1d;
+  border: none;
+  text-transform: none;
+  background-color: #fff0db;
+  box-shadow: 1px 4px 14px rgba(0, 0, 0, 0.34);
+}
+
+.fixedMobileBasketPanel:focus,
+.fixedMobileBasketPanel:active,
+.fixedMobileBasketPanel:hover {
+  color: #1d1d1d;
+  background-color: #fff0db;
+}
+
+.checkoutBtn {
+  display: inline-flex;
+  background-color: #f0894e;
+  border-color: #f0894e;
+  height: 34px;
+  border-radius: 4px;
+  padding: 5px 22px;
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
 @media all and (max-width: 767px) {
   .tabPane {
-    padding: 16px;
+    padding: 16px 16px 60px;
+  }
+
+  .fixedMobileBasketPanel {
+    display: flex;
   }
 }

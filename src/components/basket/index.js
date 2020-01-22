@@ -27,7 +27,11 @@ function Basket({
   if (!total) {
     return (
       <div className={cx(styles.basket, className)}>
-        <Typography.Title level={4} style={{ paddingTop: 20 }}>
+        <Typography.Title
+          level={4}
+          className={styles.title}
+          style={{ paddingTop: 26 }}
+        >
           Select a meal from the list
         </Typography.Title>
       </div>
@@ -36,7 +40,9 @@ function Basket({
 
   return (
     <div className={cx(styles.basket, className)}>
-      <Typography.Title level={4}>Basket</Typography.Title>
+      <Typography.Title level={4} className={styles.title}>
+        Basket
+      </Typography.Title>
       <TransitionGroup>
         {orderProducts.map(({ product, amount, restaurant }) => (
           <CSSTransition timeout={500} classNames="basket-item-animation">
@@ -49,14 +55,14 @@ function Basket({
           </CSSTransition>
         ))}
       </TransitionGroup>
-      <hr />
+      <hr className={styles.hr} />
 
       <BasketRow leftContent="Sub-total" rightContent={`${total} $`} />
       <BasketRow leftContent="Delivery costs" rightContent="FREE" />
-      <BasketRow leftContent="Total" rightContent={`${total} $`} />
+      <BasketRow leftContent="Total" rightContent={`${total} $`} bold />
       {!hideButton && (
         <Link to="/checkout">
-          <Button type="primary" size="large" block>
+          <Button type="primary" size="large" block className={styles.button}>
             {t("order_btn")}
           </Button>
         </Link>

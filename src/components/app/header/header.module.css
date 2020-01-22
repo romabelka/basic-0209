@@ -1,6 +1,55 @@
 .header {
   height: 60px;
   background: #1d1d1d;
-  padding: 18px;
+  padding: 14px;
   text-align: center;
+}
+
+.goBackBtn {
+  padding: 0;
+  border: none;
+  font-size: 24px;
+  color: #fff;
+  font-weight: 400 !important;
+  cursor: pointer;
+}
+
+.goBackBtn > span {
+  color: #fff;
+  text-transform: none;
+}
+
+.goBackBtn:hover,
+.goBackBtn:hover > span {
+  opacity: 8;
+}
+
+.langSwitcher .langSwitcherBtn:not(.ant-radio-button-wrapper-disabled)::before {
+  background-color: #d9d9d9 !important;
+}
+
+.goBackBtnText {
+  display: none !important;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logoWrap {
+  position: static;
+}
+
+@media all and (min-width: 768px) {
+  .goBackBtn {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .goBackBtnText {
+    display: inline-block !important;
+  }
 }

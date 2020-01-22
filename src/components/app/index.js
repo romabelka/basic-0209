@@ -8,6 +8,8 @@ import RestaurantsPage from "../pages/restaurants";
 import { Provider as UserProvider } from "../../contexts/user-context";
 import i18n from "../../contexts/i18n-context";
 import ThankYouPage from "../pages/thank-you";
+import ErrorPage from "../pages/error";
+import NotFoundPage from "../pages/not-found";
 
 function App() {
   const [name, setName] = useState("Roma");
@@ -24,12 +26,7 @@ function App() {
           <Switch>
             <Route path="/checkout" exact component={CheckoutPage} />
             <Route path="/restaurants" component={RestaurantsPage} />
-            <Route
-              path="/error"
-              render={() => (
-                <Typography.Title level={1}>{t("error_page")}</Typography.Title>
-              )}
-            />
+            <Route path="/error" component={ErrorPage} />
             <Route
               path="/sign-in"
               render={() => (
@@ -40,14 +37,7 @@ function App() {
             />
             <Route path="/thank-you" component={ThankYouPage} />
             <Redirect from="/" exact to="/restaurants" />
-            <Route
-              path="/"
-              render={() => (
-                <Typography.Title level={1}>
-                  {t("not_found_page")}
-                </Typography.Title>
-              )}
-            />
+            <Route path="/" component={NotFoundPage} />
           </Switch>
         </main>
       </Layout>
