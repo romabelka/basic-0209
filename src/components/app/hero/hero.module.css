@@ -1,6 +1,7 @@
 .hero {
   position: relative;
   height: 220px;
+  overflow: hidden;
 }
 
 .hero:after {

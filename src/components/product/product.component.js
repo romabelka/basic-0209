@@ -31,15 +31,17 @@ export default function Product({
             <Button.Group>
               <Button
                 className={styles.button}
-                icon="minus"
                 onClick={() => handleDecrement(product.id)}
-              />
+              >
+                &mdash;
+              </Button>
               <Button
                 className={styles.button}
-                icon="plus"
                 onClick={() => handleIncrement(product.id)}
                 data-id="product-increment-btn"
-              />
+              >
+                &#43;
+              </Button>
             </Button.Group>
           </div>
         </Col>

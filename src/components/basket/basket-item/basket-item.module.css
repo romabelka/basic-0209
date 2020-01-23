@@ -11,7 +11,9 @@
 }
 
 .price {
-  margin-left: 13px;
+  width: 40px;
+  text-align: right;
+  display: inline-block;
 }
 
 .count:not(:last-child) {

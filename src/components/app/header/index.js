@@ -13,7 +13,7 @@ function Header() {
   return (
     <header className={styles.header}>
       <Row type="flex" justify="center">
-        <Col xs={24} md={20} lg={16}>
+        <Col xs={24} md={20} lg={18}>
           <Row type="flex" justify="space-between" align="middle">
             <Col>
               <Button

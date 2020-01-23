@@ -4,7 +4,7 @@ import Menu from "../menu";
 import PropTypes from "prop-types";
 import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
-import { Col, Row, Tabs } from "antd";
+import { Tabs } from "antd";
 import { Route, Redirect, Switch, Link } from "react-router-dom";
 import RateComponent from "../../components/rate";
 
@@ -42,22 +42,14 @@ function Restaurant({ restaurant }) {
                 className={styles.contentTabs}
               >
                 <Tabs.TabPane tab="Menu" key="menu" className={styles.tabPane}>
-                  <Row type="flex" justify="center">
-                    <Col xs={24} lg={20}>
-                      <Menu restaurant={restaurant} />
-                    </Col>
-                  </Row>
+                  <Menu restaurant={restaurant} />
                 </Tabs.TabPane>
                 <Tabs.TabPane
                   tab="Reviews"
                   key="reviews"
                   className={styles.tabPane}
                 >
-                  <Row type="flex" justify="center">
-                    <Col xs={24} md={20}>
-                      <Reviews restaurant={restaurant} />
-                    </Col>
-                  </Row>
+                  <Reviews restaurant={restaurant} />
                 </Tabs.TabPane>
               </Tabs>
               <div className={styles.fixedMobileBasketPanel}>
