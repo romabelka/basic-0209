@@ -33,7 +33,7 @@ export default function Product({
                 className={styles.button}
                 onClick={() => handleDecrement(product.id)}
               >
-                &mdash;
+                &minus;
               </Button>
               <Button
                 className={styles.button}
