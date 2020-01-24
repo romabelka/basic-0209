@@ -5,7 +5,10 @@
     "error_page": "Error Page",
     "sign_in_page": "Sign In Page",
     "change_language": "switch to russian",
-    "order_btn": "checkout"
+    "order_btn": "checkout",
+    "order_food": "Order Food",
+    "from_restaurants": "From 175 Restaurants",
+    "select_meal": "Select a meal from the list"
   },
   "ru": {
     "select_restaurant": "Пожалуйста, выберите ресторан",
@@ -13,6 +16,9 @@
     "error_page": "Ошибка",
     "sign_in_page": "Страница входа",
     "change_language": "ангийская версия",
-    "order_btn": "в корзину"
+    "order_btn": "в корзину",
+    "order_food": "Заказать Еду",
+    "from_restaurants": "Из 175 Ресторанов",
+    "select_meal": "Выберите блюдо из списка"
   }
 }

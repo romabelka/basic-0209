@@ -32,7 +32,7 @@ function Basket({
           className={styles.title}
           style={{ paddingTop: 26 }}
         >
-          Select a meal from the list
+          {t("select_meal")}
         </Typography.Title>
       </div>
     );

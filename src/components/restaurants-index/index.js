@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./restaurants-index.module.css";
 import { Col, Row, Tabs, Typography } from "antd";
 import RestaurantItem from "./restaurant-item";
+import i18n from "../../contexts/i18n-context";
 
 function RestaurantsIndex({ restaurants }) {
   const [activeTab, setActiveTab] = useState("all");
+  const { t } = useContext(i18n);
   const cuisines = [
     "all",
     ...new Set(restaurants.flatMap(restaurant => restaurant.cuisines))
@@ -16,10 +18,10 @@ function RestaurantsIndex({ restaurants }) {
       <div className={styles.header}>
         <div className={styles.headerCaption}>
           <Typography.Title level={2} className={styles.title}>
-            Order Food
+            {t("order_food")}
           </Typography.Title>
           <Typography.Title level={3} className={styles.subtitle}>
-            From 175 Restaurants
+            {t("from_restaurants")}
           </Typography.Title>
         </div>
       </div>
