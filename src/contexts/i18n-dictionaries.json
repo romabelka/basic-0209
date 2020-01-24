@@ -8,7 +8,19 @@
     "order_btn": "checkout",
     "order_food": "Order Food",
     "from_restaurants": "From 175 Restaurants",
-    "select_meal": "Select a meal from the list"
+    "select_meal": "Select a meal from the list",
+    "go_back": "Restaurants",
+    "basket": "Basket",
+    "menu": "Menu",
+    "reviews": "Reviews",
+    "leave_your_review": "Leave your review",
+    "publish_review": "PUBLISH REVIEW",
+    "rating": "Rating",
+    "checkout": "checkout",
+    "sub_total": "Sub-total:",
+    "delivery_costs": "Delivery costs:",
+    "free": "FREE",
+    "total": "total:"
   },
   "ru": {
     "select_restaurant": "Пожалуйста, выберите ресторан",
@@ -17,8 +29,20 @@
     "sign_in_page": "Страница входа",
     "change_language": "ангийская версия",
     "order_btn": "в корзину",
-    "order_food": "Заказать Еду",
+    "order_food": "Заказ Еды",
     "from_restaurants": "Из 175 Ресторанов",
-    "select_meal": "Выберите блюдо из списка"
+    "select_meal": "Выберите блюдо из списка",
+    "go_back": "Все Рестораны",
+    "basket": "Корзина",
+    "menu": "Меню",
+    "reviews": "Отзывы",
+    "leave_your_review": "Оставьте свой отзыв",
+    "publish_review": "ОПУБЛИКОВАТЬ ОТЗЫВ",
+    "rating": "Рейтинг",
+    "checkout": "оформить заказ",
+    "sub_total": "Предварительно:",
+    "delivery_costs": "Доставка:",
+    "free": "БЕСПЛАТНО",
+    "total": "Всего:"
   }
 }

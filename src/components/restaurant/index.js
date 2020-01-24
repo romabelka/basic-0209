@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Reviews from "../reviews";
 import Menu from "../menu";
 import PropTypes from "prop-types";
@@ -6,10 +6,11 @@ import Hero from "../app/hero";
 import styles from "./restaurant.module.css";
 import { Tabs } from "antd";
 import { Route, Redirect, Switch, Link } from "react-router-dom";
+import i18n from "../../contexts/i18n-context";
 import RateComponent from "../../components/rate";
 
 function Restaurant({ restaurant }) {
-  console.log("---", restaurant.averageRating);
+  const { t } = useContext(i18n);
   return (
     <>
       <Hero
@@ -41,11 +42,15 @@ function Restaurant({ restaurant }) {
                 animated={false}
                 className={styles.contentTabs}
               >
-                <Tabs.TabPane tab="Menu" key="menu" className={styles.tabPane}>
+                <Tabs.TabPane
+                  tab={t("menu")}
+                  key="menu"
+                  className={styles.tabPane}
+                >
                   <Menu restaurant={restaurant} />
                 </Tabs.TabPane>
                 <Tabs.TabPane
-                  tab="Reviews"
+                  tab={t("reviews")}
                   key="reviews"
                   className={styles.tabPane}
                 >
@@ -55,7 +60,7 @@ function Restaurant({ restaurant }) {
               <div className={styles.fixedMobileBasketPanel}>
                 <span>Basket € 8.95</span>
                 <Link to="/checkout" className={styles.checkoutBtn}>
-                  checkout
+                  {t("checkout")}
                 </Link>
               </div>
             </>

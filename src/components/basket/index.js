@@ -41,7 +41,7 @@ function Basket({
   return (
     <div className={cx(styles.basket, className)}>
       <Typography.Title level={4} className={styles.title}>
-        Basket
+        {t("basket")}
       </Typography.Title>
       <TransitionGroup>
         {orderProducts.map(({ product, amount, restaurant }) => (
@@ -57,9 +57,9 @@ function Basket({
       </TransitionGroup>
       <hr className={styles.hr} />
 
-      <BasketRow leftContent="Sub-total" rightContent={`${total} $`} />
-      <BasketRow leftContent="Delivery costs" rightContent="FREE" />
-      <BasketRow leftContent="Total" rightContent={`${total} $`} bold />
+      <BasketRow leftContent={t("sub_total")} rightContent={`${total} $`} />
+      <BasketRow leftContent={t("delivery_costs")} rightContent={t("free")} />
+      <BasketRow leftContent={t("total")} rightContent={`${total} $`} bold />
       {!hideButton && (
         <Link to="/checkout">
           <Button type="primary" size="large" block className={styles.button}>

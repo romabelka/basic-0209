@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import Logo from "./logo";
 import styles from "./header.module.css";
@@ -9,8 +9,10 @@ import { Button, Icon, Col, Row, Radio } from "antd";
 import i18n from "../../../contexts/i18n-context";
 
 function Header() {
-  const { language, setLanguage } = useContext(i18n);
+  const { t, language, setLanguage } = useContext(i18n);
   const history = useHistory();
+  const location = useLocation();
+  const showBackBtn = location.pathname !== "/restaurants";
 
   return (
     <header className={styles.header}>
@@ -18,15 +20,17 @@ function Header() {
         <Col xs={24} md={20} lg={18}>
           <Row type="flex" justify="space-between" align="middle">
             <Col>
-              <Button
-                type="link"
-                ghost
-                className={styles.goBackBtn}
-                onClick={history.goBack}
-              >
-                <Icon type="arrow-left" />
-                <span className={styles.goBackBtnText}>Link</span>
-              </Button>
+              {showBackBtn && (
+                <Button
+                  type="link"
+                  ghost
+                  className={styles.goBackBtn}
+                  onClick={() => history.push("/restaurants")}
+                >
+                  <Icon type="arrow-left" />
+                  <span className={styles.goBackBtnText}>{t("go_back")}</span>
+                </Button>
+              )}
             </Col>
             <Col className={styles.logoWrap}>
               <Link to="/restaurants" className={styles.logo}>

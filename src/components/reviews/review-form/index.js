@@ -1,6 +1,7 @@
 import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
+import i18n from "../../../contexts/i18n-context";
 import useInput from "../../../hooks/use-input";
 
 import Rate from "../../rate";
@@ -11,6 +12,7 @@ import { addReview } from "../../../redux/ac";
 const AddReview = ({ onSubmit }) => {
   const [rate, setRate] = useState();
   const [text, setText, isValidText] = useInput();
+  const { t } = useContext(i18n);
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -22,7 +24,7 @@ const AddReview = ({ onSubmit }) => {
       <Row type="flex" align="middle">
         <Col xs={24} md={18} align="left">
           <Typography.Title className={styles.addReviewTitle} level={4}>
-            Leave your review
+            {t("leave_your_review")}
           </Typography.Title>
           <Form
             onSubmit={handleSubmit}
@@ -43,7 +45,7 @@ const AddReview = ({ onSubmit }) => {
               />
             </Form.Item>
             <div className={styles.rateWrap}>
-              Rating:{" "}
+              {t("rating")}:{" "}
               <Rate
                 value={rate}
                 onChange={setRate}
@@ -51,7 +53,7 @@ const AddReview = ({ onSubmit }) => {
               />
             </div>
             <Button htmlType="submit" className={styles.submitButton}>
-              PUBLISH REVIEW
+              {t("publish_review")}
             </Button>
           </Form>
         </Col>
