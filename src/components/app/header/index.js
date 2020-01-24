@@ -12,7 +12,7 @@ function Header() {
   const { t, language, setLanguage } = useContext(i18n);
   const history = useHistory();
   const location = useLocation();
-  const showBackBtn = location.pathname !== "/restaurants";
+  const showBackBtn = location.pathname !== "/";
 
   return (
     <header className={styles.header}>
@@ -25,7 +25,7 @@ function Header() {
                   type="link"
                   ghost
                   className={styles.goBackBtn}
-                  onClick={() => history.push("/restaurants")}
+                  onClick={() => history.push("/")}
                 >
                   <Icon type="arrow-left" />
                   <span className={styles.goBackBtnText}>{t("go_back")}</span>

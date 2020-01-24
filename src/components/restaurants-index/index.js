@@ -1,13 +1,26 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./restaurants-index.module.css";
 import { Col, Row, Tabs, Typography } from "antd";
+import { connect } from "react-redux";
 import RestaurantItem from "./restaurant-item";
 import i18n from "../../contexts/i18n-context";
+import Loader from "../loader";
+import { fetchRestaurants } from "../../redux/ac";
+import {
+  restaurantsListSelector,
+  restaurantsLoading
+} from "../../redux/selectors";
 
-function RestaurantsIndex({ restaurants }) {
+function RestaurantsIndex({ restaurants, fetchRestaurants, loading }) {
   const [activeTab, setActiveTab] = useState("all");
   const { t } = useContext(i18n);
+  useEffect(() => {
+    fetchRestaurants();
+  }, [fetchRestaurants]);
+
+  if (loading) return <Loader />;
+
   const cuisines = [
     "all",
     ...new Set(restaurants.flatMap(restaurant => restaurant.cuisines))
@@ -64,4 +77,10 @@ RestaurantsIndex.propTypes = {
   })
 };
 
-export default RestaurantsIndex;
+export default connect(
+  state => ({
+    restaurants: restaurantsListSelector(state),
+    loading: restaurantsLoading(state)
+  }),
+  { fetchRestaurants }
+)(RestaurantsIndex);

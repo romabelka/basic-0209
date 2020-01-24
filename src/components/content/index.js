@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row, Col } from "antd";
 import Restaurant from "../restaurant";
 import { connect } from "react-redux";
@@ -6,7 +6,12 @@ import { restaurantSelector, restaurantsLoading } from "../../redux/selectors";
 import { fetchRestaurants } from "../../redux/ac";
 import Loader from "../loader";
 
-function Content({ restaurant, loading }) {
+function Content({ restaurant, fetchRestaurants, loading }) {
+  useEffect(() => {
+    fetchRestaurants();
+  }, [fetchRestaurants]);
+  console.log("---", 123);
+
   if (loading || !restaurant) return <Loader />;
   return (
     <Row type="flex" justify="center">

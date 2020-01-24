@@ -4,12 +4,12 @@ import React, { useContext, useState } from "react";
 import Header from "./header";
 import CheckoutPage from "../pages/checkout";
 import { Redirect, Route, Switch } from "react-router-dom";
-import RestaurantsPage from "../pages/restaurants";
 import { Provider as UserProvider } from "../../contexts/user-context";
 import i18n from "../../contexts/i18n-context";
 import ThankYouPage from "../pages/thank-you";
 import ErrorPage from "../pages/error";
-import NotFoundPage from "../pages/not-found";
+import RestaurantsIndex from "../restaurants-index";
+import Content from "../content";
 
 function App() {
   const [name, setName] = useState("Roma");
@@ -22,7 +22,7 @@ function App() {
         <main role="main">
           <Switch>
             <Route path="/checkout" exact component={CheckoutPage} />
-            <Route path="/restaurants" component={RestaurantsPage} />
+            <Route path={`/restaurants/:id`} component={Content} />
             <Route path="/error" component={ErrorPage} />
             <Route
               path="/sign-in"
@@ -33,8 +33,7 @@ function App() {
               )}
             />
             <Route path="/thank-you" component={ThankYouPage} />
-            <Redirect from="/" exact to="/restaurants" />
-            <Route path="/" component={NotFoundPage} />
+            <Route path="/" render={() => <RestaurantsIndex />} />
           </Switch>
         </main>
       </Layout>
