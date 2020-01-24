@@ -1,5 +1,5 @@
 import { Layout, Typography } from "antd";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 import Header from "./header";
 import CheckoutPage from "../pages/checkout";
@@ -14,9 +14,6 @@ import NotFoundPage from "../pages/not-found";
 function App() {
   const [name, setName] = useState("Roma");
   const { t } = useContext(i18n);
-  useEffect(() => {
-    setInterval(() => setName(Math.random().toString()), 1000);
-  }, [setName]);
 
   return (
     <UserProvider value={{ name, setName }}>

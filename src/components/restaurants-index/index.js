@@ -5,8 +5,9 @@ import { Col, Row, Tabs, Typography } from "antd";
 import RestaurantItem from "./restaurant-item";
 
 function RestaurantsIndex({ restaurants }) {
-  const [activeTab, setActiveTab] = useState();
+  const [activeTab, setActiveTab] = useState("all");
   const cuisines = [
+    "all",
     ...new Set(restaurants.flatMap(restaurant => restaurant.cuisines))
   ];
 
@@ -34,7 +35,10 @@ function RestaurantsIndex({ restaurants }) {
             <Row type="flex" justify="center">
               <Col span={24}>
                 {restaurants
-                  .filter(restaurant => restaurant.cuisines.includes(cuisine))
+                  .filter(
+                    restaurant =>
+                      cuisine === "all" || restaurant.cuisines.includes(cuisine)
+                  )
                   .map(restaurant => (
                     <RestaurantItem
                       restaurant={restaurant}

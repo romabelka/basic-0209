@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import Logo from "./logo";
 import styles from "./header.module.css";
@@ -9,6 +10,7 @@ import i18n from "../../../contexts/i18n-context";
 
 function Header() {
   const { language, setLanguage } = useContext(i18n);
+  const history = useHistory();
 
   return (
     <header className={styles.header}>
@@ -20,7 +22,7 @@ function Header() {
                 type="link"
                 ghost
                 className={styles.goBackBtn}
-                onClick={() => console.log("go back")}
+                onClick={history.goBack}
               >
                 <Icon type="arrow-left" />
                 <span className={styles.goBackBtnText}>Link</span>
