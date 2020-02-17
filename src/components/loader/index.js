@@ -1,9 +1,13 @@
 import React from "react";
-import { Spin } from "antd";
 import styles from "./loader.module.css";
 
 function Loader() {
-  return <Spin className={styles.loader} />;
+  return (
+    <div className={styles.spinner}>
+      <div className={styles["double-bounce1"]} />
+      <div className={styles["double-bounce2"]} />
+    </div>
+  );
 }
 
 Loader.propTypes = {};

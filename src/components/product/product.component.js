@@ -1,7 +1,9 @@
-import { Button, Card, Col, Row, Typography } from "antd";
 import PropTypes from "prop-types";
 import React from "react";
 import styles from "./product.module.css";
+import { Card } from "../card";
+import MinusIcon from "./icons/minus.svg";
+import PlusIcon from "./icons/plus.svg";
 
 export default function Product({
   product,
@@ -13,39 +15,35 @@ export default function Product({
 
   return (
     <Card className={styles.productDetailedOrderCard}>
-      <Row type="flex" justify="space-between" align="middle">
-        <Col xs={16} md={16} lg={20} align="left">
-          <Typography.Title level={4} className={styles.title}>
-            {product.name}
-          </Typography.Title>
-          <Typography.Paragraph className={styles.description}>
-            {product.ingredients.join(", ")}
-          </Typography.Paragraph>
+      <div className={styles.content}>
+        <div>
+          <h4 className={styles.title}>{product.name}</h4>
+          <p className={styles.description}>{product.ingredients.join(", ")}</p>
           <div className={styles.price}>{product.price} $</div>
-        </Col>
-        <Col xs={8} md={8} lg={4} align="right">
+        </div>
+        <div>
           <div className={styles.counter}>
             <div className={styles.count} data-id="product-amount">
               {amount}
             </div>
-            <Button.Group>
-              <Button
+            <div className={styles.buttonGroup}>
+              <button
                 className={styles.button}
                 onClick={() => handleDecrement(product.id)}
               >
-                &minus;
-              </Button>
-              <Button
+                <img src={MinusIcon} alt="icon" />
+              </button>
+              <button
                 className={styles.button}
                 onClick={() => handleIncrement(product.id)}
                 data-id="product-increment-btn"
               >
-                &#43;
-              </Button>
-            </Button.Group>
+                <img src={PlusIcon} alt="icon" />
+              </button>
+            </div>
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </Card>
   );
 }

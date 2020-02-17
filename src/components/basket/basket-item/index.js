@@ -1,42 +1,47 @@
 import React from "react";
 import cx from "classnames";
-import { Button, Col, Row, Typography } from "antd";
 import { increment, decrement } from "../../../redux/ac";
+import { Button } from "../../button";
 import styles from "./basket-item.module.css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import MinusIcon from "./icons/squared-minus.svg";
+import PlusIcon from "./icons/squared-plus.svg";
+
 function BasketItem({ product, amount, restaurant, increment, decrement }) {
   return (
-    <Row type="flex" align="middle" className={styles.basketItem}>
-      <Col span={12} align="left">
+    <div className={styles.basketItem}>
+      <div className={styles.name}>
         <Link to={`/restaurants/${restaurant.id}/menu`}>
-          <Typography.Text>{product.name}</Typography.Text>
+          <span>{product.name}</span>
         </Link>
-      </Col>
-      <Col span={12} align="right">
+      </div>
+      <div className={styles.info}>
         <div className={styles.counter}>
           <Button
-            type="link"
-            size="small"
+            type="unstyled"
+            size="sm"
             className={styles.button}
-            icon="minus"
             onClick={() => decrement(product.id)}
-          />
-          <Typography.Text className={styles.count}>{amount}</Typography.Text>
+          >
+            <img src={MinusIcon} alt="" />
+          </Button>
+          <span className={styles.count}>{amount}</span>
           <Button
-            type="link"
-            size="small"
+            type="unstyled"
+            size="sm"
             className={styles.button}
-            icon="plus"
             onClick={() => increment(product.id)}
-          />
+          >
+            <img src={PlusIcon} alt="" />
+          </Button>
         </div>
-        <Typography.Text className={cx(styles.count, styles.price)}>
+        <p className={cx(styles.count, styles.price)}>
           ${product.price * amount}
-        </Typography.Text>
-      </Col>
-    </Row>
+        </p>
+      </div>
+    </div>
   );
 }
 

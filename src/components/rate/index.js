@@ -1,23 +1,27 @@
-import { Rate as AntRate } from "antd";
 import cx from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 
 import styles from "./rate.module.css";
 
-const Rate = ({ amount, value, onChange, sm = false, disabled = false }) => (
-  <>
-    <AntRate
-      disabled={disabled}
+import { StarIcon } from "./star-icon";
+
+const Rate = ({ amount, value, onChange, disabled = false }) => (
+  <div className={styles.wrapper}>
+    <span
       onChange={onChange}
-      value={value}
-      className={cx(styles.customRate, {
-        [styles.customRateSm]: sm,
+      className={cx({
         [styles.disabled]: disabled
       })}
-    />
-    {amount && <span className="ant-rate-text">({amount})</span>}
-  </>
+    >
+      <StarIcon />
+      <StarIcon />
+      <StarIcon />
+      <StarIcon />
+      <StarIcon />
+    </span>
+    {amount && <span className={styles.amount}>({amount})</span>}
+  </div>
 );
 
 Rate.propTypes = {

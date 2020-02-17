@@ -1,0 +1,36 @@
+.langSwitcher {
+  position: relative;
+}
+
+.langSwitcherBtn {
+  color: var(--white);
+  position: relative;
+  cursor: pointer;
+}
+
+.langSwitcherBtn:first-child {
+  margin-right: 1px;
+}
+
+.langSwitcherBtn:first-child:after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background-color: var(--grey);
+}
+
+.langSwitcherBtn > input {
+  display: none;
+}
+
+.langSwitcherBtn > input:checked ~ span {
+  color: var(--yellow);
+}
+
+.langSwitcherBtn > span {
+  display: inline-block;
+  padding: 3px 6px;
+}

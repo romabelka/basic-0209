@@ -1,7 +1,6 @@
 import React from "react";
 import Product from "../product";
 import * as PropTypes from "prop-types";
-import { Col, Row, Typography } from "antd";
 import Basket from "../basket";
 import { connect } from "react-redux";
 import {
@@ -10,6 +9,8 @@ import {
 } from "../../redux/selectors";
 import Loader from "../loader";
 import { fetchProducts } from "../../redux/ac";
+
+import styles from "./menu.module.css";
 
 class Menu extends React.Component {
   state = {
@@ -34,28 +35,21 @@ class Menu extends React.Component {
   }
 
   render() {
-    if (this.state.error)
-      return (
-        <Typography.Title level={2}>
-          {this.state.error.message}
-        </Typography.Title>
-      );
+    if (this.state.error) return <h2>{this.state.error.message}</h2>;
 
     if (this.props.loading) return <Loader />;
 
     return (
-      <>
-        <Row type="flex" justify="center" gutter={{ xs: 8, sm: 16, md: 24 }}>
-          <Col xs={24} md={15} lg={12}>
-            {this.props.restaurant.menu.map(id => (
-              <Product id={id} key={id} />
-            ))}
-          </Col>
-          <Col xs={0} md={7} lg={6}>
-            <Basket />
-          </Col>
-        </Row>
-      </>
+      <div className={styles.menuWrapper}>
+        <div>
+          {this.props.restaurant.menu.map(id => (
+            <Product id={id} key={id} />
+          ))}
+        </div>
+        <div>
+          <Basket />
+        </div>
+      </div>
     );
   }
 }

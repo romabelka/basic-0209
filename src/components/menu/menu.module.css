@@ -1,0 +1,29 @@
+.menuWrapper {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 60px;
+}
+
+.menuWrapper > * {
+  padding: 12px 0;
+}
+
+@media all and (min-width: 768px) {
+  .menuWrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 0;
+  }
+
+  .menuWrapper > *:first-child {
+    flex: 1 0 calc(100% - 300px - 2 * 24px);
+  }
+
+  .menuWrapper > *:last-child {
+    flex: 1 0 calc(300px - 24px);
+  }
+
+  .menuWrapper > * {
+    padding: 0 12px;
+  }
+}

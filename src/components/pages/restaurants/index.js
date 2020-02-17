@@ -1,7 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import Content from "../../content";
-import RestaurantsIndex from "../../restaurants-index";
 
 function RestaurantsPage() {
   console.log("---", 123);
