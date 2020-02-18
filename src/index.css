@@ -186,6 +186,8 @@ textarea {
   font-weight: 400;
   outline: none;
   box-shadow: none;
+  border: none;
+  background-color: transparent;
   transition: 0.3s all;
   vertical-align: top;
   cursor: pointer;
