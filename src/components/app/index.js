@@ -1,4 +1,3 @@
-import { Layout } from "antd";
 import React, { useContext, useState } from "react";
 
 import Header from "./header";
@@ -17,7 +16,7 @@ function App() {
 
   return (
     <UserProvider value={{ name, setName }}>
-      <Layout>
+      <>
         <Header />
         <main role="main">
           <Switch>
@@ -32,7 +31,7 @@ function App() {
             <Route path="/" render={() => <RestaurantsIndex />} />
           </Switch>
         </main>
-      </Layout>
+      </>
     </UserProvider>
   );
 }

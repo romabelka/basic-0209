@@ -24,7 +24,7 @@ function Restaurant({ restaurant }) {
         id="menu"
         aria-controls="menu-content-panel"
         onClick={() => setActiveTab("menu", "tabs")}
-        className={activeTab === "menu" ? "tab tab-selected" : "tab"}
+        className={activeTab === "menu" ? "tab tabSelected" : "tab"}
       >
         {t("menu")}
       </button>
@@ -35,7 +35,7 @@ function Restaurant({ restaurant }) {
         id="reviews"
         aria-controls="reviews-content-panel"
         onClick={() => setActiveTab("reviews", "tabs")}
-        className={activeTab === "reviews" ? "tab tab-selected" : "tab"}
+        className={activeTab === "reviews" ? "tab tabSelected" : "tab"}
       >
         {t("reviews")}
       </button>
@@ -49,7 +49,7 @@ function Restaurant({ restaurant }) {
         id="menu-panel"
         role="tabpanel"
         aria-labelledby="menu-tab"
-        className={cx("tab-panel", {
+        className={cx("tabPanel", {
           show: activeTab === "menu",
           hide: activeTab !== "menu"
         })}
@@ -61,7 +61,7 @@ function Restaurant({ restaurant }) {
         id="reviews-panel"
         role="tabpanel"
         aria-labelledby="reviews-tab"
-        className={cx("tab-panel", {
+        className={cx("tabPanel", {
           show: activeTab === "reviews",
           hide: activeTab !== "reviews"
         })}
@@ -94,13 +94,13 @@ function Restaurant({ restaurant }) {
             history
           }) => (
             <>
-              <div className="content-tabs">
-                <div className="tabs-header">
+              <div className="contentTabs">
+                <div className="tabsHeader">
                   <Container>
                     <div
                       role="tablist"
                       aria-orientation="horizontal"
-                      className="tabs-nav"
+                      className={cx("tabsNav", styles.tabsNav)}
                       onClick={e =>
                         history.push(`/restaurants/${id}/${e.target.id}`)
                       }
@@ -109,7 +109,7 @@ function Restaurant({ restaurant }) {
                     </div>
                   </Container>
                 </div>
-                <div className="tabs-content">
+                <div className="tabsContent">
                   <Container className={styles.container}>
                     {createTabPanels()}
                   </Container>

@@ -4,7 +4,7 @@ import styles from "./thank-you.module.css";
 
 function ThankYouPage() {
   return (
-    <div className="full-height-layout">
+    <div className="fullHeightLayout">
       <Container>
         <h1 className={styles.title}>
           Thanks!

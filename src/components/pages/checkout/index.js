@@ -11,15 +11,15 @@ function CheckoutPage({ history }) {
         <div className={styles.checkoutInnerContent}>
           <div>
             <form className="form">
-              <div className="form-group">
+              <div className="formGroup">
                 <label>Name</label>
                 <input type="text" />
               </div>
-              <div className="form-group">
+              <div className="formGroup">
                 <label>Phone number</label>
                 <input type="tel" />
               </div>
-              <div className="form-group">
+              <div className="formGroup">
                 <label>Address</label>
                 <textarea />
               </div>

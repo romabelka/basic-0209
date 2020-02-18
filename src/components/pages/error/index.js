@@ -6,7 +6,7 @@ function ErrorPage() {
   const { t } = useContext(i18n);
 
   return (
-    <div className="full-height-layout">
+    <div className="fullHeightLayout">
       <Container>
         <h1>{t("error_page")}</h1>
       </Container>

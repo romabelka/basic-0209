@@ -61,11 +61,7 @@ fieldset {
   border: 0;
 }
 
-.text-center {
-  text-align: center;
-}
-
-.full-height-layout {
+.fullHeightLayout {
   min-height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
@@ -90,6 +86,8 @@ h4 {
   font-weight: 600;
   margin: 0;
 }
+
+/* forms */
 
 input[type="text"],
 input[type="tel"],
@@ -122,7 +120,7 @@ textarea {
   height: 84px;
 }
 
-.form-group label {
+.formGroup label {
   display: block;
   font-size: 16px;
   line-height: 1.3;
@@ -131,20 +129,20 @@ textarea {
   color: #999;
 }
 
-.form-group input,
-.form-group textarea {
+.formGroup input,
+.formGroup textarea {
   width: 100%;
 }
 
-.form-group {
+.formGroup {
   margin-bottom: 24px;
 }
 
-.flex-grow-up {
+.flexGrowUp {
   flex-grow: 1;
 }
 
-.content-wrap {
+.contentWrap {
   padding: 0;
 }
 
@@ -153,13 +151,13 @@ textarea {
     padding: 16px 24px;
   }
 
-  .form-group {
+  .formGroup {
     margin-bottom: 16px;
   }
 }
 
 @media all and (min-width: 768px) {
-  .content-wrap {
+  .contentWrap {
     padding: 60px 0;
   }
 }
@@ -204,7 +202,7 @@ textarea {
   opacity: 1;
 }
 
-.tab-selected:after {
+.tabSelected:after {
   content: "";
   position: absolute;
   top: calc(100% - 3px);
@@ -214,30 +212,38 @@ textarea {
   background-color: var(--black);
 }
 
-.tab-panel {
+.tabPanel {
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.tabs-header {
+.tabsHeader {
   padding: 0 24px;
   background-color: var(--grey);
 }
 
-.tabs-nav {
+.tabsNav {
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
-.tabs-content {
+.tabsContent {
   padding: 30px 0;
 }
 
 @media all and (max-width: 767px) {
-  .tabs-content {
+  .tabsContent {
     padding: 18px 0;
+  }
+
+  .tabsNav {
+    justify-content: flex-start;
   }
 }

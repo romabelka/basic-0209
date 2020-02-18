@@ -52,7 +52,7 @@
 .button {
   color: var(--white);
   background-color: var(--yellow);
-  border-color: var(--yellow);
+  border: 1px solid var(--yellow);
   border-radius: 2px;
   width: 36px;
   height: 36px;

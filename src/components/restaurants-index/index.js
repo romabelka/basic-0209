@@ -33,9 +33,9 @@ function RestaurantsIndex({ restaurants, fetchRestaurants, loading }) {
         role="tab"
         aria-selected={cuisine === activeTab}
         id={`${cuisine}-panel`}
-        aria-controls={`${cuisine}-content-panel`}
+        aria-controls={`${cuisine}-contentPanel`}
         onClick={() => setActiveTab(cuisine, "tabs")}
-        className={cuisine === activeTab ? "tab tab-selected" : "tab"}
+        className={cuisine === activeTab ? "tab tabSelected" : "tab"}
       >
         {t(cuisine)}
       </button>
@@ -48,7 +48,7 @@ function RestaurantsIndex({ restaurants, fetchRestaurants, loading }) {
         id={`${cuisine}-content-panel`}
         role="tabpanel"
         aria-labelledby={`${cuisine}-tab`}
-        className={`tab-panel ${cuisine === activeTab ? "show" : "hide"}`}
+        className={`tabPanel ${cuisine === activeTab ? "show" : "hide"}`}
       >
         {restaurants
           .filter(
@@ -69,19 +69,19 @@ function RestaurantsIndex({ restaurants, fetchRestaurants, loading }) {
           <h3 className={styles.subtitle}>{t("from_restaurants")}</h3>
         </div>
       </div>
-      <div className="content-tabs">
-        <div className="tabs-header">
+      <div className="contentTabs">
+        <div className="tabsHeader">
           <Container>
             <div
               role="tablist"
               aria-orientation="horizontal"
-              className="tabs-nav"
+              className="tabsNav"
             >
-              {createTabs()}
+              <span>cuisines:</span> {createTabs()}
             </div>
           </Container>
         </div>
-        <div className="tabs-content">{createTabPanels()}</div>
+        <div className="tabsContent">{createTabPanels()}</div>
       </div>
     </>
   );
