@@ -9,7 +9,6 @@ function Content({ restaurant, fetchRestaurants, loading }) {
   useEffect(() => {
     fetchRestaurants();
   }, [fetchRestaurants]);
-  console.log("---", 123);
 
   if (loading || !restaurant) return <Loader />;
   return <Restaurant restaurant={restaurant} />;

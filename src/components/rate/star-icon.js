@@ -1,7 +1,9 @@
 import React from "react";
 
-export const StarIcon = ({ checked }) => (
+export const StarIcon = ({ checked, onClick, disabled }) => (
   <svg
+    style={{ cursor: disabled ? "default" : "pointer" }}
+    onClick={onClick}
     width="16"
     height="16"
     viewBox="0 0 16 16"

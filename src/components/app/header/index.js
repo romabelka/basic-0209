@@ -47,7 +47,7 @@ function Header() {
             )}
           </div>
           <div className={styles.logoWrap}>
-            <Link to="/restaurants" className={styles.logo}>
+            <Link to="/" className={styles.logo}>
               <Logo />
             </Link>
           </div>

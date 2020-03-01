@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Basket from "../../basket";
 import { Button } from "../../button";
 import { Container } from "../../container";
 import styles from "./checkout.module.css";
+import i18n from "../../../contexts/i18n-context";
 
 function CheckoutPage({ history }) {
+  const { t } = useContext(i18n);
+
   return (
     <div className={styles.checkoutContent}>
       <Container className={styles.container}>
@@ -12,15 +15,15 @@ function CheckoutPage({ history }) {
           <div>
             <form className="form">
               <div className="formGroup">
-                <label>Name</label>
+                <label>{t("order_name")}</label>
                 <input type="text" />
               </div>
               <div className="formGroup">
-                <label>Phone number</label>
+                <label>{t("order_phone")}</label>
                 <input type="tel" />
               </div>
               <div className="formGroup">
-                <label>Address</label>
+                <label>{t("order_address")}</label>
                 <textarea />
               </div>
               <Button
@@ -28,7 +31,7 @@ function CheckoutPage({ history }) {
                 block
                 type="primary"
               >
-                Order
+                {t("order_final")}
               </Button>
             </form>
           </div>

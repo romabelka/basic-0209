@@ -29,10 +29,9 @@ function RestaurantsIndex({ restaurants, fetchRestaurants, loading }) {
   const createTabs = () =>
     cuisines.map(cuisine => (
       <button
-        key={`${cuisine}-tab`}
+        key={cuisine}
         role="tab"
         aria-selected={cuisine === activeTab}
-        id={`${cuisine}-panel`}
         aria-controls={`${cuisine}-contentPanel`}
         onClick={() => setActiveTab(cuisine, "tabs")}
         className={cuisine === activeTab ? "tab tabSelected" : "tab"}
@@ -44,8 +43,7 @@ function RestaurantsIndex({ restaurants, fetchRestaurants, loading }) {
   const createTabPanels = () =>
     cuisines.map(cuisine => (
       <div
-        key={`${cuisine}-panel`}
-        id={`${cuisine}-content-panel`}
+        key={cuisine}
         role="tabpanel"
         aria-labelledby={`${cuisine}-tab`}
         className={`tabPanel ${cuisine === activeTab ? "show" : "hide"}`}
@@ -77,7 +75,7 @@ function RestaurantsIndex({ restaurants, fetchRestaurants, loading }) {
               aria-orientation="horizontal"
               className="tabsNav"
             >
-              <span>cuisines:</span> {createTabs()}
+              <span>{t("cuisines")}:</span> {createTabs()}
             </div>
           </Container>
         </div>

@@ -36,12 +36,15 @@ function Basket({
       <h4 className={styles.title}>{t("basket")}</h4>
       <TransitionGroup>
         {orderProducts.map(({ product, amount, restaurant }) => (
-          <CSSTransition timeout={500} classNames="basket-item-animation">
+          <CSSTransition
+            timeout={500}
+            classNames="basket-item-animation"
+            key={product.id}
+          >
             <BasketItem
               product={product}
               amount={amount}
               restaurant={restaurant}
-              key={product.id}
             />
           </CSSTransition>
         ))}

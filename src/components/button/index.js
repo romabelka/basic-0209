@@ -9,7 +9,7 @@ export const Button = ({
   size,
   block,
   className,
-  handleClick,
+  onClick,
   children
 }) =>
   type === "unstyled" ? (
@@ -23,7 +23,7 @@ export const Button = ({
         },
         className
       )}
-      onClick={handleClick}
+      onClick={onClick}
     >
       {children}
     </button>
@@ -40,7 +40,7 @@ export const Button = ({
         },
         className
       )}
-      onClick={handleClick}
+      onClick={onClick}
     >
       {children}
     </button>

@@ -1,4 +1,3 @@
-import cx from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -8,17 +7,15 @@ import { StarIcon } from "./star-icon";
 
 const Rate = ({ amount, value, onChange, disabled = false }) => (
   <div className={styles.wrapper}>
-    <span
-      onChange={onChange}
-      className={cx({
-        [styles.disabled]: disabled
-      })}
-    >
-      <StarIcon />
-      <StarIcon />
-      <StarIcon />
-      <StarIcon />
-      <StarIcon />
+    <span onChange={onChange}>
+      {[...Array(5)].map((_, i) => (
+        <StarIcon
+          key={i}
+          checked={i <= value - 1}
+          onClick={() => onChange(i + 1)}
+          disabled={disabled}
+        />
+      ))}
     </span>
     {amount && <span className={styles.amount}>({amount})</span>}
   </div>

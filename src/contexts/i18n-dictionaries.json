@@ -20,7 +20,15 @@
     "sub_total": "Sub-total:",
     "delivery_costs": "Delivery costs:",
     "free": "FREE",
-    "total": "total:"
+    "total": "total:",
+    "order_name": "Name",
+    "order_phone": "Phone Number",
+    "order_address": "Address",
+    "order_final": "Order",
+    "thank_you": "Thank You!",
+    "thank_you_placed": "Your order is being prepared",
+    "cuisines": "Cuisines",
+    "all": "all"
   },
   "ru": {
     "select_restaurant": "Пожалуйста, выберите ресторан",
@@ -43,6 +51,14 @@
     "sub_total": "Предварительно:",
     "delivery_costs": "Доставка:",
     "free": "БЕСПЛАТНО",
-    "total": "Всего:"
+    "total": "Всего:",
+    "order_name": "Имя",
+    "order_phone": "Номер телефона",
+    "order_address": "Адрес",
+    "order_final": "Заказать",
+    "thank_you": "Спасибо!",
+    "thank_you_placed": "Ваш заказ уже готовится",
+    "cuisines": "Кухни",
+    "all": "все"
   }
 }
