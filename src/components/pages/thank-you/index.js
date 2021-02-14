@@ -1,20 +1,20 @@
-import React from "react";
-import { Typography, Row, Col, Layout } from "antd";
+import React, { useContext } from "react";
+import { Container } from "../../container";
 import styles from "./thank-you.module.css";
+import i18n from "../../../contexts/i18n-context";
 
 function ThankYouPage() {
+  const { t } = useContext(i18n);
   return (
-    <Layout className="full-height-layout">
-      <Row type="flex" justify="center" align="middle" className="flex-grow-up">
-        <Col span={16}>
-          <Typography.Title level="1" strong className={styles.title}>
-            Thanks!
-            <br />
-            Your order is being prepared
-          </Typography.Title>
-        </Col>
-      </Row>
-    </Layout>
+    <div className="fullHeightLayout">
+      <Container>
+        <h1 className={styles.title}>
+          {t("thank_you")}
+          <br />
+          {t("thank_you_placed")}
+        </h1>
+      </Container>
+    </div>
   );
 }
 

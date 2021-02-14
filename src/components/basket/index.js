@@ -1,4 +1,3 @@
-import Button from "antd/es/button";
 import cx from "classnames";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +6,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styles from "./basket.module.css";
 import BasketRow from "./basket-row";
 import BasketItem from "./basket-item";
+import { Button } from "../button";
 import { connect } from "react-redux";
 import {
   orderedProductsSelector,
@@ -14,7 +14,6 @@ import {
 } from "../../redux/selectors";
 import "./basket.css";
 import i18n from "../../contexts/i18n-context";
-import { Typography } from "antd";
 
 function Basket({
   title = "Basket",
@@ -27,30 +26,25 @@ function Basket({
   if (!total) {
     return (
       <div className={cx(styles.basket, className)}>
-        <Typography.Title
-          level={4}
-          className={styles.title}
-          style={{ paddingTop: 26 }}
-        >
-          {t("select_meal")}
-        </Typography.Title>
+        <h4 className={styles.title}>{t("select_meal")}</h4>
       </div>
     );
   }
 
   return (
     <div className={cx(styles.basket, className)}>
-      <Typography.Title level={4} className={styles.title}>
-        {t("basket")}
-      </Typography.Title>
+      <h4 className={styles.title}>{t("basket")}</h4>
       <TransitionGroup>
         {orderProducts.map(({ product, amount, restaurant }) => (
-          <CSSTransition timeout={500} classNames="basket-item-animation">
+          <CSSTransition
+            timeout={500}
+            classNames="basket-item-animation"
+            key={product.id}
+          >
             <BasketItem
               product={product}
               amount={amount}
               restaurant={restaurant}
-              key={product.id}
             />
           </CSSTransition>
         ))}
@@ -62,7 +56,7 @@ function Basket({
       <BasketRow leftContent={t("total")} rightContent={`${total} $`} bold />
       {!hideButton && (
         <Link to="/checkout">
-          <Button type="primary" size="large" block className={styles.button}>
+          <Button type="primary" block className={styles.button}>
             {t("order_btn")}
           </Button>
         </Link>

@@ -3,11 +3,39 @@
   overflow-x: hidden;
 }
 
+.container {
+  padding: 0;
+}
+
+.checkoutInnerContent {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.checkoutInnerContent > * {
+  flex: 1 0 100%;
+}
+
 @media all and (min-width: 768px) {
   .checkoutContent {
     margin-top: 40px;
     min-height: calc(100vh - 100px);
     padding: 16px;
+  }
+
+  .checkoutInnerContent {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .checkoutInnerContent > * {
+    flex: 1 0 calc(50% - 24px);
+    padding: 0 15px;
+  }
+
+  .container {
+    max-width: 760px;
+    padding: initial;
   }
 }
 

@@ -4,9 +4,24 @@ import { useHistory, useLocation } from "react-router-dom";
 import Logo from "./logo";
 import styles from "./header.module.css";
 import { Link } from "react-router-dom";
-import { Button, Icon, Col, Row, Radio } from "antd";
+import { Button } from "../../button";
+import { Container } from "../../container";
+import { LangSwitcher } from "./lang-switcher";
 
 import i18n from "../../../contexts/i18n-context";
+
+const ArrowIcon = () => (
+  <svg
+    viewBox="64 64 896 896"
+    className=""
+    width="1em"
+    height="1em"
+    fill="#fff"
+    aria-hidden="true"
+  >
+    <path d="M872 474H286.9l350.2-304c5.6-4.9 2.2-14-5.2-14h-88.5c-3.9 0-7.6 1.4-10.5 3.9L155 487.8a31.96 31.96 0 0 0 0 48.3L535.1 866c1.5 1.3 3.3 2 5.2 2h91.5c7.4 0 10.8-9.2 5.2-14L286.9 550H872c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z" />
+  </svg>
+);
 
 function Header() {
   const { t, language, setLanguage } = useContext(i18n);
@@ -16,47 +31,34 @@ function Header() {
 
   return (
     <header className={styles.header}>
-      <Row type="flex" justify="center">
-        <Col xs={24} md={20} lg={18}>
-          <Row type="flex" justify="space-between" align="middle">
-            <Col>
-              {showBackBtn && (
-                <Button
-                  type="link"
-                  ghost
-                  className={styles.goBackBtn}
-                  onClick={() => history.push("/")}
-                >
-                  <Icon type="arrow-left" />
-                  <span className={styles.goBackBtnText}>{t("go_back")}</span>
-                </Button>
-              )}
-            </Col>
-            <Col className={styles.logoWrap}>
-              <Link to="/restaurants" className={styles.logo}>
-                <Logo />
-              </Link>
-            </Col>
-            <Col>
-              <Radio.Group
-                className={styles.langSwitcher}
-                size="small"
-                value={language}
-                onChange={e => {
-                  setLanguage(e.target.value);
-                }}
+      <Container>
+        <div className={styles.headerNav}>
+          <div>
+            {showBackBtn && (
+              <Button
+                type="unstyled"
+                size="sm"
+                className={styles.goBackBtn}
+                onClick={() => history.push("/")}
               >
-                <Radio.Button value="en" className={styles.langSwitcherBtn}>
-                  EN
-                </Radio.Button>
-                <Radio.Button value="ru" className={styles.langSwitcherBtn}>
-                  RU
-                </Radio.Button>
-              </Radio.Group>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+                <ArrowIcon />
+                <span className={styles.goBackBtnText}>{t("go_back")}</span>
+              </Button>
+            )}
+          </div>
+          <div className={styles.logoWrap}>
+            <Link to="/" className={styles.logo}>
+              <Logo />
+            </Link>
+          </div>
+          <LangSwitcher
+            lang={language}
+            onChange={e => {
+              setLanguage(e.target.value);
+            }}
+          />
+        </div>
+      </Container>
     </header>
   );
 }

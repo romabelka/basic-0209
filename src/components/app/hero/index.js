@@ -1,20 +1,15 @@
 import React from "react";
 
 import styles from "./hero.module.css";
-import { Typography } from "antd";
 
 function Hero({ img, heading, description, children }) {
   return (
     <div className={styles.hero}>
       {img && <img src={img} className={styles.heroImg} alt="hero-banner" />}
       <div className={styles.heroCaption}>
-        <Typography.Title level={2} className={styles.heading}>
-          {heading}
-        </Typography.Title>
-        <Typography.Text className={styles.description}>
-          {description}
-        </Typography.Text>
-        <div className={styles.colorWhite}>{children}</div>
+        <h2 className={styles.heading}>{heading}</h2>
+        <p className={styles.description}>{description}</p>
+        <div>{children}</div>
       </div>
     </div>
   );

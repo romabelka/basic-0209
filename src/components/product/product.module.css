@@ -1,68 +1,103 @@
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.content > *:first-child {
+  flex: 1 0 70%;
+}
+
+.content > *:last-child {
+  flex: 1 0 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .title {
-  font-size: 18px !important;
-  line-height: 28px !important;
-  margin-bottom: 0 !important;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
+  margin-bottom: 0;
 }
 
 .description {
-  font-size: 16px !important;
-  line-height: 24px !important;
-  margin: 0 !important;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
 }
 
 .price {
-  margin-top: 8px !important;
-  font-size: 18px !important;
-  line-height: 28px !important;
+  margin-top: 8px;
+  font-size: 18px;
+  line-height: 28px;
   font-weight: 600;
-  color: #de9124;
+  color: var(--yellow);
 }
 
 .counter {
-  padding: 5px;
+  padding: 5px 0;
   text-align: center;
   display: inline-block;
 }
 
 .count {
-  color: #898989 !important;
+  color: #898989;
+  font-weight: 600;
   margin-bottom: 5px;
   font-size: 18px;
   line-height: 28px;
 }
 
 .button {
-  color: #fff !important;
-  border-radius: 2px !important;
-  width: 36px !important;
-  height: 36px !important;
-  padding: 0 !important;
-  font-weight: 700 !important;
-  font-size: 24px !important;
-  vertical-align: top;
+  color: var(--white);
+  background-color: var(--yellow);
+  border: 1px solid var(--yellow);
+  border-radius: 2px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-weight: 700;
+  font-size: 24px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
 }
 
 .button:first-child {
-  font-size: 20px !important;
+  font-size: 20px;
 }
 
 .button:hover,
 .button:focus,
 .button:active {
-  border-color: #f0ad4e;
-  color: #fff !important;
+  border-color: var(--yellow-light);
+  background-color: var(--yellow-light);
 }
 
 .button + button {
-  margin-left: 1px !important;
+  margin-left: 1px;
 }
 
 .button svg {
-  width: 1.6em !important;
-  height: 1.6em !important;
+  width: 1.6em;
+  height: 1.6em;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
 }
 
 .productDetailedOrderCard {
+  padding: 20px 26px;
   margin-bottom: 12px;
 }
 
@@ -72,11 +107,8 @@
 
 @media all and (max-width: 767px) {
   .productDetailedOrderCard {
+    padding: 12px 16px;
     margin-bottom: 16px;
-  }
-
-  .productDetailedOrderCard > * {
-    padding: 16px;
   }
 
   .description {

@@ -1,16 +1,21 @@
 .basket {
   padding: 13px 16px 20px;
-  background-color: #fff0db;
+  background-color: var(--pink);
+}
+
+.basket a {
+  text-decoration: none;
 }
 
 .hr {
-  margin: 14px 0 !important;
+  margin: 14px 0;
 }
 
 .title {
   text-align: center;
-  margin-bottom: 20px !important;
-  font-size: 18px !important;
+  margin: 20px 0 16px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .lastRow {
@@ -20,8 +25,6 @@
 .button {
   margin-top: 22px;
   font-size: 18px;
-  background-color: #e4661e !important;
-  border-color: #e4661e !important;
 }
 
 @media all and (max-width: 767px) {

@@ -1,9 +1,8 @@
-import { Layout, Typography } from "antd";
 import React, { useContext, useState } from "react";
 
 import Header from "./header";
 import CheckoutPage from "../pages/checkout";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { Provider as UserProvider } from "../../contexts/user-context";
 import i18n from "../../contexts/i18n-context";
 import ThankYouPage from "../pages/thank-you";
@@ -17,7 +16,7 @@ function App() {
 
   return (
     <UserProvider value={{ name, setName }}>
-      <Layout>
+      <>
         <Header />
         <main role="main">
           <Switch>
@@ -26,17 +25,13 @@ function App() {
             <Route path="/error" component={ErrorPage} />
             <Route
               path="/sign-in"
-              render={() => (
-                <Typography.Title level={1}>
-                  {t("sign_in_page")}
-                </Typography.Title>
-              )}
+              render={() => <h1>{t("sign_in_page")}</h1>}
             />
             <Route path="/thank-you" component={ThankYouPage} />
             <Route path="/" render={() => <RestaurantsIndex />} />
           </Switch>
         </main>
-      </Layout>
+      </>
     </UserProvider>
   );
 }

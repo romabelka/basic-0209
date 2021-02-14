@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./restaurants-index.module.css";
-import { Col, Row, Tabs, Typography } from "antd";
 import { connect } from "react-redux";
 import RestaurantItem from "./restaurant-item";
+import { Container } from "../container";
 import i18n from "../../contexts/i18n-context";
 import Loader from "../loader";
 import { fetchRestaurants } from "../../redux/ac";
@@ -26,45 +26,61 @@ function RestaurantsIndex({ restaurants, fetchRestaurants, loading }) {
     ...new Set(restaurants.flatMap(restaurant => restaurant.cuisines))
   ];
 
+  const createTabs = () =>
+    cuisines.map(cuisine => (
+      <button
+        key={cuisine}
+        role="tab"
+        aria-selected={cuisine === activeTab}
+        aria-controls={`${cuisine}-contentPanel`}
+        onClick={() => setActiveTab(cuisine, "tabs")}
+        className={cuisine === activeTab ? "tab tabSelected" : "tab"}
+      >
+        {t(cuisine)}
+      </button>
+    ));
+
+  const createTabPanels = () =>
+    cuisines.map(cuisine => (
+      <div
+        key={cuisine}
+        role="tabpanel"
+        aria-labelledby={`${cuisine}-tab`}
+        className={`tabPanel ${cuisine === activeTab ? "show" : "hide"}`}
+      >
+        {restaurants
+          .filter(
+            restaurant =>
+              cuisine === "all" || restaurant.cuisines.includes(cuisine)
+          )
+          .map(restaurant => (
+            <RestaurantItem restaurant={restaurant} key={restaurant.id} />
+          ))}
+      </div>
+    ));
+
   return (
     <>
       <div className={styles.header}>
         <div className={styles.headerCaption}>
-          <Typography.Title level={2} className={styles.title}>
-            {t("order_food")}
-          </Typography.Title>
-          <Typography.Title level={3} className={styles.subtitle}>
-            {t("from_restaurants")}
-          </Typography.Title>
+          <h2 className={styles.title}>{t("order_food")}</h2>
+          <h3 className={styles.subtitle}>{t("from_restaurants")}</h3>
         </div>
       </div>
-      <Tabs
-        activeKey={activeTab}
-        onTabClick={setActiveTab}
-        tabPosition="top"
-        animated={false}
-        className={styles.contentTabs}
-      >
-        {cuisines.map(cuisine => (
-          <Tabs.TabPane tab={cuisine} key={cuisine} className={styles.tabPane}>
-            <Row type="flex" justify="center">
-              <Col span={24}>
-                {restaurants
-                  .filter(
-                    restaurant =>
-                      cuisine === "all" || restaurant.cuisines.includes(cuisine)
-                  )
-                  .map(restaurant => (
-                    <RestaurantItem
-                      restaurant={restaurant}
-                      key={restaurant.id}
-                    />
-                  ))}
-              </Col>
-            </Row>
-          </Tabs.TabPane>
-        ))}
-      </Tabs>
+      <div className="contentTabs">
+        <div className="tabsHeader">
+          <Container>
+            <div
+              role="tablist"
+              aria-orientation="horizontal"
+              className="tabsNav"
+            >
+              <span>{t("cuisines")}:</span> {createTabs()}
+            </div>
+          </Container>
+        </div>
+        <div className="tabsContent">{createTabPanels()}</div>
+      </div>
     </>
   );
 }

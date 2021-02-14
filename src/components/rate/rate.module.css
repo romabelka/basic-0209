@@ -1,19 +1,13 @@
-.customRate li {
-  margin-right: 0 !important;
+.wrapper * {
+  vertical-align: top;
+  display: inline-block;
+  line-height: 18px;
 }
 
-.customRateSm,
-.customRateSm li {
-  font-size: 16px !important;
+.amount {
+  margin-left: 4px;
 }
 
 .disabled {
   pointer-events: none;
-}
-
-@media all and (max-width: 767px) {
-  .customRate,
-  .customRate li {
-    font-size: 16px !important;
-  }
 }

@@ -1,51 +1,46 @@
-import React from "react";
-import { Button, Col, Form, Input, Row, Layout } from "antd";
+import React, { useContext } from "react";
 import Basket from "../../basket";
+import { Button } from "../../button";
+import { Container } from "../../container";
 import styles from "./checkout.module.css";
+import i18n from "../../../contexts/i18n-context";
 
 function CheckoutPage({ history }) {
+  const { t } = useContext(i18n);
+
   return (
-    <Layout class={styles.checkoutContent}>
-      <Row
-        gutter={{ xs: 16, sm: 16, lg: 32, xl: 32 }}
-        type="flex"
-        justify="center"
-        className="flex-grow-up"
-      >
-        <Col
-          xs={{ span: 24, order: 2 }}
-          md={{ span: 12, order: 1 }}
-          xl={{ span: 6 }}
-        >
-          <Form>
-            <Form.Item label="Name">
-              <Input size="large" />
-            </Form.Item>
-            <Form.Item label="Phone number">
-              <Input size="large" />
-            </Form.Item>
-            <Form.Item label="Address">
-              <Input.TextArea size="large" />
-            </Form.Item>
-            <Button
-              onClick={() => history.push("/thank-you")}
-              block
-              type="primary"
-              size="large"
-            >
-              Order
-            </Button>
-          </Form>
-        </Col>
-        <Col
-          xs={{ span: 24, order: 1 }}
-          md={{ span: 12, order: 2 }}
-          xl={{ span: 6 }}
-        >
-          <Basket hideButton className="text-center" />
-        </Col>
-      </Row>
-    </Layout>
+    <div className={styles.checkoutContent}>
+      <Container className={styles.container}>
+        <div className={styles.checkoutInnerContent}>
+          <div>
+            <form className="form">
+              <div className="formGroup">
+                <label>{t("order_name")}</label>
+                <input type="text" />
+              </div>
+              <div className="formGroup">
+                <label>{t("order_phone")}</label>
+                <input type="tel" />
+              </div>
+              <div className="formGroup">
+                <label>{t("order_address")}</label>
+                <textarea />
+              </div>
+              <Button
+                onClick={() => history.push("/thank-you")}
+                block
+                type="primary"
+              >
+                {t("order_final")}
+              </Button>
+            </form>
+          </div>
+          <div>
+            <Basket hideButton />
+          </div>
+        </div>
+      </Container>
+    </div>
   );
 }
 

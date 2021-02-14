@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Row, Col } from "antd";
 import Restaurant from "../restaurant";
 import { connect } from "react-redux";
 import { restaurantSelector, restaurantsLoading } from "../../redux/selectors";
@@ -10,16 +9,9 @@ function Content({ restaurant, fetchRestaurants, loading }) {
   useEffect(() => {
     fetchRestaurants();
   }, [fetchRestaurants]);
-  console.log("---", 123);
 
   if (loading || !restaurant) return <Loader />;
-  return (
-    <Row type="flex" justify="center">
-      <Col span={24}>
-        <Restaurant restaurant={restaurant} />
-      </Col>
-    </Row>
-  );
+  return <Restaurant restaurant={restaurant} />;
 }
 
 export default connect(
